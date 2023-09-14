@@ -8,3 +8,6 @@
  */
 
 rootProject.name = 'microservice-play'
+
+include "private_table_per_service"
+project(":private_table_per_service") = file("./data_per")
