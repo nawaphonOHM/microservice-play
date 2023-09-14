@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'nawaphon.microservices.data_per_services'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
 	sourceCompatibility = '11'
@@ -20,6 +20,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jar {
+	enabled = false
 }
 
 tasks.named('test') {
