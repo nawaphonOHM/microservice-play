@@ -132,6 +132,20 @@ docker_verify_minimum_env() {
 		EOE
 		exit 1
 	fi
+	if [ -z "$ORDER_SERVICE_PASSWORD" ]; then
+  		# The - option suppresses leading tabs but *not* spaces. :)
+  		cat >&2 <<-'EOE'
+  			Error: Env ORDER_SERVICE_PASSWORD must be existed.
+  		EOE
+  		exit 1
+  fi
+  if [ -z "$CUSTOMER_SERVICE_PASSWORD" ]; then
+    		# The - option suppresses leading tabs but *not* spaces. :)
+    		cat >&2 <<-'EOE'
+    			Error: Env CUSTOMER_SERVICE_PASSWORD must be existed.
+    		EOE
+    		exit 1
+  fi
 	if [ 'trust' = "$POSTGRES_HOST_AUTH_METHOD" ]; then
 		cat >&2 <<-'EOWARN'
 			********************************************************************************
@@ -181,6 +195,11 @@ docker_process_init_files() {
 		esac
 		printf '\n'
 	done
+}
+
+additional_ability() {
+  sed --in-place 's/CUSTOMER_SERVICE_PASSWORD/$CUSTOMER_SERVICE_PASSWORD/g' /docker-entrypoint-initdb.d/initial.sql
+  sed --in-place 's/ORDER_SERVICE_PASSWORD/$ORDER_SERVICE_PASSWORD/g' /docker-entrypoint-initdb.d/initial.sql
 }
 
 # Execute sql script, passed via stdin (or -f flag of pqsl)
@@ -325,6 +344,8 @@ _main() {
 
 			docker_setup_db
 			docker_process_init_files /docker-entrypoint-initdb.d/*
+
+			additional_ability
 
 			docker_temp_server_stop
 			unset PGPASSWORD
