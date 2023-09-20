@@ -1,6 +1,8 @@
 package nawaphon.microservices.data_per_services.private_table_per_service.pojo;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.UUID;
 
 @Entity
@@ -11,13 +13,13 @@ public class Order {
     private UUID id;
 
     @Column(name = "customer_id")
-    private Number customerId;
+    private BigInteger customerId;
 
     @Column(name = "status")
     private boolean status;
 
     @Column(name = "total")
-    private Number total;
+    private BigDecimal total;
 
 
     public UUID getId() {
@@ -28,7 +30,7 @@ public class Order {
         return customerId;
     }
 
-    public void setCustomerId(Number customerId) {
+    public void setCustomerId(BigInteger customerId) {
         this.customerId = customerId;
     }
 
@@ -44,7 +46,7 @@ public class Order {
         return total;
     }
 
-    public void setTotal(Number total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 }
