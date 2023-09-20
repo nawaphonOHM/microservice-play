@@ -1,6 +1,6 @@
-create user customer_service_use with encrypted password 'customer@service@password';
+create user customer_service_use with encrypted password 'CUSTOMER_SERVICE_PASSWORD';
 
-create user order_service_use with encrypted password 'order@service@password';
+create user order_service_use with encrypted password 'ORDER_SERVICE_PASSWORD';
 
 create table customer
 (
