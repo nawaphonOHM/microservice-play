@@ -1,4 +1,20 @@
-FROM ubuntu:latest
-LABEL authors="nawaphon"
+FROM openjdk:11.0.16-jre
 
-ENTRYPOINT ["top", "-b"]
+
+RUN useradd --create-home order_service
+
+COPY ./build/libs/private_table_per_service-0.0.1.jar /home/order_service/
+COPY ./entrypoint.sh /home/order_service/
+
+RUN chown order_service /home/order_service/entrypoint.sh && chmod 700 /home/order_service/entrypoint.sh
+
+
+EXPOSE 8080
+
+USER order_service
+
+WORKDIR /home/order_service/
+
+ENTRYPOINT ["./entrypoint.sh"]
+
+LABEL authors="nawaphon"
