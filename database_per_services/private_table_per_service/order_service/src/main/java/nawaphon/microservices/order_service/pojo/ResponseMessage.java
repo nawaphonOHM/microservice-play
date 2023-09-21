@@ -1,4 +1,4 @@
-package nawaphon.microservices.data_per_services.private_table_per_service.pojo;
+package nawaphon.microservices.order_service.pojo;
 
 import java.util.List;
 

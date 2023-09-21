@@ -1,8 +1,8 @@
-package nawaphon.microservices.data_per_services.private_table_per_service.controllers;
+package nawaphon.microservices.order_service.controllers;
 
-import nawaphon.microservices.data_per_services.private_table_per_service.pojo.Order;
-import nawaphon.microservices.data_per_services.private_table_per_service.pojo.ResponseMessage;
-import nawaphon.microservices.data_per_services.private_table_per_service.services.MainService;
+import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.order_service.pojo.ResponseMessage;
+import nawaphon.microservices.order_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
