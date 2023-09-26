@@ -12,13 +12,6 @@ main() {
 
   unset ERROR
 
-
-  eth0Ip="$(hostname --all-ip-addresses | awk '{print $1}')"
-
-  echo "My eth0 ip is $eth0Ip"
-
-  export DATABASE_URL="jdbc:postgresql://$eth0Ip:$DATABASE_PORT/postgres"
-
   java -jar /home/order_service/order_service-0.0.1.jar || exit 1
 }
 
