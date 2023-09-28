@@ -16,9 +16,9 @@ main() {
 }
 
 mandatoryEnvCheck() {
-  if [ -z "$DATABASE_PORT" ]; then
+  if [ -z "$DATABASE_URL" ]; then
       cat >&2 <<-'EOE'
-      Error: DATABASE_PORT is required.
+      Error: DATABASE_URL is required.
 EOE
     ERROR=1
     fi
