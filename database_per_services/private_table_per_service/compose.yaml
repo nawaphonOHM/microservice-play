@@ -1,0 +1,24 @@
+services:
+  order-service:
+    image: nawaphon2539/microservices-lab:order-service
+    ports:
+      - "1000:8080"
+    env_file:
+      - order_service/order-service-vars.env
+    networks:
+      default:
+        ipv4_address: 192.168.1.2
+  database:
+    image: nawaphon2539/microservices-lab:private-table-per-service
+    env_file:
+      - db/database-vars.env
+    networks:
+      default:
+        ipv4_address: 192.168.1.3
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/29
+          gateway: 192.168.1.1
