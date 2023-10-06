@@ -8,13 +8,22 @@ services:
     networks:
       default:
         ipv4_address: 192.168.1.2
+  customer-service:
+    image: nawaphon2539/microservices-lab:customer-service
+    ports:
+      - "1001:8080"
+    env_file:
+      - customer_service/customer-service-vars.env
+    networks:
+      default:
+        ipv4_address: 192.168.1.3
   database:
     image: nawaphon2539/microservices-lab:private-table-per-service
     env_file:
       - db/database-vars.env
     networks:
       default:
-        ipv4_address: 192.168.1.3
+        ipv4_address: 192.168.1.4
 
 networks:
   default:
