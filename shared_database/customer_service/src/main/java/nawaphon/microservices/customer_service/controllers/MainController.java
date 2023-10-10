@@ -4,9 +4,9 @@ import nawaphon.microservices.customer_service.pojo.Customer;
 import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -19,9 +19,13 @@ public class MainController {
         this.mainService = mainService;
     }
 
+    @PostMapping("/post-user")
+    public ResponseMessage<?> postNewCustomer(@RequestBody final Customer newCustomer) {
+        return mainService.addNewCustomer(newCustomer);
+    }
 
-    @GetMapping("/hello-world")
-    public ResponseMessage<Customer> firstGetMethod(){
-        return mainService.firstService();
+    @GetMapping("/get-customer-by-criteria")
+    public ResponseMessage<?> getCustomerByCriteria(@RequestParam final Map<String, String> params) {
+        return mainService.getCustomerByCriteria(params);
     }
 }

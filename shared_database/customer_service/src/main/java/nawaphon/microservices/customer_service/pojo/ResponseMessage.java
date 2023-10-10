@@ -1,14 +1,12 @@
 package nawaphon.microservices.customer_service.pojo;
 
-import java.util.List;
-
-public class ResponseMessage<R> {
+public class ResponseMessage<A> {
 
     private final Number code;
     private final String message;
-    private final List<R> results;
+    private final A results;
 
-    public ResponseMessage(final Number code, final String message, final List<R> results){
+    public ResponseMessage(final Number code, final String message, final A results){
         this.code = code;
         this.message = message;
         this.results = results;
@@ -18,7 +16,7 @@ public class ResponseMessage<R> {
         return message;
     }
 
-    public List<R> getResults() {
+    public A getResults() {
         return results;
     }
 
