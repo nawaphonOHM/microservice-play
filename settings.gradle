@@ -9,5 +9,8 @@
 
 rootProject.name = 'microservice-play'
 
-include("private_table_per_service")
-project(":private_table_per_service").projectDir = file("./database_per_services/private_table_per_service")
+include("private_table_per_service@customer_service")
+project(":private_table_per_service@customer_service").projectDir = file("./database_per_services/private_table_per_service/customer_service")
+
+include("private_table_per_service@order_service")
+project(":private_table_per_service@order_service").projectDir = file("./database_per_services/private_table_per_service/order_service")
