@@ -24,8 +24,25 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
+project(":common") {
+    apply plugin: 'java'
 
-subprojects {
+    java {
+        sourceCompatibility = '11'
+    }
+}
+
+def commonProject = "common"
+
+configure(subprojects.findAll{it.name == commonProject}) {
+    apply plugin: 'java'
+
+    java {
+        sourceCompatibility = '11'
+    }
+}
+
+configure(subprojects.findAll{it.name != commonProject}) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
