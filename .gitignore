@@ -3,8 +3,6 @@
 
 # Ignore Gradle build output directory
 build
-.idea/gradle.xml
-.idea/compiler.xml
 /shared_database/.idea/.gitignore
 /shared_database/order_service/.idea/dataSources/a8c7ab3f-1ef5-4a2a-a523-a3244cd92870.xml
 /shared_database/order_service/.idea/shelf/add_more_port__connection_to_db_.xml
@@ -22,3 +20,4 @@ build
 /shared_database/.idea/vcs.xml
 /shared_database/db/.idea/workspace.xml
 /shared_database/order_service/.idea/workspace.xml
+/.idea/
