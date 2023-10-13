@@ -34,12 +34,22 @@ project(":common") {
 
 def commonProject = "common"
 
+
 configure(subprojects.findAll{it.name == commonProject}) {
     apply plugin: 'java'
 
     java {
         sourceCompatibility = '11'
     }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'javax.persistence:javax.persistence-api:2.2'
+    }
+
 }
 
 configure(subprojects.findAll{it.name != commonProject}) {
@@ -58,7 +68,12 @@ configure(subprojects.findAll{it.name != commonProject}) {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation project(path: ':common')
+
+
         runtimeOnly 'org.postgresql:postgresql'
+
+
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 

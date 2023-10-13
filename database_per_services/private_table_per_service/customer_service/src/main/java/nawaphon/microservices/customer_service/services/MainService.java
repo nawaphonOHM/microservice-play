@@ -1,7 +1,7 @@
 package nawaphon.microservices.customer_service.services;
 
-import nawaphon.microservices.customer_service.pojo.Customer;
-import nawaphon.microservices.customer_service.pojo.ResponseMessage;
+import nawaphon.microservice.pojo.Customer;
+import nawaphon.microservice.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class MainService {
 
 
 
-    public ResponseMessage<Customer> firstService() {
+    public ResponseMessage<List<Customer>> firstService() {
         final List<Customer> results = this.customerRepository.findAll();
 
         return new ResponseMessage<>(200, "Done", results);
