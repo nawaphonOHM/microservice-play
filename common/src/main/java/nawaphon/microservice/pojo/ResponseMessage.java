@@ -1,7 +1,5 @@
 package nawaphon.microservice.pojo;
 
-import java.util.List;
-
 public class ResponseMessage<A> {
 
     private final Number code;

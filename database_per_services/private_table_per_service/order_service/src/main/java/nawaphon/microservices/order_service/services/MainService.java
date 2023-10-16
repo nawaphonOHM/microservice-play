@@ -1,7 +1,7 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservices.order_service.pojo.Order;
-import nawaphon.microservices.order_service.pojo.ResponseMessage;
+import nawaphon.microservice.pojo.ResponseMessage;
+import nawaphon.microservice.pojo.Order;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class MainService {
 
 
 
-    public ResponseMessage<Order> firstService() {
+    public ResponseMessage<List<Order>> firstService() {
         final List<Order> results = this.orderRepository.findAll();
 
         return new ResponseMessage<>(200, "Done", results);
