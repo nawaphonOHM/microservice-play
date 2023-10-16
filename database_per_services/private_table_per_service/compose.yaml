@@ -1,6 +1,6 @@
 services:
   order-service:
-    image: nawaphon2539/microservices-lab:order-service
+    image: nawaphon2539/microservices-lab:private-table-per-service.order-service
     ports:
       - "1000:8080"
     env_file:
@@ -10,7 +10,7 @@ services:
         ipv4_address: 192.168.1.2
     depends_on: [database]
   customer-service:
-    image: nawaphon2539/microservices-lab:customer-service
+    image: nawaphon2539/microservices-lab:private-table-per-service.customer-service
     ports:
       - "1001:8080"
     env_file:
