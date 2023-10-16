@@ -4,3 +4,80 @@
  * This is a general purpose Gradle build.
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.2/samples
  */
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.15'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    enabled = false
+}
+
+gradle.buildFinished {
+    project.buildDir.deleteDir()
+}
+
+project(":common") {
+    apply plugin: 'java'
+
+    java {
+        sourceCompatibility = '11'
+    }
+}
+
+def commonProject = "common"
+
+
+configure(subprojects.findAll{it.name == commonProject}) {
+    apply plugin: 'java'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'javax.persistence:javax.persistence-api:2.2'
+    }
+
+}
+
+configure(subprojects.findAll{it.name != commonProject}) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation project(path: ':common')
+
+
+        runtimeOnly 'org.postgresql:postgresql'
+
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
