@@ -24,14 +24,6 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
-project(":common") {
-    apply plugin: 'java'
-
-    java {
-        sourceCompatibility = '11'
-    }
-}
-
 def commonProject = "common"
 
 
