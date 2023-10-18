@@ -19,7 +19,7 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @PostMapping("/post-user")
+    @PostMapping("/post-customer")
     public ResponseMessage<?> postNewCustomer(@RequestBody final Customer newCustomer) {
         return mainService.addNewCustomer(newCustomer);
     }
