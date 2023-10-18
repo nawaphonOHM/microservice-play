@@ -44,13 +44,12 @@ public class MainService {
 
     public ResponseMessage<?> addNewCustomer(final Customer newCustomer) {
         try {
-            this.customerRepository.save(newCustomer);
+            final Customer result = this.customerRepository.save(newCustomer);
+            logger.info("Saving new customer is done.");
+            return new ResponseMessage<>(200, "Data is success to save on database", result);
         } catch (final Exception exception) {
             logger.error("There is an error while saving new customer on the database {0}", exception);
             return new ResponseMessage<>(500, "failed", "Data is fail to save on database");
         }
-
-        logger.info("Saving new customer is done.");
-        return new ResponseMessage<>(200, "Data is success to save on database", newCustomer);
     }
 }
