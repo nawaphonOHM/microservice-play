@@ -36,6 +36,12 @@ EOE
 EOE
     ERROR=1
     fi
+    if [ -z "$LOG_LEVEL" ]; then
+          cat >&2 <<- 'EOE'
+          Error: LOG_LEVEL is required.
+EOE
+        ERROR=1
+        fi
 }
 
 
