@@ -2,7 +2,6 @@ package nawaphon.microservice.main.common.pojo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +12,9 @@ public class Order {
     private UUID id;
 
     @Column(name = "customer_id")
-    private BigInteger customerId;
+    @ManyToOne()
+    @JoinColumn(name = "id")
+    private Customer customerId;
 
     @Column(name = "status")
     private boolean status;
@@ -24,14 +25,6 @@ public class Order {
 
     public UUID getId() {
         return id;
-    }
-
-    public Number getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(BigInteger customerId) {
-        this.customerId = customerId;
     }
 
     public boolean isStatus() {
@@ -48,5 +41,17 @@ public class Order {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Customer getCustomerId() {
+        return customerId;
     }
 }
