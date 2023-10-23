@@ -11,9 +11,8 @@ public class Order {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "customer_id")
     @ManyToOne()
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "customer_id")
     private Customer customerId;
 
     @Column(name = "status")
