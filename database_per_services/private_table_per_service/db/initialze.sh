@@ -23,7 +23,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
       id          uuid    not null
           constraint "ORDER_pk"
               primary key,
-      customer_id integer not null,
+      customer_id uuid not null,
       status      boolean not null,
       total       numeric default 0.0
   );
