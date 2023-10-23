@@ -31,4 +31,12 @@ public class Customer {
     public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", creditLimit=" + creditLimit +
+                '}';
+    }
 }

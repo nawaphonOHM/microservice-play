@@ -53,4 +53,14 @@ public class Order {
     public Customer getCustomerId() {
         return customerId;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customerId=" + customerId.toString() +
+                ", status=" + status +
+                ", total=" + total +
+                '}';
+    }
 }

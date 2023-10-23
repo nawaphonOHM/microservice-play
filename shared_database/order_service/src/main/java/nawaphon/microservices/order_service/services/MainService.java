@@ -36,6 +36,7 @@ public class MainService {
 
 
         for (final Order order : orders) {
+            logger.debug("Data Object {} will be saved", order.toString());
             results.add(requiredTransactionalService.addOrder(order));
         }
 
