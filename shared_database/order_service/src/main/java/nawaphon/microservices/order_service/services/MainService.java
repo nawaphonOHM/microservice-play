@@ -1,52 +1,45 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservice.pojo.Customer;
 import nawaphon.microservice.pojo.Order;
+import nawaphon.microservice.pojo.OrderStatus;
 import nawaphon.microservice.pojo.ResponseMessage;
-import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class MainService {
 
     private static final Logger logger = LoggerFactory.getLogger(MainService.class);
 
-    private final OrderRepository orderRepository;
+    private final RequiredTransactionalService requiredTransactionalService;
 
-    public MainService(final OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    private final NonRequiredTransactionalService nonRequiredTransactionalService;
+
+    public MainService(final RequiredTransactionalService requiredTransactionalService, final NonRequiredTransactionalService nonRequiredTransactionalService) {
+        this.requiredTransactionalService = requiredTransactionalService;
+        this.nonRequiredTransactionalService = nonRequiredTransactionalService;
     }
 
 
     public ResponseMessage<List<Order>> getOrderByCriteria(final Map<String, String> params) {
-        final Order probe = new Order();
+        return nonRequiredTransactionalService.getOrderByCriteria(params);
+    }
 
-        probe.setCustomerId(new Customer());
 
-        params.forEach((key, value) -> {
-            if (key.equalsIgnoreCase("id")) {
-                logger.debug("There is id = {}", value);
-                probe.setId(UUID.fromString(value));
-            } else if (key.equalsIgnoreCase("customerId")) {
-                logger.debug("There is customerId = {}", value);
-                probe.getCustomerId().setId(UUID.fromString(value));
-            } else if (key.equalsIgnoreCase("status")) {
-                logger.debug("There is status = {}", value);
-                probe.setStatus(Boolean.parseBoolean(value));
-            } else if (key.equalsIgnoreCase("total")) {
-                logger.debug("There is total = {}", value);
-                probe.setTotal(new BigDecimal(value));
-            }
-        });
+    public ResponseMessage<List<OrderStatus>> addOrders(final List<Order> orders) {
+        final List<OrderStatus> results = new ArrayList<>();
 
-        return orderRepository.findBy(Example.of(probe), (query) -> new ResponseMessage<>(200, "Done", query.all()));
+
+        for (final Order order : orders) {
+            results.add(requiredTransactionalService.addOrder(order));
+        }
+
+
+        return new ResponseMessage<>(200, "Done", results);
     }
 }
