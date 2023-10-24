@@ -17,8 +17,8 @@ project(":private_table_per_service@order_service").projectDir = file("./databas
 
 
 include("shared_database@customer_service")
-project(":shared_database@customer_service").projectDir = file("./shared_database/customer_service")
+project(":shared_database@customer_service").projectDir = file("./shared_database/services/customer_service")
 
 include("shared_database@order_service")
-project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
+project(":shared_database@order_service").projectDir = file("./shared_database/services/order_service")
 

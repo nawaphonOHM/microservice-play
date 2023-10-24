@@ -3,8 +3,8 @@ FROM openjdk:11.0.16-jre
 
 RUN useradd --create-home customer_service
 
-COPY ./build/libs/customer_service-0.0.1.jar /home/customer_service/
-COPY ./entrypoint.sh /home/customer_service/
+COPY build/libs/customer_service-0.0.1.jar /home/customer_service/
+COPY entrypoint.sh /home/customer_service/
 
 RUN chown customer_service /home/customer_service/entrypoint.sh &&  \
     chmod 500 /home/customer_service/entrypoint.sh && \
