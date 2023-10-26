@@ -22,3 +22,7 @@ project(":shared_database@customer_service").projectDir = file("./shared_databas
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/services/order_service")
 
+
+include('shared_database@common')
+project(":common").projectDir = file("./shared_database/services/common")
+
