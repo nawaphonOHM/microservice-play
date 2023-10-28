@@ -24,10 +24,8 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
-def commonProject = "common"
 
-
-configure(subprojects.findAll{it.name == commonProject}) {
+configure(subprojects.findAll { it.name == "common" }) {
     apply plugin: 'java'
 
     java {
@@ -44,7 +42,10 @@ configure(subprojects.findAll{it.name == commonProject}) {
 
 }
 
-configure(subprojects.findAll{it.name != commonProject}) {
+configure(subprojects.findAll {
+    it.name == "private_table_per_service@customer_service" ||
+            it.name == "private_table_per_service@order_service"
+}) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
