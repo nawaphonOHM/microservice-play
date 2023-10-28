@@ -1,8 +1,8 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservice.pojo.Order;
-import nawaphon.microservice.pojo.OrderStatus;
-import nawaphon.microservice.pojo.ResponseMessage;
+import nawaphon.microservice.main.common.pojo.Order;
+import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservice.shared_database.common.pojo.OrderStatusEnvelop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,8 +31,8 @@ public class MainService {
     }
 
 
-    public ResponseMessage<List<OrderStatus>> addOrders(final List<Order> orders) {
-        final List<OrderStatus> results = new ArrayList<>();
+    public ResponseMessage<List<OrderStatusEnvelop>> addOrders(final List<Order> orders) {
+        final List<OrderStatusEnvelop> results = new ArrayList<>();
 
 
         for (final Order order : orders) {

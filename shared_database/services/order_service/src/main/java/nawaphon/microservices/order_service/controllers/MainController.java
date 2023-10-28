@@ -1,8 +1,8 @@
 package nawaphon.microservices.order_service.controllers;
 
-import nawaphon.microservice.pojo.Order;
-import nawaphon.microservice.pojo.OrderStatus;
-import nawaphon.microservice.pojo.ResponseMessage;
+import nawaphon.microservice.main.common.pojo.Order;
+import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservice.shared_database.common.pojo.OrderStatusEnvelop;
 import nawaphon.microservices.order_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +28,7 @@ public class MainController {
     }
 
     @PostMapping("/add-orders")
-    public ResponseMessage<List<OrderStatus>> addOrders(@RequestBody final List<Order> orders) {
+    public ResponseMessage<List<OrderStatusEnvelop>> addOrders(@RequestBody final List<Order> orders) {
         return mainService.addOrders(orders);
     }
 }

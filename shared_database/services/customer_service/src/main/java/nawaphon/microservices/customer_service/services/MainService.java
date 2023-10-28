@@ -1,7 +1,7 @@
 package nawaphon.microservices.customer_service.services;
 
-import nawaphon.microservice.pojo.Customer;
-import nawaphon.microservice.pojo.ResponseMessage;
+import nawaphon.microservice.main.common.pojo.Customer;
+import nawaphon.microservice.main.common.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

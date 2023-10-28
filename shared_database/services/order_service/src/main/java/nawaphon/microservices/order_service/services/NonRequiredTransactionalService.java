@@ -1,8 +1,8 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservice.pojo.Customer;
-import nawaphon.microservice.pojo.Order;
-import nawaphon.microservice.pojo.ResponseMessage;
+import nawaphon.microservice.main.common.pojo.Customer;
+import nawaphon.microservice.main.common.pojo.Order;
+import nawaphon.microservice.main.common.pojo.ResponseMessage;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

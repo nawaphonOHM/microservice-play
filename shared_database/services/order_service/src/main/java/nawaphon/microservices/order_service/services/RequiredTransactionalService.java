@@ -1,8 +1,8 @@
 package nawaphon.microservices.order_service.services;
 
-import enums.Status;
-import nawaphon.microservice.pojo.Order;
-import nawaphon.microservice.pojo.OrderStatus;
+import nawaphon.microservice.main.common.pojo.Order;
+import nawaphon.microservice.shared_database.common.enums.OrderStatus;
+import nawaphon.microservice.shared_database.common.pojo.OrderStatusEnvelop;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class RequiredTransactionalService {
         this.orderRepository = orderRepository;
     }
 
-    public OrderStatus addOrder(Order order) {
-        return new OrderStatus(orderRepository.save(order), Status.PASS);
+    public OrderStatusEnvelop addOrder(Order order) {
+        return new OrderStatusEnvelop(orderRepository.save(order), OrderStatus.PENDING);
     }
 }
