@@ -1,4 +1,4 @@
-package nawaphon.microservices.customer_service.repositories;
+package nawaphon.microservice.shared_database.common.repositories;
 
 import nawaphon.microservice.main.common.pojo.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,7 +3,7 @@ package nawaphon.microservices.order_service.services;
 import nawaphon.microservice.main.common.pojo.Order;
 import nawaphon.microservice.shared_database.common.enums.OrderStatus;
 import nawaphon.microservice.shared_database.common.pojo.OrderStatusEnvelop;
-import nawaphon.microservices.order_service.repositories.OrderRepository;
+import nawaphon.microservice.shared_database.common.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
