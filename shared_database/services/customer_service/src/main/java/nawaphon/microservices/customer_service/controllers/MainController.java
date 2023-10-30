@@ -2,11 +2,13 @@ package nawaphon.microservices.customer_service.controllers;
 
 import nawaphon.microservice.main.common.pojo.Customer;
 import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservices.customer_service.pojo.CustomerId;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/")
@@ -27,5 +29,10 @@ public class MainController {
     @GetMapping("/get-customer-by-criteria")
     public ResponseMessage<?> getCustomerByCriteria(@RequestParam final Map<String, String> params) {
         return mainService.getCustomerByCriteria(params);
+    }
+
+    @PatchMapping("/update-customer-credit/{customer-uuid}")
+    public ResponseMessage<?> patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final CustomerId credit) {
+        return mainService.updateUserCredit(customerUUID, credit.getCredit());
     }
 }
