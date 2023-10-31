@@ -3,6 +3,7 @@ package nawaphon.microservices.customer_service.services;
 import nawaphon.microservice.main.common.pojo.Customer;
 import nawaphon.microservice.main.common.pojo.ResponseMessage;
 import nawaphon.microservice.shared_database.common.repositories.CustomerRepository;
+import nawaphon.microservices.customer_service.exceptions.FailToSaveCustomerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
@@ -49,7 +50,7 @@ public class MainService {
             return new ResponseMessage<>(200, "Data is success to save on database", result);
         } catch (final Exception exception) {
             logger.error("There is an error while saving new customer on the database {0}", exception);
-            return new ResponseMessage<>(500, "failed", "Data is fail to save on database");
+            throw new FailToSaveCustomerException();
         }
     }
 }
