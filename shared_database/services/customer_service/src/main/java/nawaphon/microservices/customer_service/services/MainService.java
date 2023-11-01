@@ -3,11 +3,15 @@ package nawaphon.microservices.customer_service.services;
 import nawaphon.microservice.main.common.pojo.Customer;
 import nawaphon.microservice.main.common.pojo.ResponseMessage;
 import nawaphon.microservice.shared_database.common.repositories.CustomerRepository;
+import nawaphon.microservices.customer_service.exceptions.CustomerNotFoundException;
 import nawaphon.microservices.customer_service.exceptions.FailToSaveCustomerException;
+import nawaphon.microservices.customer_service.exceptions.UpdateNewCreditFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -52,5 +56,26 @@ public class MainService {
             logger.error("There is an error while saving new customer on the database {0}", exception);
             throw new FailToSaveCustomerException();
         }
+    }
+
+    @Transactional
+    public ResponseMessage<?> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
+
+        final Customer customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
+
+        logger.info("Found Customer ");
+
+        customer.setCreditLimit(newCredit);
+
+        try {
+            this.customerRepository.save(customer);
+            logger.info("Customer id {} has now credit as {}", customer.getId(), newCredit);
+            return new ResponseMessage<>(HttpStatus.OK.value(), "Done", customer);
+        } catch (final Exception exception) {
+            logger.error("Failed to update new credit {} of {}", newCredit, customer.getId());
+            throw new UpdateNewCreditFailedException(newCredit, customer.getId());
+        }
+
+
     }
 }
