@@ -58,6 +58,14 @@ public class MainService {
         }
     }
 
+    public ResponseMessage<?> removeCustomer(final UUID uuid) {
+        logger.info("Deleting Customer {}", uuid);
+        this.customerRepository.deleteById(uuid);
+        logger.info("Deleting Customer {} is done", uuid);
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), "Delete Customer is Done", uuid);
+    }
+
     @Transactional
     public ResponseMessage<?> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
 
