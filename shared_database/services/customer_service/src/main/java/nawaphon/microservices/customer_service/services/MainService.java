@@ -51,7 +51,7 @@ public class MainService {
         try {
             final Customer result = this.customerRepository.save(newCustomer);
             logger.info("Saving new customer is done.");
-            return new ResponseMessage<>(200, "Data is success to save on database", result);
+            return new ResponseMessage<>(HttpStatus.OK.value(), "Data is success to save on database", result);
         } catch (final Exception exception) {
             logger.error("There is an error while saving new customer on the database {0}", exception);
             throw new FailToSaveCustomerException();
