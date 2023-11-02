@@ -2,8 +2,8 @@ package nawaphon.microservices.customer_service.services;
 
 import nawaphon.microservice.main.common.pojo.Customer;
 import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservice.shared_database.common.exceptions.CustomerNotFoundException;
 import nawaphon.microservice.shared_database.common.repositories.CustomerRepository;
-import nawaphon.microservices.customer_service.exceptions.CustomerNotFoundException;
 import nawaphon.microservices.customer_service.exceptions.FailToSaveCustomerException;
 import nawaphon.microservices.customer_service.exceptions.UpdateNewCreditFailedException;
 import org.slf4j.Logger;
