@@ -1,4 +1,4 @@
-package nawaphon.microservices.customer_service.exceptions;
+package nawaphon.microservice.shared_database.common.exceptions;
 
 public class CustomerNotFoundException extends RuntimeException {
 
