@@ -2,7 +2,9 @@ package nawaphon.microservices.order_service.services;
 
 import nawaphon.microservice.main.common.pojo.Order;
 import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservice.shared_database.common.enums.OrderStatus;
 import nawaphon.microservice.shared_database.common.pojo.OrderStatusEnvelop;
+import nawaphon.microservices.order_service.exceptions.InsufficientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -36,8 +38,19 @@ public class MainService {
 
 
         for (final Order order : orders) {
-            logger.debug("Data Object {} will be saved", order.toString());
-            results.add(requiredTransactionalService.addOrder(order));
+            logger.debug("Data Object {}; total {} will be saved", order.getId(), order.getTotal());
+            boolean saveSuccess;
+
+            try {
+                saveSuccess = requiredTransactionalService.addOrder(order);
+
+                logger.debug("Data Object {}; total {} save status {}", order.getId(), order.getTotal(), saveSuccess);
+            } catch (final InsufficientException exception) {
+                saveSuccess = false;
+                logger.error("Data Object {} will be saved has insufficient credit", order.getId());
+            }
+
+            results.add(new OrderStatusEnvelop(order, saveSuccess ? OrderStatus.ACCEPT : OrderStatus.REJECT));
         }
 
 
