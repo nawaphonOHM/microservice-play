@@ -1,7 +1,7 @@
 package nawaphon.microservices.customer_service.services;
 
-import nawaphon.microservice.main.common.pojo.Customer;
-import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservices.customer_service.pojo.Customer;
+import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
