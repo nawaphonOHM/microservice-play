@@ -15,6 +15,4 @@ project(":private_table_per_service@customer_service").projectDir = file("./data
 include("private_table_per_service@order_service")
 project(":private_table_per_service@order_service").projectDir = file("./database_per_services/private_table_per_service/order_service")
 
-include('common')
-project(":common").projectDir = file("./common")
 

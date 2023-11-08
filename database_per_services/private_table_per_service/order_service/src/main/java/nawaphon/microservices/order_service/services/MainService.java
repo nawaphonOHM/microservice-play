@@ -1,7 +1,7 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservice.main.common.pojo.Order;
-import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservices.order_service.controllers.pojo.Order;
+import nawaphon.microservices.order_service.controllers.pojo.ResponseMessage;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
