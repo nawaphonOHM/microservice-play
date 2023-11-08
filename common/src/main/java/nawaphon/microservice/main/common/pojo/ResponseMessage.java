@@ -1,4 +1,4 @@
-package nawaphon.microservice.pojo;
+package nawaphon.microservice.main.common.pojo;
 
 public class ResponseMessage<A> {
 
@@ -6,7 +6,7 @@ public class ResponseMessage<A> {
     private final String message;
     private final A results;
 
-    public ResponseMessage(final Number code, final String message, final A results){
+    public ResponseMessage(final Number code, final String message, final A results) {
         this.code = code;
         this.message = message;
         this.results = results;
