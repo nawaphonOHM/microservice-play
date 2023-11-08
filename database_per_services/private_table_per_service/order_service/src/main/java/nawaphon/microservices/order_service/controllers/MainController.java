@@ -1,7 +1,7 @@
 package nawaphon.microservices.order_service.controllers;
 
-import nawaphon.microservice.main.common.pojo.Order;
-import nawaphon.microservice.main.common.pojo.ResponseMessage;
+import nawaphon.microservice.pojo.Order;
+import nawaphon.microservice.pojo.ResponseMessage;
 import nawaphon.microservices.order_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class MainController {
 
 
     @GetMapping("/hello-world")
-    public ResponseMessage<List<Order>> firstGetMethod() {
+    public ResponseMessage<List<Order>> firstGetMethod(){
         return mainService.firstService();
     }
 }
