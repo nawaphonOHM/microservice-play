@@ -4,7 +4,7 @@ services:
     ports:
       - "1000:8080"
     env_file:
-      - services/order_service/order-service-vars.env
+      - order_service/order-service-vars.env
     networks:
       default:
         ipv4_address: 192.168.1.2
@@ -14,7 +14,7 @@ services:
     ports:
       - "1001:8080"
     env_file:
-      - services/customer_service/customer-service-vars.env
+      - customer_service/customer-service-vars.env
     networks:
       default:
         ipv4_address: 192.168.1.3
