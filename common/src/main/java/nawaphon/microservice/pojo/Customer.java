@@ -1,4 +1,4 @@
-package nawaphon.microservice.main.common.pojo;
+package nawaphon.microservice.pojo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
