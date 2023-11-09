@@ -28,7 +28,8 @@ public class MainController {
     }
 
     @PostMapping("/add-orders")
-    public ResponseMessage<List<OrderStatusEnvelop>> addOrders(@RequestBody final List<Order> orders) {
-        return mainService.addOrders(orders);
+    public ResponseMessage<OrderStatusEnvelop> addOrders(@RequestBody final Order order) {
+        final ResponseMessage<List<OrderStatusEnvelop>> results = mainService.addOrders(List.of(order));
+        return new ResponseMessage<>(results.getCode(), results.getMessage(), results.getResults().get(0));
     }
 }
