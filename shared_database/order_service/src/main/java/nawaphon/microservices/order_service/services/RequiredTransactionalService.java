@@ -33,8 +33,11 @@ public class RequiredTransactionalService {
         customer.setCreditLimit(customer.getCreditLimit().subtract(new BigDecimal(String.valueOf(order.getTotal()))));
 
         if (customer.getCreditLimit().compareTo(BigDecimal.ZERO) < 0) {
+            logger.error("Customer {} has insufficient credit", order.getCustomerId());
             throw new InsufficientException();
         }
+
+        logger.debug("Customer {} has sufficient credit", order.getCustomerId());
 
         orderRepository.save(order);
 
