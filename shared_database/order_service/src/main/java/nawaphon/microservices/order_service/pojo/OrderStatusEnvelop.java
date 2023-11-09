@@ -1,12 +1,14 @@
 package nawaphon.microservices.order_service.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import nawaphon.microservices.order_service.enums.OrderStatus;
 
 import java.util.UUID;
 
 public class OrderStatusEnvelop {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private final UUID orderId;
 
     private final UUID customerID;
