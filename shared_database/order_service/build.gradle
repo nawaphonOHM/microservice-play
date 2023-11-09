@@ -1,0 +1,6 @@
+group = 'nawaphon.microservices.data_per_services'
+version = '0.0.1'
+
+archivesBaseName = 'order_service'
+
+
