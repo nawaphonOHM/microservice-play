@@ -3,19 +3,34 @@ package nawaphon.microservices.order_service.pojo;
 
 import nawaphon.microservices.order_service.enums.OrderStatus;
 
+import java.util.UUID;
+
 public class OrderStatusEnvelop {
 
-    private final Order order;
+    private final UUID orderId;
+
+    private final UUID customerID;
     private final OrderStatus status;
 
 
-    public OrderStatusEnvelop(final Order order, final OrderStatus status) {
-        this.order = order;
+    public OrderStatusEnvelop(UUID orderId, UUID customerID, OrderStatus status) {
+        this.orderId = orderId;
+        this.customerID = customerID;
         this.status = status;
     }
 
-    public Order getOrder() {
-        return order;
+    public OrderStatusEnvelop(UUID customerID, OrderStatus status) {
+        this.orderId = null;
+        this.customerID = customerID;
+        this.status = status;
+    }
+
+    public UUID getOrderId() {
+        return orderId;
+    }
+
+    public UUID getCustomerID() {
+        return customerID;
     }
 
     public OrderStatus getStatus() {

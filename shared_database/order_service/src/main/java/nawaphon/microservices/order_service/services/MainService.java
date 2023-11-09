@@ -50,7 +50,15 @@ public class MainService {
                 logger.error("Data Object {} will be saved has insufficient credit", order.getId());
             }
 
-            results.add(new OrderStatusEnvelop(order, saveSuccess ? OrderStatus.ACCEPT : OrderStatus.REJECT));
+            final OrderStatusEnvelop orderStatus;
+
+            if (saveSuccess) {
+                orderStatus = new OrderStatusEnvelop(order.getId(), order.getCustomerId().getId(), OrderStatus.ACCEPT);
+            } else {
+                orderStatus = new OrderStatusEnvelop(order.getCustomerId().getId(), OrderStatus.REJECT);
+            }
+
+            results.add(orderStatus);
         }
 
 
