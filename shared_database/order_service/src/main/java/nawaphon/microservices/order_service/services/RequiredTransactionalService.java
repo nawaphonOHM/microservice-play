@@ -30,6 +30,8 @@ public class RequiredTransactionalService {
     public boolean addOrder(Order order) {
         final Customer customer = this.customerRepository.findById(order.getCustomerId().getId()).orElseThrow(CustomerNotFoundException::new);
 
+        order.setCustomerId(customer);
+
         customer.setCreditLimit(customer.getCreditLimit().subtract(new BigDecimal(String.valueOf(order.getTotal()))));
 
         if (customer.getCreditLimit().compareTo(BigDecimal.ZERO) < 0) {
