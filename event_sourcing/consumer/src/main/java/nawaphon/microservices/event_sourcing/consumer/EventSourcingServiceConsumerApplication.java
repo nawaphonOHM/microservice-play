@@ -1,13 +1,13 @@
-package nawaphon.microservices.event_sourcing;
+package nawaphon.microservices.event_sourcing.consumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EventSourcingServiceApplication {
+public class EventSourcingServiceConsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EventSourcingServiceApplication.class, args);
+        SpringApplication.run(EventSourcingServiceConsumerApplication.class, args);
     }
 
 }
