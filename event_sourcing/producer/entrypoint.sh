@@ -17,6 +17,13 @@ main() {
 
 mandatoryEnvCheck() {
   ERROR=0
+
+  if [ -z "$KAFKA_BOOSTRAP_SERVERS"  ]; then
+    cat >&2 <<-EOE
+    Error: KAFKA_BOOSTRAP_SERVERS is required.
+EOE
+  ERROR=1
+  fi
 }
 
 
