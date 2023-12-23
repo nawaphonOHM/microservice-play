@@ -4,6 +4,7 @@ import nawaphon.microservices.customer_service.pojo.Customer;
 import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.test_configuration.MainServiceMock;
 import org.assertj.core.api.AssertionsForClassTypes;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,5 +37,10 @@ class MainServiceImplTest {
     @Test
     void listInsideResponseMessageShouldNotNullTest() {
         AssertionsForClassTypes.assertThat(testResult).isNotNull();
+    }
+
+    @Test
+    void shouldHasOnlyOneCustomerObjectTest() {
+        Assertions.assertEquals(1, testResult.getResults().size());
     }
 }
