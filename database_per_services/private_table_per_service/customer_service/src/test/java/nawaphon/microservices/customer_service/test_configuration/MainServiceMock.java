@@ -17,9 +17,9 @@ public class MainServiceMock {
     @Bean
     public MainService mainService() {
 
-        final Customer customerTest = new Customer();
+        final Customer customerTest = Mockito.mock(Customer.class);
 
-        customerTest.setCreditLimit(new BigDecimal(1000));
+        Mockito.when(customerTest.getCreditLimit()).thenReturn(new BigDecimal(1000));
 
         final List<Customer> customers = List.of(customerTest);
 
