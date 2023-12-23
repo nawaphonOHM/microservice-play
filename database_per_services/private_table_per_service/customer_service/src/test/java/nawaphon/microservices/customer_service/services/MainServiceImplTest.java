@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
@@ -48,5 +49,11 @@ class MainServiceImplTest {
     @Test
     void shouldHasOnlyOneCustomerObjectTest() {
         Assertions.assertEquals(1, testResult.getResults().size());
+    }
+
+    @Test
+    void assertCustomerHasAllExpectedPropertyTest() {
+        AssertionsForClassTypes.assertThat(testResult.getResults().get(0)).extracting(Customer::getCreditLimit)
+                .isEqualTo(new BigDecimal(1000));
     }
 }
