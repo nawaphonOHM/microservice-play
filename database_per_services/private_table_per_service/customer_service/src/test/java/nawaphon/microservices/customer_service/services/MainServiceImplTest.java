@@ -32,4 +32,9 @@ class MainServiceImplTest {
     void responseMessageShouldNotNullTest() {
         AssertionsForClassTypes.assertThat(testResult).isNotNull();
     }
+
+    @Test
+    void listInsideResponseMessageShouldNotNullTest() {
+        AssertionsForClassTypes.assertThat(testResult).isNotNull();
+    }
 }
