@@ -40,6 +40,12 @@ class MainServiceImplTest {
     }
 
     @Test
+    void assertResponseMessageHasAllValidPropertyTest() {
+        AssertionsForClassTypes.assertThat(testResult).extracting(ResponseMessage::getCode, ResponseMessage::getMessage)
+                .containsExactly(200, "Done");
+    }
+
+    @Test
     void shouldHasOnlyOneCustomerObjectTest() {
         Assertions.assertEquals(1, testResult.getResults().size());
     }
