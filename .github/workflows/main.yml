@@ -1,4 +1,4 @@
-name: Build Spring boot project of Microservice
+name: Build Spring boot microservice project
 run-name: ${{ github.actor }} is running
 on:
   schedule:
