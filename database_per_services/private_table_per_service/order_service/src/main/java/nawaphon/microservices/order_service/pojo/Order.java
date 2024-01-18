@@ -1,4 +1,4 @@
-package nawaphon.microservices.order_service.controllers.pojo;
+package nawaphon.microservices.order_service.pojo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -42,7 +42,7 @@ public class Order {
         this.status = status;
     }
 
-    public Number getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 

@@ -1,4 +1,4 @@
-package nawaphon.microservices.order_service.controllers.pojo;
+package nawaphon.microservices.order_service.pojo;
 
 public class ResponseMessage<A> {
 
