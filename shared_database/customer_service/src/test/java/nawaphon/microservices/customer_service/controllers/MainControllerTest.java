@@ -13,8 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @WebMvcTest(MainController.class)
@@ -54,5 +57,30 @@ public class MainControllerTest {
 
         BDDMockito.verify(service, BDDMockito.times(1))
                 .addNewCustomer(BDDMockito.refEq(body));
+    }
+
+    @Test
+    void ableToGetCustomerByCriteria() throws Exception {
+        final MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+
+        body.add("id", "eeee");
+
+        final List<Customer> customers = List.of();
+
+
+        BDDMockito.given(service.getCustomerByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
+                var1.get("id").equals("eeee")))).willReturn(
+                new ResponseMessage<>(200, "Done", BDDMockito.refEq(customers))
+        );
+
+        mvc.perform(
+                MockMvcRequestBuilders.get("/get-customer-by-criteria")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .params(body)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+
+        BDDMockito.verify(service, BDDMockito.times(1))
+                .getCustomerByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
+                        var1.get("id").equals("eeee")));
     }
 }
