@@ -1,5 +1,9 @@
 name: docker build image
 
+env:
+  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+  DOCKER_SECRET: ${{ secrets.DOCKER_SECRET }}
+
 on:
   schedule:
     - cron: '0 7 * * *'
