@@ -1,5 +1,6 @@
 package nawaphon.microservices.customer_service.services;
 
+import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import nawaphon.microservices.customer_service.test_configurations.MainServiceMock;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,5 +13,8 @@ public class MainServiceTest {
 
     @Autowired
     private MainService mainService;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
 }
