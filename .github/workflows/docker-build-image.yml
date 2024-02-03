@@ -1,9 +1,5 @@
 name: docker build image
 
-env:
-  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
-  DOCKER_SECRET: ${{ secrets.DOCKER_SECRET }}
-
 on:
   schedule:
     - cron: '0 7 * * *'
@@ -11,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+      DOCKER_SECRET: ${{ secrets.DOCKER_SECRET }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
