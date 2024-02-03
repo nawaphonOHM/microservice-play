@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class MainService {
     }
 
 
-    public ResponseMessage<?> getCustomerByCriteria(final Map<String, String> params) {
+    public ResponseMessage<List<Customer>> getCustomerByCriteria(final Map<String, String> params) {
         final Customer probe = new Customer();
 
         params.forEach((key, value) -> {
