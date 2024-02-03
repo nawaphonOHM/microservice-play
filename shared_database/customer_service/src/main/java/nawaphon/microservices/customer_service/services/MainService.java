@@ -68,7 +68,7 @@ public class MainService {
     }
 
     @Transactional
-    public ResponseMessage<?> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
+    public ResponseMessage<Customer> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
 
         final Customer customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 
