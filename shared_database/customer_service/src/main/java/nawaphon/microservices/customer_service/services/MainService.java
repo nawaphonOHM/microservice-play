@@ -48,7 +48,7 @@ public class MainService {
     }
 
 
-    public ResponseMessage<?> addNewCustomer(final Customer newCustomer) {
+    public ResponseMessage<Customer> addNewCustomer(final Customer newCustomer) {
         try {
             final Customer result = this.customerRepository.save(newCustomer);
             logger.info("Saving new customer is done.");
