@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = MainServiceMock.class)
@@ -43,6 +44,16 @@ public class MainServiceTest {
         mainService.addNewCustomer(customer);
 
         BDDMockito.verify(customerRepository, BDDMockito.times(1)).save(BDDMockito.any());
+    }
+
+
+    @Test
+    void testAbleToRemoveCustomer() {
+        final UUID id = UUID.randomUUID();
+
+        mainService.removeCustomer(id);
+
+        BDDMockito.verify(customerRepository, BDDMockito.times(1)).deleteById(BDDMockito.any());
     }
 
 }
