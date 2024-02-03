@@ -2,6 +2,7 @@ package nawaphon.microservices.customer_service.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.customer_service.pojo.Customer;
+import nawaphon.microservices.customer_service.pojo.CustomerId;
 import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.junit.jupiter.api.Test;
@@ -82,5 +83,34 @@ public class MainControllerTest {
         BDDMockito.verify(service, BDDMockito.times(1))
                 .getCustomerByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
                         var1.get("id").equals("eeee")));
+    }
+
+    @Test
+    void ableToUpdateCustomerCredit() throws Exception {
+        final ObjectMapper objectMapper = new ObjectMapper();
+
+        final UUID id = UUID.randomUUID();
+
+        final CustomerId body = new CustomerId(BigDecimal.TEN);
+
+        final Customer response = new Customer();
+
+        response.setId(id);
+        response.setCreditLimit(BigDecimal.TEN);
+
+
+        BDDMockito.given(service.updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.getCredit())))
+                .willReturn(
+                        new ResponseMessage<>(200, "Done", response)
+                );
+
+        mvc.perform(
+                MockMvcRequestBuilders.patch("/update-customer-credit/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writer().withDefaultPrettyPrinter().writeValueAsString(body))
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+
+        BDDMockito.verify(service, BDDMockito.times(1))
+                .updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.getCredit()));
     }
 }
