@@ -1,5 +1,6 @@
 package nawaphon.microservices.customer_service.services;
 
+import nawaphon.microservices.customer_service.pojo.Customer;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import nawaphon.microservices.customer_service.test_configurations.MainServiceMock;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,15 @@ public class MainServiceTest {
                 BDDMockito.any(),
                 BDDMockito.any()
         );
+    }
+
+    @Test
+    void testAbleToAddNewCustomer() {
+        final Customer customer = new Customer();
+
+        mainService.addNewCustomer(customer);
+
+        BDDMockito.verify(customerRepository, BDDMockito.times(1)).save(BDDMockito.any());
     }
 
 }
