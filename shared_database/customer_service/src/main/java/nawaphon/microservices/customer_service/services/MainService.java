@@ -59,7 +59,7 @@ public class MainService {
         }
     }
 
-    public ResponseMessage<?> removeCustomer(final UUID uuid) {
+    public ResponseMessage<UUID> removeCustomer(final UUID uuid) {
         logger.info("Deleting Customer {}", uuid);
         this.customerRepository.deleteById(uuid);
         logger.info("Deleting Customer {} is done", uuid);
