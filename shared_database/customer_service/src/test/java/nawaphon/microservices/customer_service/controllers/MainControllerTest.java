@@ -113,4 +113,24 @@ public class MainControllerTest {
         BDDMockito.verify(service, BDDMockito.times(1))
                 .updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.getCredit()));
     }
+
+    @Test
+    void ableToDeleteCustomer() throws Exception {
+
+        final UUID id = UUID.randomUUID();
+
+
+        BDDMockito.given(service.removeCustomer(BDDMockito.refEq(id)))
+                .willReturn(
+                        new ResponseMessage<>(200, "Done", id)
+                );
+
+        mvc.perform(
+                MockMvcRequestBuilders.delete("/delete-customer-credit/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+
+        BDDMockito.verify(service, BDDMockito.times(1))
+                .removeCustomer(BDDMockito.refEq(id));
+    }
 }
