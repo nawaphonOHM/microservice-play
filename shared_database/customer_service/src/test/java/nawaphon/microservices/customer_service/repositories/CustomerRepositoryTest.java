@@ -89,4 +89,17 @@ public class CustomerRepositoryTest {
 
     }
 
+
+    @Test
+    void ableToSaveNewEntity() {
+        final Customer customer = new Customer();
+
+        customer.setCreditLimit(BigDecimal.valueOf(2000));
+
+        final Customer savedCustomer = customerRepository.save(customer);
+
+        Assertions.assertNotNull(savedCustomer.getId());
+        Assertions.assertEquals(BigDecimal.valueOf(2000), savedCustomer.getCreditLimit());
+    }
+
 }
