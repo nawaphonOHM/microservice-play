@@ -72,4 +72,21 @@ public class CustomerRepositoryTest {
 
     }
 
+
+    @Test
+    void ableFindByProperlyWhenSetCreditAndUUID() {
+        final Customer customer = new Customer();
+
+        customer.setCreditLimit(BigDecimal.valueOf(1000));
+        customer.setId(uuid1);
+
+        final List<Customer> foundCustomer = customerRepository.findBy(Example.of(customer),
+                FluentQuery.FetchableFluentQuery::all);
+
+        Assertions.assertEquals(1, foundCustomer.size());
+        Assertions.assertEquals(uuid1, foundCustomer.get(0).getId());
+        Assertions.assertEquals(BigDecimal.valueOf(1000), foundCustomer.get(0).getCreditLimit());
+
+    }
+
 }
