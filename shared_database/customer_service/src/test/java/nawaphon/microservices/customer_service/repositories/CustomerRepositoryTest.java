@@ -102,4 +102,13 @@ public class CustomerRepositoryTest {
         Assertions.assertEquals(BigDecimal.valueOf(2000), savedCustomer.getCreditLimit());
     }
 
+    @Test
+    void ableToDelete() {
+        customerRepository.deleteById(uuid1);
+
+        final List<Customer> customers = customerRepository.findAll();
+
+        Assertions.assertTrue(customers.isEmpty());
+    }
+
 }
