@@ -25,7 +25,7 @@ public class NonRequiredTransactionalServiceTest {
 
 
     @Test
-    public void testGetOrderByCriteriaMethod() {
+    public void testGetOrderByCriteriaMethodUUIDIsSetWhenThereIs() {
         final Map<String, String> map = new HashMap<>();
 
         final UUID uuidMock = UUID.randomUUID();
