@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -25,6 +26,7 @@ public class NonRequiredTransactionalServiceTest {
 
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodUUIDIsSetWhenThereIs() {
         final Map<String, String> map = new HashMap<>();
 
@@ -38,6 +40,7 @@ public class NonRequiredTransactionalServiceTest {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodCustomerIdIsSetWhenThereIs() {
         final Map<String, String> map = new HashMap<>();
 
