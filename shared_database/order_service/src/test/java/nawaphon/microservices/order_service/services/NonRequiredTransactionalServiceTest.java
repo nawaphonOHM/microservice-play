@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -65,6 +66,20 @@ public class NonRequiredTransactionalServiceTest {
         nonRequiredTransactionalService.getOrderByCriteria(map);
 
         Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().isStatus() == statusMock), Mockito.any());
+    }
+
+    @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    public void testGetOrderByCriteriaMethodTotalIsSetWhenThereIs() {
+        final Map<String, String> map = new HashMap<>();
+
+        final BigDecimal moneyMock = new BigDecimal("999.99");
+
+        map.put("total", String.valueOf(moneyMock));
+
+        nonRequiredTransactionalService.getOrderByCriteria(map);
+
+        Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().getTotal().toString().equals(moneyMock.toString())), Mockito.any());
     }
 
 }
