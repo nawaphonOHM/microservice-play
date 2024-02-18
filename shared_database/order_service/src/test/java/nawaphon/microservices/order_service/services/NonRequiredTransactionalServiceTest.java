@@ -53,4 +53,18 @@ public class NonRequiredTransactionalServiceTest {
         Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().getCustomerId().getId().toString().equals(uuidMock.toString())), Mockito.any());
     }
 
+    @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    public void testGetOrderByCriteriaMethodStatusIsSetWhenThereIs() {
+        final Map<String, String> map = new HashMap<>();
+
+        final boolean statusMock = true;
+
+        map.put("status", String.valueOf(statusMock));
+
+        nonRequiredTransactionalService.getOrderByCriteria(map);
+
+        Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().isStatus() == statusMock), Mockito.any());
+    }
+
 }
