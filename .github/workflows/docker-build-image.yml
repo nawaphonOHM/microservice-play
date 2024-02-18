@@ -20,21 +20,21 @@ jobs:
       - name: Build private-table-per-service.customer-service image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./database_per_services/private_table_per_service/customer_service
           file: ./database_per_services/private_table_per_service/customer_service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.customer-service
       - name: Build private-table-per-service.order-service image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./database_per_services/private_table_per_service/order_service
           file: ./database_per_services/private_table_per_service/order_service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.order-service
       - name: Build private_table_per_service database image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./database_per_services/private_table_per_service/db
           file: ./database_per_services/private_table_per_service/db/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service
