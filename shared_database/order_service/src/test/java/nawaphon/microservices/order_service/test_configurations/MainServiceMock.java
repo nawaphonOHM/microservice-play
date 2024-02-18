@@ -27,4 +27,10 @@ public class MainServiceMock {
     public NonRequiredTransactionalService nonRequiredTransactionalService() {
         return Mockito.mock(NonRequiredTransactionalService.class);
     }
+
+
+    @Bean
+    public OrderRepository orderRepository() {
+        return Mockito.mock(OrderRepository.class);
+    }
 }
