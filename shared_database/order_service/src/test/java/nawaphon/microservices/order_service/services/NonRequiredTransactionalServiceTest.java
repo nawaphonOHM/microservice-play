@@ -37,4 +37,17 @@ public class NonRequiredTransactionalServiceTest {
         Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().getId().toString().equals(uuidMock.toString())), Mockito.any());
     }
 
+    @Test
+    public void testGetOrderByCriteriaMethodCustomerIdIsSetWhenThereIs() {
+        final Map<String, String> map = new HashMap<>();
+
+        final UUID uuidMock = UUID.randomUUID();
+
+        map.put("customerId", uuidMock.toString());
+
+        nonRequiredTransactionalService.getOrderByCriteria(map);
+
+        Mockito.verify(orderRepository, Mockito.times(1)).findBy(Mockito.argThat((probe) -> probe.getProbe().getCustomerId().getId().toString().equals(uuidMock.toString())), Mockito.any());
+    }
+
 }
