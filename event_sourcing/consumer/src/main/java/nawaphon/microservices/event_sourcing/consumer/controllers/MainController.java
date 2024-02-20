@@ -12,7 +12,7 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    @KafkaListener(topics = "Greeting")
+    @KafkaListener(topics = "Greeting", groupId = "group00")
     public void sendEvent(@RequestBody final Message message) {
         logger.info("I've received message: {}", message.getMessage());
 
