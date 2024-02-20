@@ -1,4 +1,4 @@
-package nawaphon.microservices.order_service.controllers.pojo;
+package nawaphon.microservices.order_service.pojo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

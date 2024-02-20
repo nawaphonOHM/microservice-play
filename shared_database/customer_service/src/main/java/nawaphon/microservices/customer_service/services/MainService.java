@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class MainService {
     }
 
 
-    public ResponseMessage<?> getCustomerByCriteria(final Map<String, String> params) {
+    public ResponseMessage<List<Customer>> getCustomerByCriteria(final Map<String, String> params) {
         final Customer probe = new Customer();
 
         params.forEach((key, value) -> {
@@ -47,7 +48,7 @@ public class MainService {
     }
 
 
-    public ResponseMessage<?> addNewCustomer(final Customer newCustomer) {
+    public ResponseMessage<Customer> addNewCustomer(final Customer newCustomer) {
         try {
             final Customer result = this.customerRepository.save(newCustomer);
             logger.info("Saving new customer is done.");
@@ -58,7 +59,7 @@ public class MainService {
         }
     }
 
-    public ResponseMessage<?> removeCustomer(final UUID uuid) {
+    public ResponseMessage<UUID> removeCustomer(final UUID uuid) {
         logger.info("Deleting Customer {}", uuid);
         this.customerRepository.deleteById(uuid);
         logger.info("Deleting Customer {} is done", uuid);
@@ -67,7 +68,7 @@ public class MainService {
     }
 
     @Transactional
-    public ResponseMessage<?> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
+    public ResponseMessage<Customer> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
 
         final Customer customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 

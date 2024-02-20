@@ -9,6 +9,7 @@ import java.util.UUID;
 public class Order {
     @Id
     @GeneratedValue
+    @Column(columnDefinition = "UUID")
     private UUID id;
 
     @ManyToOne()

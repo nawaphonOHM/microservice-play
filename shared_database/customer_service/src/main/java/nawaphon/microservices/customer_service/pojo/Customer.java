@@ -11,6 +11,7 @@ public class Customer {
 
     @Id
     @GeneratedValue
+    @Column(columnDefinition = "UUID")
     private UUID id;
 
     @Column(name = "credit_limit")
