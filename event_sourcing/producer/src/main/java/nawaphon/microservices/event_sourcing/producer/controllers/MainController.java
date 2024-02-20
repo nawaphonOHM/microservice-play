@@ -32,6 +32,8 @@ public class MainController {
     @PostMapping("/send-message")
     public ResponseMessage<String> sendEvent(@RequestBody final Message message) {
 
+        kafkaTemplate.send("Greeting", UUID.randomUUID(), message);
+
 
         return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Done");
     }
