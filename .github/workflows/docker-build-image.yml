@@ -54,3 +54,27 @@ jobs:
           file: ./database_per_services/private_table_per_service/db/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service
+
+      - name: Build shared_databases.customer-service image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/customer_service
+          file: ./shared_database/customer_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.customer-service
+
+      - name: Build shared_databases.order-service image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/order_service
+          file: ./shared_database/order_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.order-service
+
+      - name: Build shared_databases database image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/db
+          file: ./shared_database/db/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared_database
