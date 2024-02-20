@@ -2,7 +2,6 @@ package nawaphon.microservices.event_sourcing.producer.controllers;
 
 import nawaphon.microservices.event_sourcing.producer.pojo.Message;
 import nawaphon.microservices.event_sourcing.producer.pojo.ResponseMessage;
-import org.apache.kafka.common.protocol.types.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/")
 @ResponseBody
@@ -20,10 +21,10 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private KafkaTemplate<Field.UUID, Message> kafkaTemplate;
+    private final KafkaTemplate<UUID, Message> kafkaTemplate;
 
 
-    public MainController(final KafkaTemplate<Field.UUID, Message> kafkaTemplate) {
+    public MainController(final KafkaTemplate<UUID, Message> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
