@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/customer_service/producer-0.0.1.jar || exit 1
+  java -jar /home/consumer/consumer-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {
