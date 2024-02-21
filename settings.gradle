@@ -26,4 +26,4 @@ include("event_sourcing@order")
 project(":event_sourcing@order").projectDir = file("./event_sourcing/order")
 
 include("event_sourcing@customer")
-project(":event_sourcing@customer").projectDir = file("./event_sourcing/consumer")
+project(":event_sourcing@customer").projectDir = file("./event_sourcing/customer")
