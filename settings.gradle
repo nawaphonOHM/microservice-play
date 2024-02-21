@@ -23,7 +23,7 @@ include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
 
 include("event_sourcing@order")
-project(":event_sourcing@order").projectDir = file("./event_sourcing/producer")
+project(":event_sourcing@order").projectDir = file("./event_sourcing/order")
 
 include("event_sourcing@customer")
 project(":event_sourcing@customer").projectDir = file("./event_sourcing/consumer")
