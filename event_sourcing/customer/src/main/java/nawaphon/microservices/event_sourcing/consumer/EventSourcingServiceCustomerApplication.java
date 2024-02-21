@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EventSourcingServiceConsumerApplication {
+public class EventSourcingServiceCustomerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EventSourcingServiceConsumerApplication.class, args);
+        SpringApplication.run(EventSourcingServiceCustomerApplication.class, args);
     }
 
 }
