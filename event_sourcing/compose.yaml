@@ -23,7 +23,7 @@ services:
   order_0:
     image: nawaphon2539/microservices-lab:event-sourcing.order-service
     env_file:
-      - producer/producer-vars.env
+      - order/order-vars.env
     ports:
       - "1001:8080"
     networks:
@@ -34,7 +34,7 @@ services:
   customer_0:
     image: nawaphon2539/microservices-lab:event-sourcing.customer-service
     env_file:
-      - consumer/consumer-vars.env
+      - customer/customer-vars.env
     ports:
       - "1002:8080"
     networks:
