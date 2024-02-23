@@ -1,22 +1,22 @@
 FROM openjdk:11.0.16-jre
 
 
-RUN useradd --create-home producer
+RUN useradd --create-home order
 
-COPY ./build/libs/producer-0.0.1.jar /home/producer/
-COPY ./entrypoint.sh /home/producer/
+COPY ./build/libs/order-0.0.1.jar /home/order/
+COPY ./entrypoint.sh /home/order/
 
-RUN chown producer /home/producer/entrypoint.sh &&  \
-    chmod 500 /home/producer/entrypoint.sh && \
-    chown producer /home/producer/producer-0.0.1.jar && \
-    chmod 500 /home/producer/producer-0.0.1.jar
+RUN chown order /home/order/entrypoint.sh &&  \
+    chmod 500 /home/order/entrypoint.sh && \
+    chown order /home/order/order-0.0.1.jar && \
+    chmod 500 /home/order/order-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER producer
+USER order
 
-WORKDIR /home/producer/
+WORKDIR /home/order/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
