@@ -2,16 +2,16 @@ package nawaphon.microservices.event_sourcing.consumer.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
 public class CustomerId {
-    private final BigDecimal credit;
+    private final UUID id;
 
-    public CustomerId(@JsonProperty("credit") final BigDecimal credit) {
-        this.credit = credit;
+    public CustomerId(@JsonProperty("id") final UUID credit) {
+        this.id = credit;
     }
 
-    public BigDecimal getCredit() {
-        return credit;
+    public UUID getId() {
+        return id;
     }
 }
