@@ -31,6 +31,11 @@ public class MainController {
         return mainService.searchCustomerById(new CustomerId(id));
     }
 
+    @GetMapping("/get-customer-by-criteria/")
+    public ResponseMessage<?> getCustomerByCriteria() {
+        return mainService.searchCustomers();
+    }
+
     @PatchMapping("/update-customer-credit/{customer-uuid}")
     public ResponseMessage<?> patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final CustomerId credit) {
         throw new RuntimeException("Not Implemented");
