@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -27,9 +26,9 @@ public class MainController {
         return mainService.addCustomer(newCustomer);
     }
 
-    @GetMapping("/get-customer-by-criteria")
-    public ResponseMessage<?> getCustomerByCriteria(@RequestParam final Map<String, String> params) {
-        throw new RuntimeException("Not Implemented");
+    @GetMapping("/get-customer-by-criteria/{id}")
+    public ResponseMessage<?> getCustomerByCriteria(@PathVariable("id") final UUID id) {
+        return mainService.searchCustomerById(new CustomerId(id));
     }
 
     @PatchMapping("/update-customer-credit/{customer-uuid}")
