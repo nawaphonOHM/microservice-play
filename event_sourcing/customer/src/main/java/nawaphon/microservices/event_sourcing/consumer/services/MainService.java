@@ -47,7 +47,7 @@ public class MainService {
 
         final Future<SendResult<UUID, String>> sendResultFuture;
         try {
-            sendResultFuture = kafkaTemplate.send("order-customer", newCustomerUUID, objectMapper.writeValueAsString(customer));
+            sendResultFuture = kafkaTemplate.send("orderCustomer", newCustomerUUID, objectMapper.writeValueAsString(customer));
         } catch (JsonProcessingException e) {
             LOGGER.error("There is an error while serializing Customer Object", e);
             throw new UnclassifiedException("There is error while serializing Customer Object", e);
