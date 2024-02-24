@@ -8,6 +8,7 @@ import nawaphon.microservices.event_sourcing.consumer.pojo.CustomerId;
 import nawaphon.microservices.event_sourcing.consumer.pojo.ResponseMessage;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StoreQueryParameters;
+import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +19,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -79,5 +82,26 @@ public class MainService {
         } catch (JsonProcessingException e) {
             throw new UnclassifiedException("There is error while deserializing Customer Object", e);
         }
+    }
+
+    public ResponseMessage<List<Customer>> searchCustomer() {
+        final KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
+        assert kafkaStreams != null;
+        final ReadOnlyKeyValueStore<UUID, String> readOnlyKeyValueStore = kafkaStreams.store(
+                StoreQueryParameters.fromNameAndType("orderCustomer", QueryableStoreTypes.keyValueStore())
+        );
+
+        final KeyValueIterator<UUID, String> iterator = readOnlyKeyValueStore.all();
+        final List<Customer> customers = new ArrayList<>();
+        while (iterator.hasNext()) {
+            try {
+                customers.add(objectMapper.readValue(iterator.next().value, Customer.class));
+            } catch (JsonProcessingException e) {
+                throw new UnclassifiedException("There is error while deserializing Customer Object", e);
+            }
+        }
+        iterator.close();
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), customers);
     }
 }
