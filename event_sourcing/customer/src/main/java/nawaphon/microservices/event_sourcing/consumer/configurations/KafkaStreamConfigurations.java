@@ -1,21 +1,15 @@
 package nawaphon.microservices.event_sourcing.consumer.configurations;
 
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class KafkaStreamConfigurations {
 
-
-    private final StreamsBuilder streamsBuilder;
-
-    public KafkaStreamConfigurations(final StreamsBuilder streamsBuilder) {
-        this.streamsBuilder = streamsBuilder;
-        buildOrderCustomerStream();
-    }
-
-    private void buildOrderCustomerStream() {
-        streamsBuilder.stream("orderCustomer").toTable(Materialized.as("orderCustomer"));
+    @Bean
+    public NewTopic createOrderCustomerTopic() {
+        return TopicBuilder.name("orderCustomer").build();
     }
 }
