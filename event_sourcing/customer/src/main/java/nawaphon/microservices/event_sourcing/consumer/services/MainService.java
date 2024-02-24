@@ -25,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MainService {
 
+    private static final Logger LOGGER = LogManager.getLogger(MainService.class);
+
     private final KafkaTemplate<UUID, String> kafkaTemplate;
 
     private final ObjectMapper objectMapper;
@@ -47,6 +49,7 @@ public class MainService {
         try {
             sendResultFuture = kafkaTemplate.send("order-customer", newCustomerUUID, objectMapper.writeValueAsString(customer));
         } catch (JsonProcessingException e) {
+            LOGGER.error("There is an error while serializing Customer Object", e);
             throw new UnclassifiedException("There is error while serializing Customer Object", e);
         }
 
@@ -54,6 +57,7 @@ public class MainService {
             try {
                 TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
             } catch (final InterruptedException e) {
+                LOGGER.error("Unable to sleep for waiting saving a result to message queue", e);
                 throw new UnclassifiedException("Unable to sleep for waiting saving a result to message queue", e);
             }
         }
