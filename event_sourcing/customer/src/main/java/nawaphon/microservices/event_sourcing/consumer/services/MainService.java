@@ -84,7 +84,7 @@ public class MainService {
         }
     }
 
-    public ResponseMessage<List<Customer>> searchCustomer() {
+    public ResponseMessage<List<Customer>> searchCustomers() {
         final KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
         assert kafkaStreams != null;
         final ReadOnlyKeyValueStore<UUID, String> readOnlyKeyValueStore = kafkaStreams.store(
