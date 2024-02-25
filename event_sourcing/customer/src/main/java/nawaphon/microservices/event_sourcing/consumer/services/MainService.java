@@ -44,7 +44,7 @@ public class MainService {
         this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
     }
 
-    private Mono<ResponseMessage<?>> updateCustomerEvent(@NotNull final Customer customer) {
+    private @NotNull Mono<ResponseMessage<?>> updateCustomerEvent(@NotNull final Customer customer) {
 
         final String valueToBeWritten;
 
