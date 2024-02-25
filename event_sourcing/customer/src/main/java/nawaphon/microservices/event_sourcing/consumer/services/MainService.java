@@ -16,14 +16,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class MainService {
@@ -42,30 +40,41 @@ public class MainService {
         this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
     }
 
-    public ResponseMessage<Customer> addCustomer(final Customer customer) {
+    public Mono<ResponseMessage<Customer>> addCustomer(final Customer customer) {
 
         final UUID newCustomerUUID = UUID.randomUUID();
 
         customer.setId(newCustomerUUID);
 
-        final Future<SendResult<UUID, String>> sendResultFuture;
-        try {
-            sendResultFuture = kafkaTemplate.send("orderCustomer", newCustomerUUID, objectMapper.writeValueAsString(customer));
-        } catch (JsonProcessingException e) {
-            LOGGER.error("There is an error while serializing Customer Object", e);
-            throw new UnclassifiedException("There is error while serializing Customer Object", e);
-        }
+        return Mono.create((val1) -> {
+            final String valueToBeWritten;
 
-        while (!sendResultFuture.isDone()) {
             try {
-                TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
-            } catch (final InterruptedException e) {
-                LOGGER.error("Unable to sleep for waiting saving a result to message queue", e);
-                throw new UnclassifiedException("Unable to sleep for waiting saving a result to message queue", e);
+                valueToBeWritten = objectMapper.writeValueAsString(customer);
+            } catch (JsonProcessingException e) {
+                LOGGER.error("There is an error while serializing Customer Object", e);
+                val1.error(new UnclassifiedException("There is error while serializing Customer Object", e));
+                return;
             }
-        }
 
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), customer);
+            kafkaTemplate.send("orderCustomer", newCustomerUUID, valueToBeWritten)
+                    .addCallback((result) -> {
+                        assert result != null;
+                        try {
+                            val1.success(
+                                    new ResponseMessage<>(
+                                            HttpStatus.OK.value(),
+                                            HttpStatus.OK.toString(),
+                                            objectMapper.readValue(result.getProducerRecord().value(), Customer.class)
+                                    ));
+                        } catch (JsonProcessingException e) {
+                            val1.error(new RuntimeException(e));
+                        }
+                    }, (ex) -> {
+                        LOGGER.error("There is an error while serializing Customer Object", ex);
+                        val1.error(new UnclassifiedException("There is error while saving a customer object", ex));
+                    });
+        });
     }
 
     public ResponseMessage<Customer> searchCustomerById(final CustomerId customerId) {

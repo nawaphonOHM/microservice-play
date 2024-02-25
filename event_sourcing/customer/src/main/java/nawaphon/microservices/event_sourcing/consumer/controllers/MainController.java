@@ -7,6 +7,7 @@ import nawaphon.microservices.event_sourcing.consumer.services.MainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class MainController {
     }
 
     @PostMapping("/post-customer")
-    public ResponseMessage<?> postNewCustomer(@RequestBody final Customer newCustomer) {
+    public Mono<ResponseMessage<Customer>> postNewCustomer(@RequestBody final Customer newCustomer) {
         return mainService.addCustomer(newCustomer);
     }
 
