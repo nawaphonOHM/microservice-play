@@ -13,6 +13,7 @@ import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -43,7 +44,7 @@ public class MainService {
         this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
     }
 
-    public Mono<ResponseMessage<?>> addCustomer(final Customer customer) {
+    public Mono<ResponseMessage<?>> addCustomer(@NotNull final Customer customer) {
 
         final UUID newCustomerUUID = UUID.randomUUID();
 
@@ -83,7 +84,7 @@ public class MainService {
                 }).subscribeOn(Schedulers.boundedElastic());
     }
 
-    public ResponseMessage<Customer> searchCustomerById(final CustomerId customerId) {
+    public ResponseMessage<Customer> searchCustomerById(final @NotNull CustomerId customerId) {
         final KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
         assert kafkaStreams != null;
         final ReadOnlyKeyValueStore<UUID, String> readOnlyKeyValueStore = kafkaStreams.store(
