@@ -44,11 +44,7 @@ public class MainService {
         this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
     }
 
-    public Mono<ResponseMessage<?>> addCustomer(@NotNull final Customer customer) {
-
-        final UUID newCustomerUUID = UUID.randomUUID();
-
-        customer.setId(newCustomerUUID);
+    private Mono<ResponseMessage<?>> updateCustomerEvent(@NotNull final Customer customer) {
 
         final String valueToBeWritten;
 
@@ -61,7 +57,7 @@ public class MainService {
 
         return Mono.<SendResult<UUID, String>>create((var1) -> {
                     try {
-                        var1.success(kafkaTemplate.send("orderCustomer", newCustomerUUID, valueToBeWritten).get());
+                        var1.success(kafkaTemplate.send("orderCustomer", customer.getId(), valueToBeWritten).get());
                     } catch (InterruptedException | ExecutionException e) {
                         LOGGER.error("There is an error while saving a customer object", e);
                         var1.error(new UnclassifiedException("There is an error while saving a Customer Object", e));
@@ -82,6 +78,15 @@ public class MainService {
                                 null);
                     }
                 }).subscribeOn(Schedulers.boundedElastic());
+    }
+
+    public Mono<ResponseMessage<?>> addCustomer(@NotNull final Customer customer) {
+
+        final UUID newCustomerUUID = UUID.randomUUID();
+
+        customer.setId(newCustomerUUID);
+
+        return updateCustomerEvent(customer);
     }
 
     public ResponseMessage<Customer> searchCustomerById(final @NotNull CustomerId customerId) {
