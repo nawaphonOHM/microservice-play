@@ -89,6 +89,24 @@ public class MainService {
         return updateCustomerEvent(customer);
     }
 
+    public Mono<ResponseMessage<?>> updateCredit(final Customer customer) {
+        final CustomerId customerId = new CustomerId(customer.getId());
+
+        final Mono<ResponseMessage<?>> resultAfterUpdate = Mono.create((var1) -> {
+
+            var1.success(
+                    new ResponseMessage<>(
+                            HttpStatus.OK.value(),
+                            HttpStatus.OK.toString(),
+                            searchCustomerById(customerId)
+                    )
+            );
+        });
+
+
+        return updateCustomerEvent(customer).then(resultAfterUpdate);
+    }
+
     public ResponseMessage<Customer> searchCustomerById(final @NotNull CustomerId customerId) {
         final KafkaStreams kafkaStreams = streamsBuilderFactoryBean.getKafkaStreams();
         assert kafkaStreams != null;
