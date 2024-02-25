@@ -31,11 +31,6 @@ public class OrderCustomerStreamComponent {
     @Autowired
     public void setUp(final StreamsBuilder streamsBuilder) {
 
-        streamsBuilder.stream("orderCustomer", Consumed.with(Serdes.UUID(), Serdes.String())).toTable(
-                Materialized.<UUID, String, KeyValueStore<Bytes, byte[]>>
-                        as("orderCustomer").withKeySerde(Serdes.UUID()).withValueSerde(Serdes.String())
-        );
-
         streamsBuilder.stream("orderCustomer", Consumed.with(Serdes.UUID(), Serdes.String())).groupByKey()
                 .aggregate(() -> {
                     try {
