@@ -9,6 +9,10 @@ public class Customer {
 
     private BigDecimal creditLimit;
 
+    public Customer() {
+        this.creditLimit = BigDecimal.ZERO;
+    }
+
     public void setId(UUID id) {
         this.id = id;
     }
