@@ -36,13 +36,14 @@ configure(subprojects.findAll { eventSourcesProject.contains(it.name) }) {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
         implementation 'org.springframework.kafka:spring-kafka'
         implementation 'org.apache.kafka:kafka-streams'
 
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.kafka:spring-kafka-test'
+        testImplementation 'io.projectreactor:reactor-test'
     }
 
     repositories {
