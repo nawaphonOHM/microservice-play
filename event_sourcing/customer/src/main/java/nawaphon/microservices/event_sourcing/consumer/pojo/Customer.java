@@ -9,6 +9,8 @@ public class Customer {
 
     private BigDecimal creditLimit;
 
+    private Status status;
+
     public Customer() {
         this.creditLimit = BigDecimal.ZERO;
     }
@@ -29,11 +31,25 @@ public class Customer {
         this.creditLimit = creditLimit;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", creditLimit=" + creditLimit +
+                ", status=" + status +
                 '}';
+    }
+
+    public enum Status {
+        ACTIVATE,
+        DEACTIVATE
     }
 }
