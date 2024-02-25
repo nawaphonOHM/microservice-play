@@ -16,12 +16,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class MainService {
@@ -40,41 +43,44 @@ public class MainService {
         this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
     }
 
-    public Mono<ResponseMessage<Customer>> addCustomer(final Customer customer) {
+    public Mono<ResponseMessage<?>> addCustomer(final Customer customer) {
 
         final UUID newCustomerUUID = UUID.randomUUID();
 
         customer.setId(newCustomerUUID);
 
-        return Mono.create((val1) -> {
-            final String valueToBeWritten;
+        final String valueToBeWritten;
 
-            try {
-                valueToBeWritten = objectMapper.writeValueAsString(customer);
-            } catch (JsonProcessingException e) {
-                LOGGER.error("There is an error while serializing Customer Object", e);
-                val1.error(new UnclassifiedException("There is error while serializing Customer Object", e));
-                return;
-            }
+        try {
+            valueToBeWritten = objectMapper.writeValueAsString(customer);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("There is an error while serializing Customer Object", e);
+            throw new UnclassifiedException("There is error while serializing Customer Object", e);
+        }
 
-            kafkaTemplate.send("orderCustomer", newCustomerUUID, valueToBeWritten)
-                    .addCallback((result) -> {
-                        assert result != null;
-                        try {
-                            val1.success(
-                                    new ResponseMessage<>(
-                                            HttpStatus.OK.value(),
-                                            HttpStatus.OK.toString(),
-                                            objectMapper.readValue(result.getProducerRecord().value(), Customer.class)
-                                    ));
-                        } catch (JsonProcessingException e) {
-                            val1.error(new RuntimeException(e));
-                        }
-                    }, (ex) -> {
-                        LOGGER.error("There is an error while serializing Customer Object", ex);
-                        val1.error(new UnclassifiedException("There is error while saving a customer object", ex));
-                    });
-        });
+        return Mono.<SendResult<UUID, String>>create((var1) -> {
+                    try {
+                        var1.success(kafkaTemplate.send("orderCustomer", newCustomerUUID, valueToBeWritten).get());
+                    } catch (InterruptedException | ExecutionException e) {
+                        LOGGER.error("There is an error while saving a customer object", e);
+                        var1.error(new UnclassifiedException("There is an error while saving a Customer Object", e));
+
+                    }
+                })
+                .map((result) -> {
+                    try {
+                        return new ResponseMessage<>(
+                                HttpStatus.OK.value(),
+                                HttpStatus.OK.toString(),
+                                objectMapper.readValue(result.getProducerRecord().value(), Customer.class));
+                    } catch (JsonProcessingException e) {
+                        LOGGER.error("There is an error while saving a customer object", e);
+                        return new ResponseMessage<>(
+                                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                                HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                                null);
+                    }
+                }).subscribeOn(Schedulers.boundedElastic());
     }
 
     public ResponseMessage<Customer> searchCustomerById(final CustomerId customerId) {

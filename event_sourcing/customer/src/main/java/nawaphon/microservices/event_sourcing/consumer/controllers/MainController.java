@@ -23,7 +23,7 @@ public class MainController {
     }
 
     @PostMapping("/post-customer")
-    public Mono<ResponseMessage<Customer>> postNewCustomer(@RequestBody final Customer newCustomer) {
+    public Mono<ResponseMessage<?>> postNewCustomer(@RequestBody final Customer newCustomer) {
         return mainService.addCustomer(newCustomer);
     }
 
