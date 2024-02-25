@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @RestController
@@ -38,8 +39,13 @@ public class MainController {
     }
 
     @PatchMapping("/update-customer-credit/{customer-uuid}")
-    public ResponseMessage<?> patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final CustomerId credit) {
-        throw new RuntimeException("Not Implemented");
+    public Mono<ResponseMessage<?>> patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final BigDecimal newCredit) {
+        final Customer params = new Customer();
+
+        params.setId(customerUUID);
+        params.setCreditLimit(newCredit);
+
+        return mainService.updateCredit(params);
     }
 
     @DeleteMapping("delete-customer-credit/{customer-uuid}")
