@@ -3,6 +3,7 @@ package nawaphon.microservices.event_sourcing.consumer.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.event_sourcing.consumer.exceptions.UnclassifiedException;
+import nawaphon.microservices.event_sourcing.consumer.exceptions.UnknownCustomerIdException;
 import nawaphon.microservices.event_sourcing.consumer.pojo.Customer;
 import nawaphon.microservices.event_sourcing.consumer.pojo.CustomerId;
 import nawaphon.microservices.event_sourcing.consumer.pojo.ResponseMessage;
@@ -93,12 +94,17 @@ public class MainService {
         final CustomerId customerId = new CustomerId(customer.getId());
 
         final Mono<ResponseMessage<?>> resultAfterUpdate = Mono.create((var1) -> {
+            final ResponseMessage<Customer> customerResult = searchCustomerById(customerId);
+
+            if (customerResult.getResults().getId() == null) {
+                var1.error(new UnknownCustomerIdException(String.format("There is no %s customer id", customerId.getId())));
+            }
 
             var1.success(
                     new ResponseMessage<>(
                             HttpStatus.OK.value(),
                             HttpStatus.OK.toString(),
-                            searchCustomerById(customerId)
+                            customerResult
                     )
             );
         });
