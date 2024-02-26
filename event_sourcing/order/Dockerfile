@@ -1,4 +1,4 @@
-FROM openjdk:11.0.16-jre
+FROM openjdk:11.0.21-jre
 
 
 RUN useradd --create-home order
