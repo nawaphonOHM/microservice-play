@@ -45,11 +45,22 @@ public class OrderCustomerStreamComponent {
 
                         previous.setCreditLimit(previous.getCreditLimit().add(example.getCreditLimit()));
                         previous.setId(example.getId());
+                        previous.setStatus(example.getStatus() == Customer.Status.DEACTIVATE ? Customer.Status.DEACTIVATE : Customer.Status.ACTIVATE);
 
                         return objectMapper.writeValueAsString(previous);
                     } catch (JsonProcessingException e) {
                         throw new UnclassifiedException("There is error while deserializing Customer Object", e);
                     }
+                }, Materialized.with(Serdes.UUID(), Serdes.String())).filter((key, value) -> {
+                    final Customer customer;
+
+                    try {
+                        customer = objectMapper.readValue(value, Customer.class);
+                    } catch (JsonProcessingException e) {
+                        throw new UnclassifiedException("There is error while deserializing Customer Object", e);
+                    }
+
+                    return customer.getStatus() != Customer.Status.DEACTIVATE;
                 }, Materialized.
                         <UUID, String, KeyValueStore<Bytes, byte[]>>as("orderCustomer")
                         .withKeySerde(Serdes.UUID()).withValueSerde(Serdes.String()));
