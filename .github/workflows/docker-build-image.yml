@@ -83,7 +83,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./event_sourcing/consumer
-          file: /event_sourcing/consumer/Dockerfile
+          file: ./event_sourcing/consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:event_sourcing.consumer
 
@@ -91,6 +91,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./event_sourcing/producer
-          file: /event_sourcing/producer/Dockerfile
+          file: ./event_sourcing/producer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:event_sourcing.producer
