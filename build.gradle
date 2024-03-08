@@ -24,8 +24,36 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
+def eventSourcesProject = ["event_sourcing@producer", "event_sourcing@consumer"]
 
-configure(subprojects.findAll { return true }) {
+configure(subprojects.findAll { eventSourcesProject.contains(it.name) }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
+
+configure(subprojects.findAll { !eventSourcesProject.contains(it.name) }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
