@@ -1,6 +1,7 @@
 package nawaphon.microservices.event_sourcing.producer.controllers;
 
 import nawaphon.microservices.event_sourcing.producer.components.FakeDatabaseComponent;
+import nawaphon.microservices.event_sourcing.producer.pojo.Customer;
 import nawaphon.microservices.event_sourcing.producer.pojo.Message;
 import nawaphon.microservices.event_sourcing.producer.pojo.ResponseMessage;
 import org.slf4j.Logger;
@@ -8,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -41,5 +39,13 @@ public class MainController {
 
 
         return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Done");
+    }
+
+    @GetMapping("/get-customer/{uuid}")
+    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
+        final Customer result = fakeDatabaseComponent.getCustomers().stream().filter(
+                (predicate) -> predicate.getId() == uuid).findFirst().orElse(null);
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
     }
 }
