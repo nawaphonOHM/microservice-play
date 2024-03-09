@@ -1,5 +1,0 @@
-group = 'nawaphon.microservices.event_sourcing'
-version = '0.0.1'
-
-
-archivesBaseName = 'consumer'

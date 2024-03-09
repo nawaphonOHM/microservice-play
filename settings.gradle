@@ -22,8 +22,8 @@ project(":shared_database@customer_service").projectDir = file("./shared_databas
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
 
-include("event_sourcing@producer")
-project(":event_sourcing@producer").projectDir = file("./event_sourcing/producer")
+include("messaging@producer")
+project(":messaging@producer").projectDir = file("./messaging/producer")
 
-include("event_sourcing@consumer")
-project(":event_sourcing@consumer").projectDir = file("./event_sourcing/consumer")
+include("messaging@consumer")
+project(":messaging@consumer").projectDir = file("./messaging/consumer")
