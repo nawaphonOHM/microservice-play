@@ -1,0 +1,5 @@
+group = 'nawaphon.microservices.messaging'
+version = '0.0.1'
+
+
+archivesBaseName = 'producer'
