@@ -2,6 +2,7 @@ package nawaphon.microservices.event_sourcing.producer.controllers;
 
 import nawaphon.microservices.event_sourcing.producer.components.FakeDatabaseComponent;
 import nawaphon.microservices.event_sourcing.producer.pojo.Customer;
+import nawaphon.microservices.event_sourcing.producer.pojo.CustomerDetail;
 import nawaphon.microservices.event_sourcing.producer.pojo.Message;
 import nawaphon.microservices.event_sourcing.producer.pojo.ResponseMessage;
 import org.slf4j.Logger;
@@ -45,6 +46,14 @@ public class MainController {
     public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
         final Customer result = fakeDatabaseComponent.getCustomers().stream().filter(
                 (predicate) -> predicate.getId() == uuid).findFirst().orElse(null);
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
+    }
+
+    @GetMapping("/get-customer-details/{uuid}")
+    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
+        final CustomerDetail result = fakeDatabaseComponent.getCustomerDetails().stream().filter(
+                (predicate) -> predicate.getCustomerId() == uuid).findFirst().orElse(null);
 
         return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
     }
