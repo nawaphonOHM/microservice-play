@@ -1,5 +1,6 @@
 package nawaphon.microservices.event_sourcing.producer.controllers;
 
+import nawaphon.microservices.event_sourcing.producer.components.FakeDatabaseComponent;
 import nawaphon.microservices.event_sourcing.producer.pojo.Message;
 import nawaphon.microservices.event_sourcing.producer.pojo.ResponseMessage;
 import org.slf4j.Logger;
@@ -23,9 +24,13 @@ public class MainController {
 
     private final KafkaTemplate<UUID, Message> kafkaTemplate;
 
+    private final FakeDatabaseComponent fakeDatabaseComponent;
 
-    public MainController(final KafkaTemplate<UUID, Message> kafkaTemplate) {
+
+    public MainController(final KafkaTemplate<UUID, Message> kafkaTemplate,
+                          final FakeDatabaseComponent fakeDatabaseComponent) {
         this.kafkaTemplate = kafkaTemplate;
+        this.fakeDatabaseComponent = fakeDatabaseComponent;
     }
 
 
