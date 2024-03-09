@@ -27,4 +27,20 @@ public class MainController {
         logger.info("I've received message: {}", message.getMessage());
 
     }
+
+    @GetMapping("/get-customer/{uuid}")
+    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
+        final Customer result = this.restTemplate.getForEntity(friendIp + "/get-customer/" + uuid, Customer.class)
+                .getBody();
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
+    }
+
+    @GetMapping("/get-customer-details/{uuid}")
+    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
+        final CustomerDetail result = this.restTemplate.getForEntity(friendIp + "/get-customer-details/" + uuid,
+                CustomerDetail.class).getBody();
+
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
+    }
 }
