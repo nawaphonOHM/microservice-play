@@ -13,10 +13,13 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private final RestTemplate restTemplate;
+    private final String friendIp;
 
-    public MainController(final RestTemplate restTemplate) {
+    public MainController(final RestTemplate restTemplate,
+                          @Value("${connection.friend-service}") final String friendIp) {
         this.restTemplate = restTemplate;
 
+        this.friendIp = friendIp;
     }
 
     @KafkaListener(topics = "Greeting", groupId = "group00")
