@@ -24,7 +24,7 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
-def eventSourcesProject = ["event_sourcing@producer", "event_sourcing@consumer"]
+def eventSourcesProject = ["messaging@producer", "messaging@consumer"]
 
 configure(subprojects.findAll { eventSourcesProject.contains(it.name) }) {
     apply plugin: 'java'
