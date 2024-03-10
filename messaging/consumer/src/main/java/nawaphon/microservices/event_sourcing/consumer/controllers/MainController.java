@@ -28,11 +28,15 @@ public class MainController {
     private final RestTemplate restTemplate;
     private final String friendIp;
 
+    private final ObjectMapper objectMapper;
+
     public MainController(final RestTemplate restTemplate,
-                          @Value("${connection.friend-service}") final String friendIp) {
+                          @Value("${connection.friend-service}") final String friendIp,
+                          final ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
 
         this.friendIp = friendIp;
+        this.objectMapper = objectMapper;
     }
 
     @KafkaListener(topics = "Greeting", groupId = "group00")
