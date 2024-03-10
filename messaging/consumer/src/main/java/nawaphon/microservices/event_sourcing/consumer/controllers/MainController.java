@@ -47,9 +47,16 @@ public class MainController {
 
     @GetMapping("/get-customer/{uuid}")
     public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
-        final ResponseMessage<Customer> result = this.restTemplate.exchange(friendIp + "/get-customer/" + uuid,
+        final String url = friendIp + "/get-customer/" + uuid;
+        final ResponseMessage<Customer> result = this.restTemplate.exchange(url,
                         HttpMethod.GET, null, new CustomerParameterizedTypeReference())
                 .getBody();
+
+        try {
+            logger.debug("Call {}: response: {}", url, objectMapper.writeValueAsString(result));
+        } catch (JsonProcessingException e) {
+            logger.error("Unable write log");
+        }
 
         assert result != null;
         return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.getResults());
