@@ -5,4 +5,8 @@ import nawaphon.microservices.event_sourcing.consumer.pojo.ResponseMessage;
 import org.springframework.core.ParameterizedTypeReference;
 
 public class CustomerDetailsParameterizedTypeReference extends ParameterizedTypeReference<ResponseMessage<CustomerDetail>> {
+
+    public CustomerDetailsParameterizedTypeReference() {
+        super();
+    }
 }
