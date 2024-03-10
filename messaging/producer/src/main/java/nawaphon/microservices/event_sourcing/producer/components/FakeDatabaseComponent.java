@@ -1,5 +1,6 @@
 package nawaphon.microservices.event_sourcing.producer.components;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.event_sourcing.producer.pojo.Customer;
 import nawaphon.microservices.event_sourcing.producer.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,12 @@ public class FakeDatabaseComponent {
 
     private final List<Customer> customers = new ArrayList<>();
     private final List<CustomerDetail> customerDetails = new ArrayList<>();
+
+    private final ObjectMapper objectMapper;
+
+    public FakeDatabaseComponent(final ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     public List<Customer> getCustomers() {
         return customers;
