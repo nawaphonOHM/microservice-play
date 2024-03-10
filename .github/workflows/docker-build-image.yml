@@ -83,14 +83,14 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./event_sourcing/consumer
-          file: ./event_sourcing/consumer/Dockerfile
+          file: ./messaging/consumer/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:event_sourcing.consumer
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
 
       - name: Build event_sourcing producer image
         uses: docker/build-push-action@v5
         with:
           context: ./event_sourcing/producer
-          file: ./event_sourcing/producer/Dockerfile
+          file: ./messaging/producer/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:event_sourcing.producer
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.producer
