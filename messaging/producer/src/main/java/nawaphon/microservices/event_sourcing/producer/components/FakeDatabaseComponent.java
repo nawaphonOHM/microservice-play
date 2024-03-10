@@ -1,5 +1,6 @@
 package nawaphon.microservices.event_sourcing.producer.components;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.event_sourcing.producer.pojo.Customer;
 import nawaphon.microservices.event_sourcing.producer.pojo.CustomerDetail;
@@ -43,7 +44,11 @@ public class FakeDatabaseComponent {
             customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "John", "Doe");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
-            logger.info("Customer and CustomerDetail added: {}", customerFake);
+            try {
+                logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Unable to serialize value: ", e);
+            }
         }
 
         {
@@ -51,7 +56,11 @@ public class FakeDatabaseComponent {
             customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Jane", "Smith");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
-            logger.info("Customer and CustomerDetail added: {}", customerFake);
+            try {
+                logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Unable to serialize value: ", e);
+            }
         }
 
         {
@@ -59,7 +68,11 @@ public class FakeDatabaseComponent {
             customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Bob", "Johnson");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
-            logger.info("Customer and CustomerDetail added: {}", customerFake);
+            try {
+                logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Unable to serialize value:", e);
+            }
         }
     }
 }
