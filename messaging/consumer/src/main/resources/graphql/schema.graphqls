@@ -1,0 +1,14 @@
+type Query {
+    getCustomer(id: ID): Customer
+}
+
+type Customer {
+    id: ID
+    details: CustomerDetail
+}
+
+type CustomerDetail {
+    customerId: ID
+    firstName: String
+    lastName: String
+}
