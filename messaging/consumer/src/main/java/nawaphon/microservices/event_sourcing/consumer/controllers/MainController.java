@@ -11,6 +11,9 @@ import nawaphon.microservices.event_sourcing.consumer.utils.CustomerParameterize
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -45,6 +48,16 @@ public class MainController {
     public void sendEvent(@RequestBody final Message message) {
         logger.info("I've received message: {}", message.getMessage());
 
+    }
+
+    @QueryMapping("getCustomer")
+    public Customer customer(@Argument final UUID id) {
+        return getCustomer(id).getResults();
+    }
+
+    @SchemaMapping("CustomerDetail")
+    public CustomerDetail customerDetail(final Customer customer) {
+        return getCustomerDetail(customer.getDetailsId()).getResults();
     }
 
     @GetMapping("/get-customer/{uuid}")
