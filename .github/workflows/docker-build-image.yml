@@ -79,18 +79,18 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared_database
 
-      - name: Build event_sourcing consumer image
+      - name: Build messaging consumer image
         uses: docker/build-push-action@v5
         with:
-          context: ./event_sourcing/consumer
+          context: ./messaging/consumer
           file: ./messaging/consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
 
-      - name: Build event_sourcing producer image
+      - name: Build messaging producer image
         uses: docker/build-push-action@v5
         with:
-          context: ./event_sourcing/producer
+          context: ./messaging/producer
           file: ./messaging/producer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.producer
