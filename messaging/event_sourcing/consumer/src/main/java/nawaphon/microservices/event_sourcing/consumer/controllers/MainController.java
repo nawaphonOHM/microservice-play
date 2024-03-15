@@ -27,50 +27,12 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private final RestTemplate restTemplate;
-    private final String friendIp;
-
-    private final ObjectMapper objectMapper;
-
-    public MainController(final RestTemplate restTemplate,
-                          @Value("${connection.friend-service}") final String friendIp,
-                          final ObjectMapper objectMapper) {
-        this.restTemplate = restTemplate;
-
-        this.friendIp = friendIp;
-        this.objectMapper = objectMapper;
+    public MainController() {
     }
 
     @KafkaListener(topics = "Greeting", groupId = "group00")
     public void sendEvent(@RequestBody final Message message) {
         logger.info("I've received message: {}", message.getMessage());
 
-    }
-
-    @GetMapping("/get-customer/{uuid}")
-    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
-        final String url = friendIp + "/get-customer/" + uuid;
-        final ResponseMessage<Customer> result = this.restTemplate.exchange(url,
-                        HttpMethod.GET, null, new CustomerParameterizedTypeReference())
-                .getBody();
-
-        try {
-            logger.debug("Call {}: response: {}", url, objectMapper.writeValueAsString(result));
-        } catch (JsonProcessingException e) {
-            logger.error("Unable write log");
-        }
-
-        assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.getResults());
-    }
-
-    @GetMapping("/get-customer-details/{uuid}")
-    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
-        final ResponseMessage<CustomerDetail> result = this.restTemplate.exchange(friendIp + "/get-customer-details/" + uuid,
-                HttpMethod.GET, null,
-                new CustomerDetailsParameterizedTypeReference()).getBody();
-
-        assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.getResults());
     }
 }
