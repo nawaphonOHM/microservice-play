@@ -8,7 +8,7 @@ COPY ./entrypoint.sh /home/receiver/
 
 RUN chown receiver /home/receiver/entrypoint.sh &&  \
     chmod 500 /home/receiver/entrypoint.sh && \
-    chown producer /home/receiver/receiver-0.0.1.jar && \
+    chown receiver /home/receiver/receiver-0.0.1.jar && \
     chmod 500 /home/receiver/receiver-0.0.1.jar
 
 
