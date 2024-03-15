@@ -98,6 +98,32 @@ configure(subprojects.findAll { it.name == "messaging@consumer" }) {
 //    }
 }
 
+configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
 configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
