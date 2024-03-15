@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan(basePackages = "nawaphon.microservices.event_sourcing.consumer.configurations")
-public class EventSourcingServiceConsumerApplication {
+public class ConsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EventSourcingServiceConsumerApplication.class, args);
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 
 }
