@@ -1,0 +1,29 @@
+services:
+
+  receiver:
+    image: nawaphon2539/microservices-lab:messaging.rest.producer
+    env_file:
+      - receiver/receiver-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.2
+
+  sender:
+    image: nawaphon2539/microservices-lab:messaging.rest.consumer
+    env_file:
+      - sender/sender-vars.env
+    ports:
+      - "1002:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.3
+
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/29
+          gateway: 192.168.1.1
