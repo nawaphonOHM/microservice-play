@@ -1,4 +1,4 @@
-package nawaphon.microservices.event_sourcing.producer.pojo;
+package nawaphon.microservices.messaging.rest.receiver.pojo;
 
 public class ResponseMessage<A> {
 

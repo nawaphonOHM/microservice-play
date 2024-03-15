@@ -25,6 +25,9 @@ project(":shared_database@order_service").projectDir = file("./shared_database/o
 include("messaging@rest@sender")
 project(":messaging@rest@sender").projectDir = file("./messaging/rest/sender")
 
+include("messaging@rest@receiver")
+project(":messaging@rest@receiver").projectDir = file("./messaging/rest/receiver")
+
 include("messaging@producer")
 project(":messaging@producer").projectDir = file("./messaging/producer")
 

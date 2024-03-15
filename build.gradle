@@ -48,6 +48,30 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
 //    }
 }
 
+configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
 
 def eventSourcesProject = ["messaging@producer", "messaging@consumer"]
 

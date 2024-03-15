@@ -1,4 +1,4 @@
-package nawaphon.microservices.event_sourcing.producer;
+package nawaphon.microservices.messaging.rest.receiver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
