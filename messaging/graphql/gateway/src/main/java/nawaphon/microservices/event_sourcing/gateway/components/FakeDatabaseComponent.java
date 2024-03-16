@@ -2,8 +2,8 @@ package nawaphon.microservices.event_sourcing.gateway.components;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nawaphon.microservices.event_sourcing.consumer.pojo.Customer;
-import nawaphon.microservices.event_sourcing.consumer.pojo.CustomerDetail;
+import nawaphon.microservices.event_sourcing.gateway.pojo.Customer;
+import nawaphon.microservices.event_sourcing.gateway.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
