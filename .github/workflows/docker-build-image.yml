@@ -107,6 +107,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./messaging/event_sourcing/producer
-          file: .messaging/event_sourcing/producer/Dockerfile
+          file: ./messaging/event_sourcing/producer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.event_sourcing.producer
