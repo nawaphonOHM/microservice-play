@@ -14,6 +14,10 @@ public class Customer {
         this.detailsId = detailsId;
     }
 
+    public Customer() {
+        this(null, null);
+    }
+
     public UUID getId() {
         return id;
     }
