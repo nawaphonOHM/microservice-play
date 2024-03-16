@@ -1,5 +1,0 @@
-type CustomerDetail {
-    id: ID
-    firstName: String
-    lastName: String
-}

@@ -1,4 +1,0 @@
-type Customer {
-    id: ID
-    details: CustomerDetail
-}
