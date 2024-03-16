@@ -1,0 +1,5 @@
+type CustomerDetail {
+    customerId: ID
+    firstName: String
+    lastName: String
+}

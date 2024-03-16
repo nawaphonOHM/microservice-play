@@ -110,3 +110,11 @@ jobs:
           file: .messaging/event_sourcing/producer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.event_sourcing.producer
+
+      - name: Build graphql image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/graphql/gateway
+          file: ./messaging/graphql/gatewayDockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.graphql.gateway

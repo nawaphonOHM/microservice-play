@@ -1,0 +1,5 @@
+type Query {
+    findCustomerById(id: ID): Customer
+
+}
+
