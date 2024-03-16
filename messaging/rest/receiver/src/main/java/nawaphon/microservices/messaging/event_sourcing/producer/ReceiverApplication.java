@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.event_sourcing_producer;
+package nawaphon.microservices.messaging.event_sourcing.producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
