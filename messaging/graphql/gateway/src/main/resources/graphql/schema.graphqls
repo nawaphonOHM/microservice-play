@@ -4,7 +4,7 @@ type Query {
 }
 
 type CustomerDetail {
-    id: ID
+    customerId: ID
     firstName: String
     lastName: String
 }
