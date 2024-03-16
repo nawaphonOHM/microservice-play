@@ -1,9 +1,9 @@
-package nawaphon.microservices.messaging.event_sourcing.producer.controllers;
+package nawaphon.microservices.messaging.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nawaphon.microservices.messaging.event_sourcing.producer.pojo.Message;
-import nawaphon.microservices.messaging.event_sourcing.producer.pojo.ResponseMessage;
+import nawaphon.microservices.messaging.pojo.Message;
+import nawaphon.microservices.messaging.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
