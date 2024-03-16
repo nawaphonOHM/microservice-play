@@ -1,4 +1,4 @@
-package nawaphon.microservices.event_sourcing.consumer.pojo;
+package nawaphon.microservices.event_sourcing.gateway.pojo;
 
 import java.util.UUID;
 
