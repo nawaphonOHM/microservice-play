@@ -3,7 +3,7 @@ services:
   zookeeper:
     image: ubuntu/zookeeper:latest
     env_file:
-      - event_sourcing/zookeeper/zookeeper-vars.env
+      - zookeeper/zookeeper-vars.env
     networks:
       default:
         ipv4_address: 192.168.1.2
@@ -12,7 +12,7 @@ services:
     image: ubuntu/kafka:latest
     command: [ "/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://192.168.1.3:9092" ]
     env_file:
-      - event_sourcing/kafka/kafka-vars.env
+      - kafka/kafka-vars.env
     ports:
       - "9092:9092"
     networks:
