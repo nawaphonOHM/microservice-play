@@ -24,9 +24,55 @@ gradle.buildFinished {
     project.buildDir.deleteDir()
 }
 
-def eventSourcesProject = ["messaging@producer", "messaging@consumer"]
+configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-configure(subprojects.findAll { eventSourcesProject.contains(it.name) }) {
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
+configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
+configure(subprojects.findAll { it.name == "messaging@consumer" }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
@@ -52,8 +98,156 @@ configure(subprojects.findAll { eventSourcesProject.contains(it.name) }) {
 //    }
 }
 
+configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-configure(subprojects.findAll { !eventSourcesProject.contains(it.name) }) {
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
+configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+//    tasks.named('test') {
+//        useJUnitPlatform()
+//    }
+}
+
+configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+
+        runtimeOnly 'org.postgresql:postgresql'
+
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'com.h2database:h2'
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+configure(subprojects.findAll { it.name == "shared_database@customer_service"}) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+
+        runtimeOnly 'org.postgresql:postgresql'
+
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'com.h2database:h2'
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+configure(subprojects.findAll { it.name == "private_table_per_service@order_service"}) {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '11'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+
+        runtimeOnly 'org.postgresql:postgresql'
+
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'com.h2database:h2'
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+
+configure(subprojects.findAll { it.name == "private_table_per_service@customer_service"}) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'

@@ -22,8 +22,14 @@ project(":shared_database@customer_service").projectDir = file("./shared_databas
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
 
-include("messaging@producer")
-project(":messaging@producer").projectDir = file("./messaging/producer")
+include("messaging@rest@sender")
+project(":messaging@rest@sender").projectDir = file("./messaging/rest/sender")
 
-include("messaging@consumer")
-project(":messaging@consumer").projectDir = file("./messaging/consumer")
+include("messaging@rest@receiver")
+project(":messaging@rest@receiver").projectDir = file("./messaging/rest/receiver")
+
+include("messaging@event_sourcing@producer")
+project(":messaging@event_sourcing@producer").projectDir = file("./messaging/event_sourcing/producer")
+
+include("messaging@event_sourcing@consumer")
+project(":messaging@event_sourcing@consumer").projectDir = file("./messaging/event_sourcing/consumer")
