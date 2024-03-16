@@ -14,9 +14,9 @@ RUN chown receiver /home/receiver/entrypoint.sh &&  \
 
 EXPOSE 8080
 
-USER producer
+USER receiver
 
-WORKDIR /home/producer/
+WORKDIR /home/receiver/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
