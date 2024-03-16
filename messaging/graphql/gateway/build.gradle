@@ -1,5 +1,5 @@
-group = 'nawaphon.microservices.messaging.consumer'
+group = 'nawaphon.microservices.gateway'
 version = '0.0.1'
 
 
-archivesBaseName = 'consumer'
+archivesBaseName = 'gateway'
