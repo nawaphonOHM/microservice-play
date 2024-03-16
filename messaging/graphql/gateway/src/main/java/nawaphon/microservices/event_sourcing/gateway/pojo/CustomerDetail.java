@@ -17,6 +17,10 @@ public class CustomerDetail {
         this.lastName = lastName;
     }
 
+    public CustomerDetail() {
+        this(null, null, null);
+    }
+
     public UUID getCustomerId() {
         return customerId;
     }
