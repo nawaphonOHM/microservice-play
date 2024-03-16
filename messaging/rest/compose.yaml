@@ -1,7 +1,7 @@
 services:
 
   receiver:
-    image: nawaphon2539/microservices-lab:messaging.rest.producer
+    image: nawaphon2539/microservices-lab:messaging.rest.receiver
     env_file:
       - receiver/receiver-vars.env
     ports:
@@ -11,7 +11,7 @@ services:
         ipv4_address: 192.168.1.2
 
   sender:
-    image: nawaphon2539/microservices-lab:messaging.rest.consumer
+    image: nawaphon2539/microservices-lab:messaging.rest.sender
     env_file:
       - sender/sender-vars.env
     ports:
