@@ -1,3 +1,16 @@
 type Query {
     findCustomerById(id: ID): Customer
+
 }
+
+type CustomerDetail {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+type Customer {
+    id: ID
+    details: CustomerDetail
+}
+
