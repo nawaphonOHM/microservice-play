@@ -25,12 +25,14 @@ public class MainController {
 
     @QueryMapping("findCustomerById")
     public Customer getCustomer(@Argument final UUID id) {
+        logger.info("Getting customer with id: {}", id);
         return fakeDatabaseComponent.getCustomers().stream().filter((var1) -> var1.getId().compareTo(id) == 0)
                 .findFirst().orElse(new Customer());
     }
 
     @SchemaMapping("details")
     public CustomerDetail getCustomerDetails(final Customer customer) {
+        logger.info("Getting customer details for customer with id: {}", customer.getId());
         return fakeDatabaseComponent.getCustomerDetails().stream()
                 .filter((var1) -> var1.getCustomerId().compareTo(customer.getDetailsId()) == 0)
                 .findFirst().orElse(new CustomerDetail());
