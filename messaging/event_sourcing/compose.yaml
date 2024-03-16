@@ -21,7 +21,7 @@ services:
     depends_on: [ zookeeper ]
 
   producer_0:
-    image: nawaphon2539/microservices-lab:messaging.producer
+    image: nawaphon2539/microservices-lab:messaging.event_sourcing.producer
     env_file:
       - producer/producer-vars.env
     ports:
@@ -32,7 +32,7 @@ services:
     depends_on: [ kafka_0 ]
 
   consumer_0:
-    image: nawaphon2539/microservices-lab:messaging.consumer
+    image: nawaphon2539/microservices-lab:messaging.event_sourcing.consumer
     env_file:
       - consumer/consumer-vars.env
     ports:
