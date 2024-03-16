@@ -1,0 +1,19 @@
+services:
+
+  gateway:
+    image: nawaphon2539/microservices-lab:messaging.graphql.gateway
+    env_file:
+      - gateway/gateway-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.2
+
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/29
+          gateway: 192.168.1.1
