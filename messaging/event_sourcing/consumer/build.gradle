@@ -1,4 +1,4 @@
-group = 'nawaphon.microservices.messaging.consumer'
+group = 'nawaphon.microservices.event_sourcing.consumer'
 version = '0.0.1'
 
 

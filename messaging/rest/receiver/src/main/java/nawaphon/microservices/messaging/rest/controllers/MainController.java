@@ -1,9 +1,9 @@
-package nawaphon.microservices.messaging.event_sourcing_producer.controllers;
+package nawaphon.microservices.messaging.rest.controllers;
 
-import nawaphon.microservices.messaging.event_sourcing_producer.pojo.Customer;
-import nawaphon.microservices.messaging.event_sourcing_producer.pojo.CustomerDetail;
-import nawaphon.microservices.messaging.event_sourcing_producer.pojo.ResponseMessage;
-import nawaphon.microservices.messaging.event_sourcing_producer.components.FakeDatabaseComponent;
+import nawaphon.microservices.messaging.rest.pojo.Customer;
+import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
+import nawaphon.microservices.messaging.rest.pojo.ResponseMessage;
+import nawaphon.microservices.messaging.rest.components.FakeDatabaseComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

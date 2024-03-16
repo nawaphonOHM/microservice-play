@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.event_sourcing_producer.pojo;
+package nawaphon.microservices.messaging.rest.pojo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
