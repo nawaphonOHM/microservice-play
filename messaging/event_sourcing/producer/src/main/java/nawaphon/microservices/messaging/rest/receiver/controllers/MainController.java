@@ -1,8 +1,7 @@
 package nawaphon.microservices.messaging.rest.receiver.controllers;
 
-import nawaphon.microservices.messaging.rest.receiver.components.FakeDatabaseComponent;
-import nawaphon.microservices.messaging.rest.receiver.pojo.Customer;
-import nawaphon.microservices.messaging.rest.receiver.pojo.CustomerDetail;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.messaging.rest.receiver.pojo.Message;
 import nawaphon.microservices.messaging.rest.receiver.pojo.ResponseMessage;
 import org.slf4j.Logger;
@@ -21,38 +20,22 @@ public class MainController {
 
     private final KafkaTemplate<UUID, Message> kafkaTemplate;
 
-    private final FakeDatabaseComponent fakeDatabaseComponent;
+    private final ObjectMapper objectMapper;
 
 
-    public MainController(final KafkaTemplate<UUID, Message> kafkaTemplate,
-                          final FakeDatabaseComponent fakeDatabaseComponent) {
+    public MainController(final KafkaTemplate<UUID, Message> kafkaTemplate, final ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
-        this.fakeDatabaseComponent = fakeDatabaseComponent;
+        this.objectMapper = objectMapper;
     }
 
 
     @PostMapping("/send-message")
-    public ResponseMessage<String> sendEvent(@RequestBody final Message message) {
+    public ResponseMessage<String> sendEvent(@RequestBody final Message message) throws JsonProcessingException {
 
+        logger.debug("message to be sent: {}", objectMapper.writeValueAsString(message));
         kafkaTemplate.send("Greeting", UUID.randomUUID(), message);
 
 
         return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Done");
-    }
-
-    @GetMapping("/get-customer/{uuid}")
-    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
-        final Customer result = fakeDatabaseComponent.getCustomers().stream().filter(
-                (predicate) -> predicate.getId().compareTo(uuid) == 0).findFirst().orElse(null);
-
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
-    }
-
-    @GetMapping("/get-customer-details/{uuid}")
-    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
-        final CustomerDetail result = fakeDatabaseComponent.getCustomerDetails().stream().filter(
-                (predicate) -> predicate.getCustomerId().compareTo(uuid) == 0).findFirst().orElse(null);
-
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
     }
 }
