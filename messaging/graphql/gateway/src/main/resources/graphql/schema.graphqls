@@ -3,14 +3,3 @@ type Query {
 
 }
 
-type CustomerDetail {
-    customerId: ID
-    firstName: String
-    lastName: String
-}
-
-type Customer {
-    id: ID
-    details: CustomerDetail
-}
-
