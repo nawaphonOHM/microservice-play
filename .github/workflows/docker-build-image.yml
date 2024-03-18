@@ -98,7 +98,7 @@ jobs:
       - name: Build event_sourcing consumer image
         uses: docker/build-push-action@v5
         with:
-          context: ./event_sourcing/consumer
+          context: ./messaging/consumer/
           file: ./messaging/consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
