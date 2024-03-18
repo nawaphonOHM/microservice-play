@@ -98,8 +98,8 @@ jobs:
       - name: Build event_sourcing consumer image
         uses: docker/build-push-action@v5
         with:
-          context: ./messaging/consumer/
-          file: ./messaging/consumer/Dockerfile
+          context: ./messaging/event_sourcing/consumer
+          file: ./messaging/event_sourcing/consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
 
@@ -115,6 +115,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./messaging/graphql/gateway
-          file: ./messaging/graphql/gatewayDockerfile
+          file: ./messaging/graphql/gateway/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.graphql.gateway
