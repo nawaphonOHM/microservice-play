@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.rest.pojo;
+package nawaphon.microservices.circuit_breaker.proxy.pojo;
 
 public class ResponseMessage<A> {
 
