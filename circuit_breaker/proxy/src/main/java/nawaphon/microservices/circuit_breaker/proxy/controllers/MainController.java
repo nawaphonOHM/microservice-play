@@ -25,7 +25,7 @@ public class MainController {
 
     private final String serviceIp;
 
-    public MainController(RestTemplate restTemplate, @Value("service-ip") String serviceIp) {
+    public MainController(RestTemplate restTemplate, @Value("${service-ip}") String serviceIp) {
         this.restTemplate = restTemplate;
         this.serviceIp = serviceIp;
     }
