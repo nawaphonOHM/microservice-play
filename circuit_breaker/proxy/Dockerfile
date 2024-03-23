@@ -1,22 +1,22 @@
 FROM openjdk:11.0.16-jre
 
 
-RUN useradd --create-home proxy
+RUN useradd --create-home proxy_user
 
-COPY ./build/libs/receiver-0.0.1.jar /home/proxy/
-COPY ./entrypoint.sh /home/proxy/
+COPY ./build/libs/proxy-0.0.1.jar /home/proxy_user/
+COPY ./entrypoint.sh /home/proxy_user/
 
-RUN chown proxy /home/proxy/entrypoint.sh &&  \
-    chmod 500 /home/proxy/entrypoint.sh && \
-    chown proxy /home/proxy/proxy-0.0.1.jar && \
-    chmod 500 /home/proxy/proxy-0.0.1.jar
+RUN chown proxy_user /home/proxy_user/entrypoint.sh &&  \
+    chmod 500 /home/proxy_user/entrypoint.sh && \
+    chown proxy_user /home/proxy_user/proxy-0.0.1.jar && \
+    chmod 500 /home/proxy_user/proxy-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER proxy
+USER proxy_user
 
-WORKDIR /home/proxy/
+WORKDIR /home/proxy_user/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
