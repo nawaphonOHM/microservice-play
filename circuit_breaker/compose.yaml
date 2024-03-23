@@ -1,0 +1,29 @@
+services:
+
+  proxy:
+    image: nawaphon2539/microservices-lab:circuit_breaker.proxy
+    env_file:
+      - proxy/proxy-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.2
+
+  real_service:
+    image: nawaphon2539/microservices-lab:circuit_breaker.real_service
+    env_file:
+      - real_service/real_service-vars.env
+    ports:
+      - "1002:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.3
+
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/29
+          gateway: 192.168.1.1
