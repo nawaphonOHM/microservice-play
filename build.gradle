@@ -11,6 +11,9 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
+java {
+    sourceCompatibility = '11'
+}
 
 repositories {
     mavenCentral()
@@ -29,23 +32,13 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
-
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     repositories {
         mavenCentral()
     }
-
-//    tasks.named('test') {
-//        useJUnitPlatform()
-//    }
 }
 
 configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
@@ -53,23 +46,13 @@ configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
-
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     repositories {
         mavenCentral()
     }
-
-//    tasks.named('test') {
-//        useJUnitPlatform()
-//    }
 }
 
 configure(subprojects.findAll { it.name == "messaging@consumer" }) {
@@ -77,25 +60,16 @@ configure(subprojects.findAll { it.name == "messaging@consumer" }) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.kafka:spring-kafka'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.kafka:spring-kafka-test'
     }
 
     repositories {
         mavenCentral()
     }
-
-//    tasks.named('test') {
-//        useJUnitPlatform()
-//    }
 }
 
 configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }) {
@@ -103,25 +77,16 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.kafka:spring-kafka'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.kafka:spring-kafka-test'
     }
 
     repositories {
         mavenCentral()
     }
-
-//    tasks.named('test') {
-//        useJUnitPlatform()
-//    }
 }
 
 configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }) {
@@ -129,25 +94,16 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.kafka:spring-kafka'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.kafka:spring-kafka-test'
     }
 
     repositories {
         mavenCentral()
     }
-
-//    tasks.named('test') {
-//        useJUnitPlatform()
-//    }
 }
 
 configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
@@ -155,9 +111,7 @@ configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     repositories {
         mavenCentral()
@@ -187,9 +141,7 @@ configure(subprojects.findAll { it.name == "shared_database@customer_service"}) 
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     repositories {
         mavenCentral()
@@ -219,9 +171,7 @@ configure(subprojects.findAll { it.name == "private_table_per_service@order_serv
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     repositories {
         mavenCentral()
@@ -252,9 +202,7 @@ configure(subprojects.findAll { it.name == "private_table_per_service@customer_s
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     repositories {
         mavenCentral()
@@ -284,9 +232,7 @@ configure(subprojects.findAll { it.name == "messaging@graphql"}) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    java {
-        sourceCompatibility = '11'
-    }
+    
 
     repositories {
         mavenCentral()
@@ -295,11 +241,6 @@ configure(subprojects.findAll { it.name == "messaging@graphql"}) {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-graphql'
-
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework:spring-webflux'
-        testImplementation 'org.springframework.graphql:spring-graphql-test'
 
     }
 }
