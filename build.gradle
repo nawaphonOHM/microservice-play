@@ -31,10 +31,6 @@ allprojects {
     java {
         sourceCompatibility = '11'
     }
-
-    repositories {
-        mavenCentral()
-    }
     
 }
 
