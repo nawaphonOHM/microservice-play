@@ -1,7 +1,7 @@
 FROM openjdk:11.0.16-jre
 
 
-RUN useradd --create-home sereal_servicender
+RUN useradd --create-home real_service
 
 COPY ./build/libs/real_service-0.0.1.jar /home/real_service/
 COPY ./entrypoint.sh /home/real_service/
