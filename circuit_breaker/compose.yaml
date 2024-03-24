@@ -1,7 +1,7 @@
 services:
 
   proxy:
-    image: nawaphon2539/microservices-lab:circuit_breaker.proxy
+    image: nawaphon2539/microservices-lab:circuit-breaker.proxy
     env_file:
       - proxy/proxy-vars.env
     ports:
@@ -11,7 +11,7 @@ services:
         ipv4_address: 192.168.1.2
 
   real_service:
-    image: nawaphon2539/microservices-lab:circuit_breaker.real_service
+    image: nawaphon2539/microservices-lab:circuit-breaker.real-service
     env_file:
       - real_service/real_service-vars.env
     ports:
