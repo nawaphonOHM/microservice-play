@@ -36,3 +36,9 @@ project(":messaging@event_sourcing@consumer").projectDir = file("./messaging/eve
 
 include("messaging@graphql")
 project(":messaging@graphql").projectDir = file("messaging/graphql/gateway")
+
+include("circuit_breaker@proxy")
+project(":circuit_breaker@proxy").projectDir = file("circuit_breaker/proxy")
+
+include("circuit_breaker@real_service")
+project(":circuit_breaker@real_service").projectDir = file("circuit_breaker/real_service")
