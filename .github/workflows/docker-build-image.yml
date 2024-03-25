@@ -118,3 +118,11 @@ jobs:
           file: ./messaging/graphql/gateway/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.graphql.gateway
+
+      - name: Build circuit breaker image (proxy)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./circuit_breaker/proxy
+          file: ./circuit_breaker/proxy/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:circuit-breaker.proxy
