@@ -41,7 +41,7 @@ public class MainController {
     }
     
     
-    private ResponseMessage<Message> unavailable()  {
+    private ResponseMessage<Message> unavailable(final Exception exception)  {
         final Message message = new Message("Service is unavailable");
         
         
