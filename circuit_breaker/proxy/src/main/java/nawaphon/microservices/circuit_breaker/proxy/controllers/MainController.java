@@ -34,7 +34,7 @@ public class MainController {
     @GetMapping("/call-service}")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
     public ResponseMessage<Message> getCustomer() {
-        final String url = String.format("http://%s/circuit-breaker/real-service/first-get", serviceIp);
+        final String url = String.format("%s/first-get", serviceIp);
         final ResponseEntity<ResponseMessage<Message>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
