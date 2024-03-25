@@ -8,7 +8,7 @@ services:
       - "1001:8080"
     networks:
       default:
-        ipv4_address: 192.168.1.2
+        ipv4_address: 192.168.10.2
 
   real_service:
     image: nawaphon2539/microservices-lab:circuit-breaker.real-service
@@ -18,12 +18,12 @@ services:
       - "1002:8080"
     networks:
       default:
-        ipv4_address: 192.168.1.3
+        ipv4_address: 192.168.10.3
 
 
 networks:
   default:
     ipam:
       config:
-        - subnet: 192.168.1.0/29
-          gateway: 192.168.1.1
+        - subnet: 192.168.10.0/29
+          gateway: 192.168.10.1
