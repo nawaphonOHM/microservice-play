@@ -31,7 +31,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/call-service}")
+    @GetMapping("/call-service")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
     public ResponseMessage<Message> getCustomer() {
         final String url = String.format("%s/first-get", serviceIp);
