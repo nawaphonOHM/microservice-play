@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/proxy_user/services_registry-0.0.1.jar || exit 1
+  java -jar /home/services_registry/services_registry-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {
