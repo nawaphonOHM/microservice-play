@@ -229,3 +229,11 @@ configure(subprojects.findAll { it.name == "circuit_breaker@real_service"}) {
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 }
+
+configure(subprojects.findAll { it.name == "self_registration@services_registry"}) {
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    }
+}
