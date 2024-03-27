@@ -17,13 +17,6 @@ main() {
 
 mandatoryEnvCheck() {
   ERROR=0
-
-  if [ -z "$FRIEND_IP" ]; then
-      cat >&2 <<-EOE
-          Error: FRIEND_IP is required.
-EOE
-      ERROR=1
-    fi
 }
 
 
