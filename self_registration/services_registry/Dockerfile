@@ -12,7 +12,7 @@ RUN chown services_registry /home/services_registry/entrypoint.sh &&  \
     chmod 500 /home/services_registry/services_registry-0.0.1.jar
 
 
-EXPOSE 8080
+EXPOSE 8761
 
 USER services_registry
 
