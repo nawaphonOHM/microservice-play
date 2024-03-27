@@ -1,22 +1,22 @@
 FROM openjdk:11.0.16-jre
 
 
-RUN useradd --create-home proxy_user
+RUN useradd --create-home services_registry
 
-COPY build/libs/proxy-0.0.1.jar /home/proxy_user/
-COPY entrypoint.sh /home/proxy_user/
+COPY build/libs/services_registry-0.0.1.jar /home/services_registry/
+COPY entrypoint.sh /home/services_registry/
 
-RUN chown proxy_user /home/proxy_user/entrypoint.sh &&  \
-    chmod 500 /home/proxy_user/entrypoint.sh && \
-    chown proxy_user /home/proxy_user/proxy-0.0.1.jar && \
-    chmod 500 /home/proxy_user/proxy-0.0.1.jar
+RUN chown services_registry /home/services_registry/entrypoint.sh &&  \
+    chmod 500 /home/services_registry/entrypoint.sh && \
+    chown services_registry /home/services_registry/services_registry-0.0.1.jar && \
+    chmod 500 /home/services_registry/services_registry-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER proxy_user
+USER services_registry
 
-WORKDIR /home/proxy_user/
+WORKDIR /home/services_registry/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
