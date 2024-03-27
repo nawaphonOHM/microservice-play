@@ -2,4 +2,4 @@ group = 'nawaphon.self_registration'
 version = '0.0.1'
 
 
-archivesBaseName = 'service_registry'
+archivesBaseName = 'services_registry'
