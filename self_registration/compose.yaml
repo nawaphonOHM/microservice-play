@@ -1,2 +1,14 @@
 services:
 
+  proxy:
+    image: nawaphon2539/microservices-lab:self-registration.services-registry
+    env_file:
+      - services_registry/services-registry-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+
+
+networks:
+  default:
