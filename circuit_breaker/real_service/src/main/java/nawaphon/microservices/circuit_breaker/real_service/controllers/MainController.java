@@ -1,7 +1,7 @@
-package nawaphon.microservices.circuit_breaker.proxy.controllers;
+package nawaphon.microservices.circuit_breaker.real_service.controllers;
 
-import nawaphon.microservices.circuit_breaker.proxy.pojo.Message;
-import nawaphon.microservices.circuit_breaker.proxy.pojo.ResponseMessage;
+import nawaphon.microservices.circuit_breaker.real_service.pojo.Message;
+import nawaphon.microservices.circuit_breaker.real_service.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
