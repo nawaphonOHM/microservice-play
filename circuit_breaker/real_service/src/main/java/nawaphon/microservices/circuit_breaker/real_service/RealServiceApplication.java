@@ -1,4 +1,4 @@
-package nawaphon.microservices.circuit_breaker.proxy;
+package nawaphon.microservices.circuit_breaker.real_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

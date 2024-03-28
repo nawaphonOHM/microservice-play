@@ -1,4 +1,4 @@
-package nawaphon.microservices.circuit_breaker.proxy.pojo;
+package nawaphon.microservices.circuit_breaker.real_service.pojo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
