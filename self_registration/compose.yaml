@@ -12,7 +12,7 @@ services:
   service_a:
     image: nawaphon2539/microservices-lab:self-registration.services-a
     env_file:
-      - servicesA/service-a-vars.env
+      - serviceA/service-a-vars.env
     ports:
       - "1001:8080"
     networks:
