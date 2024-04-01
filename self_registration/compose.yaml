@@ -3,7 +3,7 @@ services:
   services_registry:
     image: nawaphon2539/microservices-lab:self-registration.services-registry
     env_file:
-      - services_registry/service-registry-vars.env
+      - services_registry/services-registry-vars.env
     ports:
       - "1001:8761"
     networks:
