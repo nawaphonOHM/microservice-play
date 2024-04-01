@@ -17,6 +17,13 @@ main() {
 
 mandatoryEnvCheck() {
   ERROR=0
+
+  if [ -z "$SERVICE_REGISTRY" ]; then
+    cat >&2 <<-EOE
+            Error: SERVICE_REGISTRY is required.
+EOE
+        ERROR=1
+      fi
 }
 
 
