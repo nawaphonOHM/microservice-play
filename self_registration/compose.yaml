@@ -9,6 +9,15 @@ services:
     networks:
       default:
 
+  service_a:
+    image: nawaphon2539/microservices-lab:self-registration.services-registry
+    env_file:
+      - services_registry/services-a-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+
 
 networks:
   default:
