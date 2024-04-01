@@ -14,7 +14,7 @@ services:
     env_file:
       - serviceA/service-a-vars.env
     ports:
-      - "1001:8080"
+      - "1002:8080"
     networks:
       default:
 
