@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.pojo;
+package nawaphon.microservices.messaging.event_sourcing.producer.pojo;
 
 import java.util.UUID;
 
