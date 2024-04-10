@@ -1,4 +1,4 @@
-package nawaphon.microservices.event_sourcing.gateway.pojo;
+package nawaphon.microservices.messaging.event_sourcing.producer.pojo;
 
 import java.util.UUID;
 
@@ -12,10 +12,6 @@ public class Customer {
     public Customer(final UUID id, final UUID detailsId) {
         this.id = id;
         this.detailsId = detailsId;
-    }
-
-    public Customer() {
-        this(null, null);
     }
 
     public UUID getId() {

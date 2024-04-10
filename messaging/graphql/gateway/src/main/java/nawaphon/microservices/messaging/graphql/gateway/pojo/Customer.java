@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.pojo;
+package nawaphon.microservices.messaging.graphql.gateway.pojo;
 
 import java.util.UUID;
 
@@ -12,6 +12,10 @@ public class Customer {
     public Customer(final UUID id, final UUID detailsId) {
         this.id = id;
         this.detailsId = detailsId;
+    }
+
+    public Customer() {
+        this(null, null);
     }
 
     public UUID getId() {

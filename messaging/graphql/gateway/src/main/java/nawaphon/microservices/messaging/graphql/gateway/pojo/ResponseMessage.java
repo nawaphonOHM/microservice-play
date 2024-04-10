@@ -1,4 +1,4 @@
-package nawaphon.microservices.messaging.pojo;
+package nawaphon.microservices.messaging.graphql.gateway.pojo;
 
 public class ResponseMessage<A> {
 

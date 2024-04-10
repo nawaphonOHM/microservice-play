@@ -1,8 +1,8 @@
-package nawaphon.microservices.event_sourcing.gateway.controllers;
+package nawaphon.microservices.messaging.graphql.gateway.controllers;
 
-import nawaphon.microservices.event_sourcing.gateway.components.FakeDatabaseComponent;
-import nawaphon.microservices.event_sourcing.gateway.pojo.Customer;
-import nawaphon.microservices.event_sourcing.gateway.pojo.CustomerDetail;
+import nawaphon.microservices.messaging.graphql.gateway.components.FakeDatabaseComponent;
+import nawaphon.microservices.messaging.graphql.gateway.pojo.Customer;
+import nawaphon.microservices.messaging.graphql.gateway.pojo.CustomerDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.graphql.data.method.annotation.Argument;
