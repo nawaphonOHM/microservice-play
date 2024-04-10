@@ -1,4 +1,4 @@
-package nawaphon.microservices.event_sourcing.gateway;
+package nawaphon.microservices.messaging.graphql.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
