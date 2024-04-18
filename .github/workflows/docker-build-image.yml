@@ -22,7 +22,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v3
 
       - name: Run the Gradle package task
-        uses: gradle/gradle-build-action@v2.11.1
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: build
 
