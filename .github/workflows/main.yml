@@ -25,3 +25,441 @@ jobs:
         uses: gradle/gradle-build-action@v3
         with:
           arguments: build
+
+      - name: Upload private_table_per_service@customer_service
+        uses: actions/upload-artifact@v4
+        with:
+          name: private_table_per_service@customer_service
+          path: |
+            ./database_per_services/private_table_per_service/customer_service/build/libs/*.jar
+            ./database_per_services/private_table_per_service/customer_service/*.env
+            ./database_per_services/private_table_per_service/customer_service/*.sh
+            ./database_per_services/private_table_per_service/customer_service/Dockerfile
+
+      - name: Upload private_table_per_service@order_service
+        uses: actions/upload-artifact@v4
+        with:
+          name: private_table_per_service@order_service
+          path: |
+            ./database_per_services/private_table_per_service/order_service/build/libs/*.jar
+            ./database_per_services/private_table_per_service/order_service/*.env
+            ./database_per_services/private_table_per_service/order_service/*.sh
+            ./database_per_services/private_table_per_service/order_service/Dockerfile
+
+      - name: Upload private_table_per_service@db
+        uses: actions/upload-artifact@v4
+        with:
+          name: private_table_per_service@db
+          path: |
+            ./database_per_services/private_table_per_service/db/*.env
+            ./database_per_services/private_table_per_service/db/*.sh
+            ./database_per_services/private_table_per_service/db/Dockerfile
+
+      - name: Upload shared_databases@customer_service
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared_databases@customer_service
+          path: |
+            ./shared_database/customer_service/build/libs/*.jar
+            ./shared_database/customer_service/*.env
+            ./shared_database/customer_service/*.sh
+            ./shared_database/customer_service/Dockerfile
+
+      - name: Upload shared_databases@order_service
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared_databases@order_service
+          path: |
+            ./shared_database/order_service/build/libs/*.jar
+            ./shared_database/order_service/*.env
+            ./shared_database/order_service/*.sh
+            ./shared_database/order_service/Dockerfile
+
+      - name: Upload shared_databases@db
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared_databases@db
+          path: |
+            ./shared_database/db/*.env
+            ./shared_database/db/*.sh
+            ./shared_database/db/Dockerfile
+
+      - name: Upload rest@sender
+        uses: actions/upload-artifact@v4
+        with:
+          name: rest@sender
+          path: |
+            ./messaging/rest/sender/build/libs/*.jar
+            ./messaging/rest/sender/*.env
+            ./messaging/rest/sender/*.sh
+            ./messaging/rest/sender/Dockerfile
+
+      - name: Upload rest@receiver
+        uses: actions/upload-artifact@v4
+        with:
+          name: rest@receiver
+          path: |
+            ./messaging/rest/receiver/build/libs/*.jar
+            ./messaging/rest/receiver/*.env
+            ./messaging/rest/receiver/*.sh
+            ./messaging/rest/receiver/Dockerfile
+
+      - name: Upload event_sourcing@consumer
+        uses: actions/upload-artifact@v4
+        with:
+          name: event_sourcing@consumer
+          path: |
+            ./messaging/event_sourcing/consumer/build/libs/*.jar
+            ./messaging/event_sourcing/consumer/*.env
+            ./messaging/event_sourcing/consumer/*.sh
+            ./messaging/event_sourcing/consumer/Dockerfile
+
+      - name: Upload event_sourcing@producer
+        uses: actions/upload-artifact@v4
+        with:
+          name: event_sourcing@producer
+          path: |
+            ./messaging/event_sourcing/producer/build/libs/*.jar
+            ./messaging/event_sourcing/producer/*.env
+            ./messaging/event_sourcing/producer/*.sh
+            ./messaging/event_sourcing/producer/Dockerfile
+
+      - name: Upload graphql@gateway
+        uses: actions/upload-artifact@v4
+        with:
+          name: graphql@gateway
+          path: |
+            ./messaging/graphql/gateway/build/libs/*.jar
+            ./messaging/graphql/gateway/*.env
+            ./messaging/graphql/gateway/*.sh
+            ./messaging/graphql/gateway/Dockerfile
+
+      - name: Upload graphql@gateway
+        uses: actions/upload-artifact@v4
+        with:
+          name: graphql@gateway
+          path: |
+            ./messaging/graphql/gateway/build/libs/*.jar
+            ./messaging/graphql/gateway/*.env
+            ./messaging/graphql/gateway/*.sh
+            ./messaging/graphql/gateway/Dockerfile
+
+      - name: Upload circuit_breaker@proxy
+        uses: actions/upload-artifact@v4
+        with:
+          name: circuit_breaker@proxy
+          path: |
+            ./circuit_breaker/proxy/build/libs/*.jar
+            ./circuit_breaker/proxy/*.env
+            ./circuit_breaker/proxy/*.sh
+            ./circuit_breaker/proxy/Dockerfile
+
+      - name: Upload circuit_breaker@real_service
+        uses: actions/upload-artifact@v4
+        with:
+          name: circuit_breaker@real_service
+          path: |
+            ./circuit_breaker/real_service/build/libs/*.jar
+            ./circuit_breaker/real_service/*.env
+            ./circuit_breaker/real_service/*.sh
+            ./circuit_breaker/real_service/Dockerfile
+
+  push-image-private_table_per_service-customer_service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download private_table_per_service@customer_service
+        uses: actions/download-artifact@v4
+        with:
+          name: private_table_per_service@customer_service
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./database_per_services/private_table_per_service/customer_service
+          file: ./database_per_services/private_table_per_service/customer_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.customer-service
+
+  push-image-private_table_per_service-order-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download private_table_per_service@order-service
+        uses: actions/download-artifact@v4
+        with:
+          name: private_table_per_service@order_service
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./database_per_services/private_table_per_service/order_service
+          file: ./database_per_services/private_table_per_service/order_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.order-service
+
+  push-image-shared_databases-customer_service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download shared_database@customer_service
+        uses: actions/download-artifact@v4
+        with:
+          name: shared_database@customer_service
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/customer_service
+          file: ./shared_database/customer_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.customer-service
+
+  push-image-shared_databases-order_service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download shared_database@order_service
+        uses: actions/download-artifact@v4
+        with:
+          name: shared_database@order_service
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/order_service
+          file: ./shared_database/order_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.order-service
+
+  push-image-shared_databases-database:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download shared_database@db
+        uses: actions/download-artifact@v4
+        with:
+          name: shared_database@db
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./shared_database/db
+          file: ./shared_database/db/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared_database
+
+  push-image-rest-sender:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download rest@sender
+        uses: actions/download-artifact@v4
+        with:
+          name: rest@sender
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/rest/sender
+          file: ./messaging/rest/sender/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.rest.sender
+
+  push-image-rest-receiver:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download rest@receiver
+        uses: actions/download-artifact@v4
+        with:
+          name: rest@receiver
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/rest/receiver
+          file: ./messaging/rest/receiver/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.rest.receiver
+
+  push-image-event_sourcing-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download event_sourcing@consumer
+        uses: actions/download-artifact@v4
+        with:
+          name: event_sourcing@consumer
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/event_sourcing/consumer
+          file: ./messaging/event_sourcing/consumer/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
+
+  push-image-event_sourcing-producer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download event_sourcing@producer
+        uses: actions/download-artifact@v4
+        with:
+          name: event_sourcing@producer
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/event_sourcing/producer
+          file: ./messaging/event_sourcing/producer/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.event_sourcing.producer
+
+  push-image-graphql-gateway:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download graphql@gateway
+        uses: actions/download-artifact@v4
+        with:
+          name: graphql@gateway
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./messaging/graphql/gateway
+          file: ./messaging/graphql/gateway/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.graphql.gateway
+
+  push-image-circuit_breaker-proxy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download circuit_breaker@proxy
+        uses: actions/download-artifact@v4
+        with:
+          name: circuit_breaker@proxy
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./circuit_breaker/proxy
+          file: ./circuit_breaker/proxy/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:circuit-breaker.proxy
+
+  push-image-circuit_breaker-real_service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download circuit_breaker@real_service
+        uses: actions/download-artifact@v4
+        with:
+          name: circuit_breaker@real_service
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./circuit_breaker/real_service
+          file: ./circuit_breaker/real_service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:circuit-breaker.real-service
