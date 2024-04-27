@@ -165,6 +165,7 @@ jobs:
             ./circuit_breaker/real_service/Dockerfile
 
   push-image-private_table_per_service-customer_service:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download private_table_per_service@customer_service
@@ -190,6 +191,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.customer-service
 
   push-image-private_table_per_service-order-service:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download private_table_per_service@order-service
@@ -215,6 +217,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:private-table-per-service.order-service
 
   push-image-shared_databases-customer_service:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download shared_database@customer_service
@@ -240,6 +243,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.customer-service
 
   push-image-shared_databases-order_service:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download shared_database@order_service
@@ -265,6 +269,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared-database.order-service
 
   push-image-shared_databases-database:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download shared_database@db
@@ -290,6 +295,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:shared_database
 
   push-image-rest-sender:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download rest@sender
@@ -315,6 +321,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.rest.sender
 
   push-image-rest-receiver:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download rest@receiver
@@ -340,6 +347,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.rest.receiver
 
   push-image-event_sourcing-consumer:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download event_sourcing@consumer
@@ -365,6 +373,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.consumer
 
   push-image-event_sourcing-producer:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download event_sourcing@producer
@@ -390,6 +399,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.event_sourcing.producer
 
   push-image-graphql-gateway:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download graphql@gateway
@@ -415,6 +425,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.graphql.gateway
 
   push-image-circuit_breaker-proxy:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download circuit_breaker@proxy
@@ -440,6 +451,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:circuit-breaker.proxy
 
   push-image-circuit_breaker-real_service:
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
       - name: Download circuit_breaker@real_service
