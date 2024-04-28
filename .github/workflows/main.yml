@@ -134,16 +134,6 @@ jobs:
             ./messaging/graphql/gateway/*.sh
             ./messaging/graphql/gateway/Dockerfile
 
-      - name: Upload graphql@gateway
-        uses: actions/upload-artifact@v4
-        with:
-          name: graphql@gateway
-          path: |
-            ./messaging/graphql/gateway/build/libs/*.jar
-            ./messaging/graphql/gateway/*.env
-            ./messaging/graphql/gateway/*.sh
-            ./messaging/graphql/gateway/Dockerfile
-
       - name: Upload circuit_breaker@proxy
         uses: actions/upload-artifact@v4
         with:
