@@ -1,6 +1,6 @@
 services:
 
-  services_registry:
+  servicesRegistry:
     image: nawaphon2539/microservices-lab:self-registration.services-registry
     env_file:
       - services_registry/services-registry-vars.env
