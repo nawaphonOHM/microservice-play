@@ -52,7 +52,7 @@ public class MainController {
         }
 
         assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.getResults());
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.results());
     }
 
     @GetMapping("/get-customer-details/{uuid}")
@@ -62,6 +62,6 @@ public class MainController {
                 new CustomerDetailsParameterizedTypeReference()).getBody();
 
         assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.getResults());
+        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.results());
     }
 }
