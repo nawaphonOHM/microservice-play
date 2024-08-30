@@ -99,7 +99,7 @@ public class MainControllerTest {
         response.setCreditLimit(BigDecimal.TEN);
 
 
-        BDDMockito.given(service.updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.getCredit())))
+        BDDMockito.given(service.updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.credit())))
                 .willReturn(
                         new ResponseMessage<>(200, "Done", response)
                 );
@@ -111,7 +111,7 @@ public class MainControllerTest {
         ).andExpect(MockMvcResultMatchers.status().isOk());
 
         BDDMockito.verify(service, BDDMockito.times(1))
-                .updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.getCredit()));
+                .updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.credit()));
     }
 
     @Test
