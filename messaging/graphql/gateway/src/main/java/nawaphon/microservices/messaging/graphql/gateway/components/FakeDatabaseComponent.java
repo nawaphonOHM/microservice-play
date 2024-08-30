@@ -2,13 +2,13 @@ package nawaphon.microservices.messaging.graphql.gateway.components;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import nawaphon.microservices.messaging.graphql.gateway.pojo.Customer;
 import nawaphon.microservices.messaging.graphql.gateway.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

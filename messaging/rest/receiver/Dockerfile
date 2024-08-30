@@ -1,4 +1,4 @@
-FROM openjdk:11.0.16-jre
+FROM openjdk:21-jdk
 
 
 RUN useradd --create-home receiver

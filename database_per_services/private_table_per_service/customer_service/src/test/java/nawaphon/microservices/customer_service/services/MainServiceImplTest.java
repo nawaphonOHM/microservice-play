@@ -42,18 +42,18 @@ class MainServiceImplTest {
 
     @Test
     void assertResponseMessageHasAllValidPropertyTest() {
-        AssertionsForClassTypes.assertThat(testResult).extracting(ResponseMessage::getCode, ResponseMessage::getMessage)
+        AssertionsForClassTypes.assertThat(testResult).extracting(ResponseMessage::code, ResponseMessage::message)
                 .containsExactly(200, "Done");
     }
 
     @Test
     void shouldHasOnlyOneCustomerObjectTest() {
-        Assertions.assertEquals(1, testResult.getResults().size());
+        Assertions.assertEquals(1, testResult.results().size());
     }
 
     @Test
     void assertCustomerHasAllExpectedPropertyTest() {
-        AssertionsForClassTypes.assertThat(testResult.getResults().get(0)).extracting(Customer::getCreditLimit)
+        AssertionsForClassTypes.assertThat(testResult.results().get(0)).extracting(Customer::getCreditLimit)
                 .isEqualTo(new BigDecimal(1000));
     }
 }

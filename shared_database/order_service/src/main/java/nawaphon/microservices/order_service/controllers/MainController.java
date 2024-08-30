@@ -30,6 +30,6 @@ public class MainController {
     @PostMapping("/add-orders")
     public ResponseMessage<OrderStatusEnvelop> addOrders(@RequestBody final Order order) {
         final ResponseMessage<List<OrderStatusEnvelop>> results = mainService.addOrders(List.of(order));
-        return new ResponseMessage<>(results.getCode(), results.getMessage(), results.getResults().get(0));
+        return new ResponseMessage<>(results.code(), results.message(), results.results().get(0));
     }
 }

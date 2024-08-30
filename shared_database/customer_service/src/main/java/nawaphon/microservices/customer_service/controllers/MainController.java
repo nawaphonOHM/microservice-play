@@ -33,7 +33,7 @@ public class MainController {
 
     @PatchMapping("/update-customer-credit/{customer-uuid}")
     public ResponseMessage<?> patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final CustomerId credit) {
-        return mainService.updateUserCredit(customerUUID, credit.getCredit());
+        return mainService.updateUserCredit(customerUUID, credit.credit());
     }
 
     @DeleteMapping("delete-customer-credit/{customer-uuid}")
