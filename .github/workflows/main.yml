@@ -160,10 +160,10 @@ jobs:
         with:
           name: service_registry@self_registration
           path: |
-            ./self_registration/service_registry/*.env
-            ./self_registration/service_registry/*.sh
-            ./self_registration/service_registry/Dockerfile
-            ./self_registration/service_registry/build/libs/*.jar
+            ./self_registration/services_registry/*.env
+            ./self_registration/services_registry/*.sh
+            ./self_registration/services_registry/Dockerfile
+            ./self_registration/services_registry/build/libs/*.jar
 
       - name: Upload serviceA@self_registration
         uses: actions/upload-artifact@v4
