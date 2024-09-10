@@ -163,6 +163,7 @@ jobs:
             ./self_registration/service_registry/*.env
             ./self_registration/service_registry/*.sh
             ./self_registration/service_registry/Dockerfile
+            ./self_registration/service_registry/build/libs/*.jar
 
       - name: Upload serviceA@self_registration
         uses: actions/upload-artifact@v4
