@@ -172,6 +172,7 @@ jobs:
             ./self_registration/serviceA/*.env
             ./self_registration/serviceA/*.sh
             ./self_registration/serviceA/Dockerfile
+            ./self_registration/serviceA/build/libs/*.jar
       
             
 
