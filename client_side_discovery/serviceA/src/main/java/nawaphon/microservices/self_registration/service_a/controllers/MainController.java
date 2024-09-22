@@ -28,8 +28,8 @@ public class MainController {
             return new ResponseMessage<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Unable to complete request");
         }
-        return new ResponseMessage<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+        return new ResponseMessage<>(HttpStatus.OK.value(),
+                HttpStatus.OK.toString(),
                 String.format("Hello world this request was processed by %s", hostname));
     }
 }
