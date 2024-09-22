@@ -1,0 +1,7 @@
+
+
+group = 'nawaphon.microservices.client_side_discovery'
+version = '0.0.1-SNAPSHOT'
+
+archivesBaseName = 'services_a'
+
