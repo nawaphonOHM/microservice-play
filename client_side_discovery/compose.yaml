@@ -1,7 +1,7 @@
 services:
 
   servicesRegistry:
-    image: nawaphon2539/microservices-lab:client_side_discovery.services-registry
+    image: nawaphon2539/microservices-lab:client-side-discovery.services-registry
     env_file:
       - services_registry/services-registry-vars.env
     ports:
