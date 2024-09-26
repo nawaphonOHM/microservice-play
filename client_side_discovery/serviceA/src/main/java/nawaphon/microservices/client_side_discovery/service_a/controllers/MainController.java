@@ -1,6 +1,6 @@
-package nawaphon.microservices.self_registration.service_a.controllers;
+package nawaphon.microservices.client_side_discovery.service_a.controllers;
 
-import nawaphon.microservices.self_registration.service_a.pojo.ResponseMessage;
+import nawaphon.microservices.client_side_discovery.service_a.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
