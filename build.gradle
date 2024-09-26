@@ -287,3 +287,19 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_regis
     }
 
 }
+
+configure(subprojects.findAll { it.name == "client_side_discovery@client"}) {
+
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.3"
+        }
+    }
+
+}
