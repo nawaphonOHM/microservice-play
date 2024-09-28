@@ -1,0 +1,35 @@
+services:
+
+  servicesRegistry:
+    image: nawaphon2539/microservices-lab:client-side-discovery.services-registry
+    env_file:
+      - services_registry/services-registry-vars.env
+    ports:
+      - "1001:8761"
+    networks:
+      default:
+
+  service_a:
+    image: nawaphon2539/microservices-lab:client-side-discovery.serviceA
+    env_file:
+      - serviceA/service-a-vars.env
+    ports:
+      - "1003-1006:8080"
+    networks:
+      default:
+    deploy:
+      mode: replicated
+      replicas: 4
+
+  client:
+    image: nawaphon2539/microservices-lab:client-side-discovery.client
+    env_file:
+      - client/client-vars.env
+    ports:
+      - "1002:8080"
+    networks:
+      default:
+
+
+networks:
+  default:
