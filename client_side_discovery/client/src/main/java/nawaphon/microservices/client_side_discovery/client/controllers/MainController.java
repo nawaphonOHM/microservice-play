@@ -22,6 +22,6 @@ public class MainController {
 
     @GetMapping("/hello-world")
     public ResponseMessage<String> helloWorld() {
-        return this.restTemplate.getForObject("http://service-a/hello-world", ResponseStringMessage.class);
+        return this.restTemplate.getForObject("http://serviceA/client-side-discovery/service-a/hello-world", ResponseStringMessage.class);
     }
 }
