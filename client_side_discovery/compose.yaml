@@ -14,12 +14,21 @@ services:
     env_file:
       - serviceA/service-a-vars.env
     ports:
-      - "1002-1005:8080"
+      - "1003-1006:8080"
     networks:
       default:
     deploy:
       mode: replicated
       replicas: 4
+
+  client:
+    image: nawaphon2539/microservices-lab:client-side-discovery.client
+    env_file:
+      - client/client-vars.env
+    ports:
+      - "1002:8080"
+    networks:
+      default:
 
 
 networks:
