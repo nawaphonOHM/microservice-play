@@ -36,3 +36,7 @@ then
 fi
 
 echo "Verifying required env....PASSED"
+
+echo "Creating VPC... "
+VPC_ID=$(aws ec2 create-vpc --cidr-block 192.168.1.0/16 --output text --query Vpc.VpcId)
+echo "Create VPC is done ID=$VPC_ID"
