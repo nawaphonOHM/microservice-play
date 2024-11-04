@@ -42,4 +42,6 @@ while getopts "i:" arg; do
   esac
 done
 
+aws ec2 delete-vpc --vpc-id "$VPC"
+
 echo "DONE..."
