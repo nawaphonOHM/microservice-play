@@ -2,7 +2,7 @@
 
 echo "Verifying required env...."
 
-if ! command -v aws 2>&1 > /dev/null
+if ! command -v aws > /dev/null 2>&1
 then
   >&2 echo "Please install awscli."
   exit 1
