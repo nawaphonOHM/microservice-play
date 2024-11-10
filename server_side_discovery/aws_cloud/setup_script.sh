@@ -38,7 +38,7 @@ fi
 echo "Verifying required env....PASSED"
 
 echo "Creating VPC... "
-VPC_ID=$(aws ec2 create-vpc --cidr-block 192.168.0.0/16 --query Vpc.VpcId --tag-specifications '[{"ResourceType":"vpc","Tags":[{"Key":"Name","Value":"Test_Vpc_Name"}]}]')
+VPC_ID=$(aws ec2 create-vpc --cidr-block 192.168.0.0/16 --output text --query Vpc.VpcId --tag-specifications '[{"ResourceType":"vpc","Tags":[{"Key":"Name","Value":"Test_Vpc_Name"}]}]')
 
 if [[ $? -ne 0 ]]
 then
@@ -60,7 +60,7 @@ then
 fi
 
 SUBNET_ID_2=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.1.0/24 --availability-zone-id apse1-az2 \
---query Subnet.SubnetId --tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet2"}]}]' )
+--output text --query Subnet.SubnetId --tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet2"}]}]' )
 
 if [[ $? -ne 0 ]]
 then
