@@ -38,7 +38,7 @@ fi
 echo "Verifying required env....PASSED"
 
 echo "Creating VPC... "
-VPC_ID=$(aws ec2 create-vpc --cidr-block 192.168.0.0/16 --output text --query Vpc.VpcId --tag-specifications '[{"ResourceType":"vpc","Tags":[{"Key":"Name","Value":"Test_Vpc_Name"}]}]')
+VPC_ID=$(aws ec2 create-vpc --cidr-block 192.168.0.0/16 --query Vpc.VpcId --tag-specifications '[{"ResourceType":"vpc","Tags":[{"Key":"Name","Value":"Test_Vpc_Name"}]}]')
 
 if [[ $? -ne 0 ]]
 then
