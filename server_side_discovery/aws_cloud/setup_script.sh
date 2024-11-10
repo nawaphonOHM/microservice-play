@@ -50,7 +50,8 @@ fi
 echo "Create VPC is done ID=$VPC_ID"
 
 echo "Creating Subnet...0/2"
-SUBNET_ID_1=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.0.0/24 --availability-zone-id apse1-az1  --tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet1"}]}]' )
+SUBNET_ID_1=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.0.0/24 --availability-zone-id apse1-az1  \
+--tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet1"}]}]' )
 
 if [[ $? -ne 0 ]]
 then
@@ -58,7 +59,8 @@ then
   exit 1
 fi
 
-SUBNET_ID_2=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.1.0/24 --availability-zone-id apse1-az2 --tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet2"}]}]' )
+SUBNET_ID_2=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.1.0/24 --availability-zone-id apse1-az2 \
+--tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet2"}]}]' )
 
 if [[ $? -ne 0 ]]
 then
