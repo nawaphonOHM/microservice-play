@@ -59,6 +59,8 @@ then
   exit 1
 fi
 
+echo "Creating Subnet...1/2. Done"
+
 SUBNET_ID_2=$(aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 192.168.1.0/24 --availability-zone-id apse1-az2 \
 --output text --query Subnet.SubnetId --tag-specifications '[{"ResourceType":"subnet","Tags":[{"Key":"Name","Value":"Subnet2"}]}]' )
 
@@ -67,5 +69,7 @@ then
   echo "Create Subnet 2/2. Failed"
   exit 1
 fi
+
+echo "Creating Subnet...2/2. Done"
 
 echo "Create Subnet are done ID1=$SUBNET_ID_1 and ID2=$SUBNET_ID_2"
