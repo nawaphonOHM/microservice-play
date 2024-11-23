@@ -73,3 +73,7 @@ fi
 echo "Creating Subnet...2/2. Done"
 
 echo "Create Subnet are done ID1=$SUBNET_ID_1 and ID2=$SUBNET_ID_2"
+
+ROUTE_TABLE_ID=$(aws ec2 describe-route-tables --filters "[{\"Name\":\"vpc-id\",\"Values\":[\"$VPC_ID\"]}]" --output text --query RouteTables[0].RouteTableId)
+
+echo "RouteTableId for VPCID=$VPC_ID is $ROUTE_TABLE_ID"
