@@ -74,6 +74,22 @@ echo "Creating Subnet...2/2. Done"
 
 echo "Create Subnet are done ID1=$SUBNET_ID_1 and ID2=$SUBNET_ID_2"
 
+echo "Creating Internet Gateway..."
+
+INTERNET_GATEWAY_ID=$(aws ec2 create-internet-gateway \
+--tag-specifications '[{"ResourceType":"internet-gateway","Tags":[{"Key":"Name","Value":"Internet-gateway-1"}]}]' \
+--output text --query InternetGateway.InternetGatewayId)
+
+if [[ $? -ne 0 ]]
+then
+  echo "Create Internet Gateway... Failed"
+  exit 1
+fi
+
+echo "Create Internet Gateway... Done"
+
+echo "Internet Gateway ID $INTERNET_GATEWAY_ID"
+
 ROUTE_TABLE_ID=$(aws ec2 describe-route-tables --filters "[{\"Name\":\"vpc-id\",\"Values\":[\"$VPC_ID\"]}]" --output text --query RouteTables[0].RouteTableId)
 
 echo "RouteTableId for VPCID=$VPC_ID is $ROUTE_TABLE_ID"
