@@ -90,6 +90,18 @@ echo "Create Internet Gateway... Done"
 
 echo "Internet Gateway ID $INTERNET_GATEWAY_ID"
 
+echo "Attaching InternetGateway to VPC ID $VPC_ID"
+
+aws ec2 attach-internet-gateway --internet-gateway-id "$INTERNET_GATEWAY_ID" --vpc-id "$VPC_ID"
+
+if [[ $? -ne 0 ]]
+then
+  echo "Attaching InternetGateway to VPC ID $VPC_ID Failed"
+  exit 1
+fi
+
+echo "Attaching InternetGateway to VPC ID $VPC_ID Done"
+
 ROUTE_TABLE_ID=$(aws ec2 describe-route-tables --filters "[{\"Name\":\"vpc-id\",\"Values\":[\"$VPC_ID\"]}]" --output text --query RouteTables[0].RouteTableId)
 
 echo "RouteTableId for VPCID=$VPC_ID is $ROUTE_TABLE_ID"
