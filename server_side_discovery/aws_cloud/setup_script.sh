@@ -120,3 +120,5 @@ fi
 
 echo "Adding Route $ROUTE_TABLE_ID to InternetGateway ID $INTERNET_GATEWAY_ID Done"
 
+### Command For Creating ECS System ###
+
