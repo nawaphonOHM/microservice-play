@@ -105,3 +105,16 @@ echo "Attaching InternetGateway to VPC ID $VPC_ID Done"
 ROUTE_TABLE_ID=$(aws ec2 describe-route-tables --filters "[{\"Name\":\"vpc-id\",\"Values\":[\"$VPC_ID\"]}]" --output text --query RouteTables[0].RouteTableId)
 
 echo "RouteTableId for VPCID=$VPC_ID is $ROUTE_TABLE_ID"
+
+echo "Adding Route $ROUTE_TABLE_ID to InternetGateway ID $INTERNET_GATEWAY_ID"
+
+aws ec2 create-route --route-table-id "$ROUTE_TABLE_ID" --destination-cidr-block 0.0.0.0/0 --gateway-id "$INTERNET_GATEWAY_ID"
+
+if [[ $? -ne 0 ]]
+then
+  echo "Adding Route $ROUTE_TABLE_ID to InternetGateway ID $INTERNET_GATEWAY_ID Failed"
+  exit 1
+fi
+
+echo "Adding Route $ROUTE_TABLE_ID to InternetGateway ID $INTERNET_GATEWAY_ID Done"
+
