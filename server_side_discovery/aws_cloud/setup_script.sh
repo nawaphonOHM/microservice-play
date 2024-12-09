@@ -122,3 +122,5 @@ echo "Adding Route $ROUTE_TABLE_ID to InternetGateway ID $INTERNET_GATEWAY_ID Do
 
 ### Command For Creating ECS System ###
 
+aws ecs create-cluster --cluster-name Server_Side_Discovery --capacity-providers FARGATE --output text
+
