@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### Command For Creating VPC System ###
+
 echo "Verifying required env...."
 
 if ! command -v aws > /dev/null 2>&1
