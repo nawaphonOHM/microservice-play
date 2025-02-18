@@ -57,3 +57,6 @@ project(":client_side_discovery@services_registry").projectDir = file("client_si
 
 include("client_side_discovery@client")
 project(":client_side_discovery@client").projectDir = file("client_side_discovery/client")
+
+include("server_side_discovery@services_A")
+project(":server_side_discovery@services_A").projectDir = file("server_side_discovery/serviceA")

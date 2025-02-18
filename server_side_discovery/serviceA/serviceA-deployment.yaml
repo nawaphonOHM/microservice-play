@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-side-discovery-and-service-a
+  labels:
+    app: server-side-discovery-and-service-a
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: server-side-discovery-and-service-a
+  template:
+    metadata:
+      name: server-side-discovery-and-service-a
+      labels:
+        app: server-side-discovery-and-service-a
+    spec:
+      containers:
+        - name: server-side-discovery-and-service-a
+          image: nawaphon2539/microservices-lab:server_side_discovery.serviceA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+      
