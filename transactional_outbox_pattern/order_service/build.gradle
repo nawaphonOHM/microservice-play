@@ -1,0 +1,5 @@
+
+group = 'nawaphon.microservices.transactional_outbox_pattern'
+version = '0.0.1'
+
+archivesBaseName = 'order_service'
