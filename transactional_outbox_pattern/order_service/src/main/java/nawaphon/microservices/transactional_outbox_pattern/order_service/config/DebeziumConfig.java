@@ -69,7 +69,7 @@ public class DebeziumConfig {
      * @return the configured Debezium engine
      */
     @Bean
-    public DebeziumEngine<SourceRecord> debeziumEngine(final DebeziumEventHandler debeziumEventHandler) {
+    public DebeziumEngine<RecordChangeEvent<SourceRecord>> debeziumEngine(final DebeziumConfigChangeEventHandler debeziumEventHandler) {
         if (!debeziumEnabled) {
             log.info("Debezium is disabled");
             return null;
