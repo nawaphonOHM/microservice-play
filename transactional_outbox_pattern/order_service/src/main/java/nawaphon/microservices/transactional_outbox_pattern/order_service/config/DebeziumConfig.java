@@ -2,10 +2,11 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.config
 
 import io.debezium.embedded.Connect;
 import io.debezium.engine.DebeziumEngine;
+import io.debezium.engine.RecordChangeEvent;
+import io.debezium.engine.format.ChangeEventFormat;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.service.DebeziumEventHandler;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
