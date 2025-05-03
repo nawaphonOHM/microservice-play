@@ -77,7 +77,7 @@ public class DebeziumConfig {
 
         log.info("Configuring Debezium embedded engine");
 
-        final Configuration configuration = Configuration.create()
+        final io.debezium.config.Configuration configuration = io.debezium.config.Configuration.create()
                 .with("connector.class", "io.debezium.connector.postgresql.PostgresConnector")
                 .with("name", connectorName)
                 .with("database.hostname", databaseHostname)
