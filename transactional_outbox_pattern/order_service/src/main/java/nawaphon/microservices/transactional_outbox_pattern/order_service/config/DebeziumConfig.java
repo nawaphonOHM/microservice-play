@@ -59,7 +59,7 @@ public class DebeziumConfig {
     @Value("${debezium.topic.prefix}")
     private String topicPrefix;
 
-    private DebeziumEngine<SourceRecord> engine;
+    private DebeziumEngine<RecordChangeEvent<SourceRecord>> engine;
     private final Executor executor = Executors.newSingleThreadExecutor();
 
     /**
