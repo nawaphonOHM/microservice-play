@@ -97,13 +97,9 @@ public class DebeziumConfig {
                 .with("schema.include.list", "public")
                 .build();
 
-        this.engine = DebeziumEngine.create(Connect.class)
+        this.engine = DebeziumEngine.create(ChangeEventFormat.of(Connect.class))
                 .using(configuration.asProperties())
-                .notifying(record -> {
-                    log.debug("Received change event: {}", record);
-                    // Process the change event using the DebeziumEventHandler
-                    debeziumEventHandler.handleChangeEvent(record);
-                })
+                .notifying(DebeziumConfigChangeEventHandler::handleChangeEvent)
                 .build();
 
         return this.engine;
