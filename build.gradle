@@ -332,6 +332,8 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@order_s
         implementation 'io.debezium:debezium-connector-postgres:3.1.1.Final'
         implementation "org.springframework.integration:spring-integration-debezium:6.4.4"
 
+        implementation "org.springframework.cloud.fn:debezium-autoconfigure:4.0.1"
+
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
