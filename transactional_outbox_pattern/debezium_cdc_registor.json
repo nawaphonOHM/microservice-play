@@ -1,0 +1,17 @@
+{
+  "name": "outbox-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "192.168.1.5",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname" : "postgres",
+    "plugin.name": "pgoutput",
+    "topic.prefix": "customers_database",
+    "table.include.list" : "public.customers_outbox",
+    "tombstones.on.delete" : "false",
+    "transforms" : "outbox",
+    "transforms.outbox.type" : "io.debezium.transforms.outbox.EventRouter"
+  }
+}
