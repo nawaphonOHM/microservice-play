@@ -19,6 +19,8 @@ services:
     networks:
       default:
         ipv4_address: 192.168.1.2
+    healthcheck:
+      test: ['nc', '-z', 'localhost', '2181', '||', '-1']
 
   kafka:
     image: ubuntu/kafka:latest
