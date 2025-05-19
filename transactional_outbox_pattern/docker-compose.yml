@@ -33,7 +33,7 @@ services:
 
   debezium:
     image: quay.io/debezium/connect:latest
-    env_file: ./order_service_debezium/order_service_debezium.env
+    env_file: ./debezium/order_service_debezium.env
     ports:
       - '8083:8083'
     networks:
