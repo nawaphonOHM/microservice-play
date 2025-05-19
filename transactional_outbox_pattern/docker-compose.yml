@@ -1,10 +1,7 @@
 services:
   postgres:
     image: postgres:latest
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - TZ=Asia/Bangkok
+    env_file: ./order_service_database/order_service_database.env
     command: [ "postgres", "-c", "wal_level=logical" ]
     ports:
       - "5432:5432"
@@ -16,8 +13,7 @@ services:
 
   zookeeper:
     image: ubuntu/zookeeper:latest
-    environment:
-      - TZ=Asia/Bangkok
+    env_file: ./zookeeper/zookeeper.env
     networks:
       default:
         ipv4_address: 192.168.1.2
@@ -25,9 +21,7 @@ services:
   kafka:
     image: ubuntu/kafka:latest
     command: [ "/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://192.168.1.3:9092" ]
-    environment:
-      - TZ=Asia/Bangkok
-      - ZOOKEEPER_HOST=zookeeper
+    env_file: ./kafka/kafka.env
     ports:
       - "9092:9092"
     networks:
@@ -37,12 +31,7 @@ services:
 
   debezium:
     image: quay.io/debezium/connect:latest
-    environment:
-      - CONFIG_STORAGE_TOPIC=debezium_configs
-      - TZ=Asia/Bangkok
-      - OFFSET_STORAGE_TOPIC=debezium_offsets
-      - STATUS_STORAGE_TOPIC=debezium_statuses
-      - BOOTSTRAP_SERVERS=kafka:9092
+    env_file: ./order_service_debezium/order_service_debezium.env
     ports:
       - '8083:8083'
     networks:
