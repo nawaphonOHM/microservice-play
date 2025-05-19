@@ -11,6 +11,7 @@ services:
     healthcheck:
       test: ["CMD", "./pg_isready"]
     volumes:
+      - '/home/nawaphon/Documents/transactional_outbox_pattern/orders_service/postgres_data:/var/lib/postgresql/data'
       - '/home/nawaphon/Documents/transactional_outbox_pattern/postgres_data:/var/lib/postgresql/data'
 
   zookeeper:
