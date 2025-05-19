@@ -4,7 +4,7 @@ services:
     env_file: ./order_service_database/order_service_database.env
     command: [ "postgres", "-c", "wal_level=logical" ]
     ports:
-      - "5432:5432"
+      - "1000:5432"
     networks:
       default:
         ipv4_address: 192.168.1.5
@@ -12,7 +12,20 @@ services:
       test: ["CMD", "./pg_isready"]
     volumes:
       - '/home/nawaphon/Documents/transactional_outbox_pattern/orders_service/postgres_data:/var/lib/postgresql/data'
-      - '/home/nawaphon/Documents/transactional_outbox_pattern/postgres_data:/var/lib/postgresql/data'
+
+  payments_database:
+    image: postgres:latest
+    env_file: ./payments_service_database/payment_service_database.env
+    command: [ "postgres", "-c", "wal_level=logical" ]
+    ports:
+      - "1001:5432"
+    networks:
+      default:
+        ipv4_address: 192.168.1.6
+    healthcheck:
+      test: ["CMD", "./pg_isready"]
+    volumes:
+      - '/home/nawaphon/Documents/transactional_outbox_pattern/payments_service/postgres_data:/var/lib/postgresql/data'
 
   zookeeper:
     image: ubuntu/zookeeper:latest
