@@ -40,6 +40,7 @@ public class MainServiceImpl implements MainService {
         orderOutbox.setPayload(ToHashMapModel.convert(order));
 
         orderOutboxRepository.save(orderOutbox);
+
         return true;
     }
 }
