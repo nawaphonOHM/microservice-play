@@ -37,6 +37,8 @@ services:
     depends_on:
       orders_database:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "./healthy_check.sh"]
 
   zookeeper:
     image: ubuntu/zookeeper:latest
