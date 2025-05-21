@@ -26,6 +26,17 @@ services:
       test: ["CMD-SHELL", "pg_isready"]
     volumes:
       - '/home/nawaphon/Documents/transactional_outbox_pattern/payments_service/postgres_data:/var/lib/postgresql/data'
+  order:
+    image: nawaphon2539/microservices-lab:transactional_outbox_pattern.order_service
+    env_file: ./order_service/order_service.env
+    ports:
+      - "1002:5432"
+    networks:
+      default:
+        ipv4_address: 192.168.1.7
+    depends_on:
+      orders_database:
+        condition: service_healthy
 
   zookeeper:
     image: ubuntu/zookeeper:latest
