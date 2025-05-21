@@ -3,7 +3,9 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -29,6 +31,18 @@ public class Order {
     @NotNull
     @Column(name = "order_name", nullable = false)
     private String orderName;
+
+    @ColumnDefault("0.00")
+    @Column(name = "price")
+    private BigDecimal price;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public String getOrderName() {
         return orderName;
