@@ -34,7 +34,7 @@ public class MainServiceImpl implements MainService {
 
         final OrderOutbox orderOutbox = new OrderOutbox();
 
-        orderOutbox.setAggregatetype("NEW_ORDER");
+        orderOutbox.setType("NEW_ORDER");
         orderOutbox.setAggregatetype("ORDER_SERVICE");
 
         orderOutbox.setPayload(ToHashMapModel.convert(order));
