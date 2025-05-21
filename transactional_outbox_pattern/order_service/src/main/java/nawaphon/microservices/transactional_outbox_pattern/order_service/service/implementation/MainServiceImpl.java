@@ -1,5 +1,6 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.service.implementation;
 
+import jakarta.transaction.Transactional;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.OrderOutbox;
@@ -21,6 +22,7 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
+    @Transactional
     public boolean saveOrder(@NonNull OrderRequest orderRequest) {
         final Order order = new Order();
 
