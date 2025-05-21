@@ -3,7 +3,10 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.enums.OrderStatus;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -22,10 +25,11 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private UUID orderId;
 
-    @Size(max = 255)
+    @Enumerated(EnumType.STRING)
     @NotNull
     @Column(name = "order_status", nullable = false)
-    private String orderStatus;
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private OrderStatus orderStatus;
 
     @Size(max = 255)
     @NotNull
@@ -35,22 +39,6 @@ public class Order {
     @ColumnDefault("0.00")
     @Column(name = "price")
     private BigDecimal price;
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
 
     public UUID getId() {
         return id;
@@ -68,12 +56,27 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
