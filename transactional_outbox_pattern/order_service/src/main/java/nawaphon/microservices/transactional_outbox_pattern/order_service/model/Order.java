@@ -25,6 +25,19 @@ public class Order {
     @Column(name = "order_status", nullable = false)
     private String orderStatus;
 
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "order_name", nullable = false)
+    private String orderName;
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
     public UUID getId() {
         return id;
     }
