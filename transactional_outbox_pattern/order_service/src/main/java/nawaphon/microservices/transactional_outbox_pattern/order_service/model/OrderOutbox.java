@@ -77,4 +77,8 @@ public class OrderOutbox {
         this.payload = payload;
     }
 
+    @PrePersist
+    public void prePersist() {
+        aggregateid = UUID.randomUUID().toString();
+    }
 }
