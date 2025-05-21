@@ -9,7 +9,7 @@ services:
       default:
         ipv4_address: 192.168.1.5
     healthcheck:
-      test: ["CMD", "./pg_isready"]
+      test: ["CMD-SHELL", "pg_isready"]
     volumes:
       - '/home/nawaphon/Documents/transactional_outbox_pattern/orders_service/postgres_data:/var/lib/postgresql/data'
 
@@ -23,7 +23,7 @@ services:
       default:
         ipv4_address: 192.168.1.6
     healthcheck:
-      test: ["CMD", "./pg_isready"]
+      test: ["CMD-SHELL", "pg_isready"]
     volumes:
       - '/home/nawaphon/Documents/transactional_outbox_pattern/payments_service/postgres_data:/var/lib/postgresql/data'
 
