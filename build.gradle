@@ -323,6 +323,7 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@order_s
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation("jakarta.validation:jakarta.validation-api:3.1.1")
 
         runtimeOnly 'org.postgresql:postgresql'
 
