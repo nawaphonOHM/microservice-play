@@ -79,4 +79,10 @@ public class Order {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    @PrePersist
+    public void prePersist() {
+        this.orderId = UUID.randomUUID();
+        this.orderStatus = OrderStatus.PENDING;
+    }
 }
