@@ -2,20 +2,22 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.servic
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.model.OrderOutbox;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderOutboxRepository;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderRepository;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.utils.ToHashMapModel;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Service
 public class MainServiceImpl implements MainService {
     private final OrderRepository orderRepository;
+    private final OrderOutboxRepository orderOutboxRepository;
 
-    public MainServiceImpl(final OrderRepository orderRepository) {
+    public MainServiceImpl(final OrderRepository orderRepository, OrderOutboxRepository orderOutboxRepository) {
         this.orderRepository = orderRepository;
+        this.orderOutboxRepository = orderOutboxRepository;
     }
 
     @Override
@@ -27,6 +29,15 @@ public class MainServiceImpl implements MainService {
         order.setPrice(orderRequest.price());
 
         orderRepository.save(order);
+
+        final OrderOutbox orderOutbox = new OrderOutbox();
+
+        orderOutbox.setAggregatetype("NEW_ORDER");
+        orderOutbox.setAggregatetype("ORDER_SERVICE");
+
+        orderOutbox.setPayload(ToHashMapModel.convert(order));
+
+        orderOutboxRepository.save(orderOutbox);
         return true;
     }
 }
