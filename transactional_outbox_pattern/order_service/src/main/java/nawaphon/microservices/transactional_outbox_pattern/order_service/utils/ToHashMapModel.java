@@ -1,6 +1,6 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.utils;
 
-import nawaphon.microservices.transactional_outbox_pattern.order_service.ToHashMpModelException;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.ToHashMpModelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

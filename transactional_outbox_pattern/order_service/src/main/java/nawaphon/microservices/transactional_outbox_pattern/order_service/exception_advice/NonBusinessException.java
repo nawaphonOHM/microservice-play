@@ -1,6 +1,6 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.exception_advice;
 
-import nawaphon.microservices.transactional_outbox_pattern.order_service.ToHashMpModelException;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.ToHashMpModelException;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
