@@ -2,7 +2,7 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.contro
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.ResponseMessage;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,8 @@ class MainControllerTest {
     void testSaveOrderSuccess() throws Exception {
         // Arrange
         OrderRequest orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
-        when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(true);
+        UUID orderId = UUID.randomUUID();
+        when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(orderId, true));
 
         // Act & Assert
         mockMvc.perform(post("/save-order")
@@ -48,7 +49,7 @@ class MainControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(HttpStatus.OK.value()))
                 .andExpect(jsonPath("$.message").value("OK"))
-                .andExpect(jsonPath("$.results").value("Order saved successfully"));
+                .andExpect(jsonPath("$.results.orderId").value(orderId.toString()));
     }
 
     @Test
@@ -56,7 +57,7 @@ class MainControllerTest {
     void testSaveOrderFailure() throws Exception {
         // Arrange
         OrderRequest orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
-        when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(false);
+        when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(null, false));
 
         // Act & Assert
         mockMvc.perform(post("/save-order")
@@ -65,6 +66,6 @@ class MainControllerTest {
                 .andExpect(status().isOk()) // Note: The controller returns 500 in the response body, but HTTP status is still 200
                 .andExpect(jsonPath("$.code").value(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                 .andExpect(jsonPath("$.message").value("Internal Server Error"))
-                .andExpect(jsonPath("$.results").value("Order not saved"));
+                .andExpect(jsonPath("$.results.orderId").doesNotExist());
     }
 }
