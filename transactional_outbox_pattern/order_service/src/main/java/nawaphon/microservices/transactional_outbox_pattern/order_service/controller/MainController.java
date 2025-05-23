@@ -1,6 +1,7 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.controller;
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.ResponseMessage;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,9 @@ public class MainController {
     @PostMapping("/save-order")
     public ResponseMessage<String> saveOrder(@RequestBody @NonNull OrderRequest orderDetail) {
 
-        final boolean done = mainService.saveOrder(orderDetail);
+        final OrderSaveStatus saveInformation = mainService.saveOrder(orderDetail);
+
+        final boolean done = saveInformation.saveStatus();
 
         if (done) {
             return new ResponseMessage<>(HttpStatus.OK.value(), "OK", "Order saved successfully");
