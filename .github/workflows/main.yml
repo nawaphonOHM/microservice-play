@@ -214,6 +214,16 @@ jobs:
             ./server_side_discovery/serviceA/*.sh
             ./server_side_discovery/serviceA/Dockerfile
             ./server_side_discovery/serviceA/build/libs/*.jar
+
+      - name: Upload order_service@transactional_outbox_pattern_transaction_log_tailing
+        uses: actions/upload-artifact@v4
+        with:
+          name: order_service@transactional_outbox_pattern_transaction_log_tailing
+          path: |
+            ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.env
+            ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.sh
+            ./transactional_outbox_pattern/transaction_log_tailing/order_service/Dockerfile
+            ./transactional_outbox_pattern/transaction_log_tailing/order_service/build/libs/*.jar
       
             
 
