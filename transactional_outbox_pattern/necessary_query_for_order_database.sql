@@ -1,4 +1,4 @@
-create table orders
+create table if not exists orders
 (
     id           uuid         not null
         constraint orders_pk
@@ -9,7 +9,7 @@ create table orders
     order_status varchar(255) not null
 );
 
-create table order_outbox
+create table if not exists order_outbox
 (
     id            uuid         not null
         constraint order_outbox_pk
