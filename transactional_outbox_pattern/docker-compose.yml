@@ -13,19 +13,6 @@ services:
     volumes:
       - '/home/nawaphon/Documents/transactional_outbox_pattern/orders_service/postgres_data:/var/lib/postgresql/data'
 
-  payments_database:
-    image: postgres:latest
-    env_file: ./payments_service_database/payment_service_database.env
-    command: [ "postgres", "-c", "wal_level=logical" ]
-    ports:
-      - "1001:5432"
-    networks:
-      default:
-        ipv4_address: 192.168.1.6
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
-    volumes:
-      - '/home/nawaphon/Documents/transactional_outbox_pattern/payments_service/postgres_data:/var/lib/postgresql/data'
   order:
     image: nawaphon2539/microservices-lab:transactional_outbox_pattern.order_service
     env_file: ./order_service/order_service.env
