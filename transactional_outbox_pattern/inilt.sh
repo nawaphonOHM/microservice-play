@@ -46,6 +46,8 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 
  # This part is order database initialization done
 
+ echo initializing...DONE
+
 
 
 
