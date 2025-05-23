@@ -1,6 +1,7 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.service.implementation;
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.OrderOutbox;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderOutboxRepository;
@@ -12,7 +13,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -50,19 +53,32 @@ class MainServiceImplTest {
         UUID customerId = UUID.randomUUID();
         OrderRequest orderRequest = new OrderRequest(orderName, price, customerId);
 
-        Order savedOrder = new Order();
-        savedOrder.setId(UUID.randomUUID());
-        savedOrder.setOrderName(orderName);
-        savedOrder.setPrice(price);
+        // Use Answer to simulate the behavior of the repository.save method
+        when(orderRepository.save(any(Order.class))).thenAnswer(new Answer<Order>() {
+            @Override
+            public Order answer(InvocationOnMock invocation) {
+                Order order = invocation.getArgument(0);
+                // Call prePersist to simulate JPA behavior
+                if (order.getOrderId() == null) {
+                    order.prePersist();
+                }
+                return order;
+            }
+        });
 
-        when(orderRepository.save(any(Order.class))).thenReturn(savedOrder);
-        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenReturn(new OrderOutbox());
+        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenAnswer(new Answer<OrderOutbox>() {
+            @Override
+            public OrderOutbox answer(InvocationOnMock invocation) {
+                return invocation.getArgument(0);
+            }
+        });
 
         // Act
-        boolean result = mainService.saveOrder(orderRequest);
+        OrderSaveStatus result = mainService.saveOrder(orderRequest);
 
         // Assert
-        assertTrue(result);
+        assertTrue(result.saveStatus());
+        assertNotNull(result.orderId());
 
         // Verify order was saved correctly
         verify(orderRepository).save(orderCaptor.capture());
@@ -95,18 +111,33 @@ class MainServiceImplTest {
         UUID customerId = UUID.randomUUID();
         OrderRequest orderRequest = new OrderRequest(orderName, price, customerId);
 
-        Order savedOrder = new Order();
-        savedOrder.setId(UUID.randomUUID());
-        savedOrder.setOrderName(orderName);
-        savedOrder.setPrice(price);
+        // Use Answer to simulate the behavior of the repository.save method
+        when(orderRepository.save(any(Order.class))).thenAnswer(new Answer<Order>() {
+            @Override
+            public Order answer(InvocationOnMock invocation) {
+                Order order = invocation.getArgument(0);
+                // Call prePersist to simulate JPA behavior
+                if (order.getOrderId() == null) {
+                    order.prePersist();
+                }
+                return order;
+            }
+        });
 
-        when(orderRepository.save(any(Order.class))).thenReturn(savedOrder);
-        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenReturn(new OrderOutbox());
+        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenAnswer(new Answer<OrderOutbox>() {
+            @Override
+            public OrderOutbox answer(InvocationOnMock invocation) {
+                return invocation.getArgument(0);
+            }
+        });
 
         // Act
-        mainService.saveOrder(orderRequest);
+        OrderSaveStatus result = mainService.saveOrder(orderRequest);
 
         // Assert
+        assertTrue(result.saveStatus());
+        assertNotNull(result.orderId());
+
         // Verify order was saved correctly
         verify(orderRepository).save(orderCaptor.capture());
         Order capturedOrder = orderCaptor.getValue();
