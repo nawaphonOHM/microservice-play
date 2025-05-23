@@ -42,6 +42,6 @@ public class MainServiceImpl implements MainService {
 
         orderOutboxRepository.save(orderOutbox);
 
-        return true;
+        return new OrderSaveStatus(order.getOrderId(), true);
     }
 }
