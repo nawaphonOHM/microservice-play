@@ -17,9 +17,7 @@ public class MainServiceImpl implements MainService {
     }
 
 
-    public ResponseMessage<List<Order>> firstService() {
-        final List<Order> results = this.orderRepository.findAll();
-
-        return new ResponseMessage<>(200, "Done", results);
+    public List<Order> firstService() {
+        return this.orderRepository.findAll();
     }
 }

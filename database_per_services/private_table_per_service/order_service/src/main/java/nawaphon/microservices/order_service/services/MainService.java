@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MainService {
 
-    ResponseMessage<List<Order>> firstService();
+    List<Order> firstService();
 }
