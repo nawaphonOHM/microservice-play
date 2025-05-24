@@ -2,6 +2,7 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.servic
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
+import nawaphon.microservices.transactional_outbox_pattern.order_service.enums.OrderStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.OrderOutbox;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderOutboxRepository;
@@ -23,8 +24,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MainServiceImplTest {
@@ -45,8 +45,8 @@ class MainServiceImplTest {
     private ArgumentCaptor<OrderOutbox> orderOutboxCaptor;
 
     @Test
-    @DisplayName("Should save order successfully")
-    void saveOrderShouldSaveOrderSuccessfully() {
+    @DisplayName("Should save order successfully and create outbox entry")
+    void saveOrderShouldSaveOrderAndCreateOutboxEntry() {
         // Arrange
         String orderName = "Test Order";
         BigDecimal price = BigDecimal.valueOf(100.0);
@@ -69,7 +69,11 @@ class MainServiceImplTest {
         when(orderOutboxRepository.save(any(OrderOutbox.class))).thenAnswer(new Answer<OrderOutbox>() {
             @Override
             public OrderOutbox answer(InvocationOnMock invocation) {
-                return invocation.getArgument(0);
+                OrderOutbox outbox = invocation.getArgument(0);
+                if (outbox.getAggregateid() == null) {
+                    outbox.prePersist();
+                }
+                return outbox;
             }
         });
 
@@ -85,7 +89,7 @@ class MainServiceImplTest {
         Order capturedOrder = orderCaptor.getValue();
         assertEquals(orderName, capturedOrder.getOrderName());
         assertEquals(price, capturedOrder.getPrice());
-        // Note: customerId is not used in the current implementation
+        assertEquals(OrderStatus.PENDING, capturedOrder.getOrderStatus());
 
         // Verify order outbox was saved correctly
         verify(orderOutboxRepository).save(orderOutboxCaptor.capture());
@@ -93,6 +97,7 @@ class MainServiceImplTest {
         assertNotNull(capturedOutbox);
         assertEquals("ORDER_SERVICE", capturedOutbox.getAggregatetype());
         assertEquals("NEW_ORDER", capturedOutbox.getType());
+        assertNotNull(capturedOutbox.getAggregateid());
         assertNotNull(capturedOutbox.getPayload());
 
         // Verify payload contains order data
@@ -100,11 +105,13 @@ class MainServiceImplTest {
         assertNotNull(payload);
         assertEquals(orderName, payload.get("orderName"));
         assertEquals(price, payload.get("price"));
+        assertEquals(capturedOrder.getOrderId().toString(), payload.get("orderId").toString());
+        assertEquals(OrderStatus.PENDING.toString(), payload.get("orderStatus").toString());
     }
 
     @Test
-    @DisplayName("Should set order properties correctly")
-    void saveOrderShouldSetOrderPropertiesCorrectly() {
+    @DisplayName("Should verify transactional behavior by ensuring both order and outbox are saved")
+    void saveOrderShouldEnsureTransactionalBehavior() {
         // Arrange
         String orderName = "Test Order";
         BigDecimal price = BigDecimal.valueOf(100.0);
@@ -112,23 +119,20 @@ class MainServiceImplTest {
         OrderRequest orderRequest = new OrderRequest(orderName, price, customerId);
 
         // Use Answer to simulate the behavior of the repository.save method
-        when(orderRepository.save(any(Order.class))).thenAnswer(new Answer<Order>() {
-            @Override
-            public Order answer(InvocationOnMock invocation) {
-                Order order = invocation.getArgument(0);
-                // Call prePersist to simulate JPA behavior
-                if (order.getOrderId() == null) {
-                    order.prePersist();
-                }
-                return order;
+        when(orderRepository.save(any(Order.class))).thenAnswer(invocation -> {
+            Order order = invocation.getArgument(0);
+            if (order.getOrderId() == null) {
+                order.prePersist();
             }
+            return order;
         });
 
-        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenAnswer(new Answer<OrderOutbox>() {
-            @Override
-            public OrderOutbox answer(InvocationOnMock invocation) {
-                return invocation.getArgument(0);
+        when(orderOutboxRepository.save(any(OrderOutbox.class))).thenAnswer(invocation -> {
+            OrderOutbox outbox = invocation.getArgument(0);
+            if (outbox.getAggregateid() == null) {
+                outbox.prePersist();
             }
+            return outbox;
         });
 
         // Act
@@ -138,26 +142,8 @@ class MainServiceImplTest {
         assertTrue(result.saveStatus());
         assertNotNull(result.orderId());
 
-        // Verify order was saved correctly
-        verify(orderRepository).save(orderCaptor.capture());
-        Order capturedOrder = orderCaptor.getValue();
-        assertNotNull(capturedOrder);
-        assertEquals(orderName, capturedOrder.getOrderName());
-        assertEquals(price, capturedOrder.getPrice());
-
-        // Verify order outbox was saved correctly
-        verify(orderOutboxRepository).save(orderOutboxCaptor.capture());
-        OrderOutbox capturedOutbox = orderOutboxCaptor.getValue();
-        assertNotNull(capturedOutbox);
-        assertEquals("ORDER_SERVICE", capturedOutbox.getAggregatetype());
-
-        // Verify type property is set
-        assertEquals("NEW_ORDER", capturedOutbox.getType());
-
-        // Verify payload contains order data
-        Map<String, Object> payload = capturedOutbox.getPayload();
-        assertNotNull(payload);
-        assertEquals(orderName, payload.get("orderName"));
-        assertEquals(price, payload.get("price"));
+        // Verify both repositories were called exactly once
+        verify(orderRepository, times(1)).save(any(Order.class));
+        verify(orderOutboxRepository, times(1)).save(any(OrderOutbox.class));
     }
 }
