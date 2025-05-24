@@ -38,12 +38,17 @@ public class MainController {
         final ResponseEntity<Message> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {});
 
+        logger.info("Call {}: response: {}", url, responseEntity.getBody());
+
 
         return responseEntity.getBody();
     }
     
     
     private Message unavailable(final Exception exception)  {
+
+        logger.error("Call service is unavailable", exception);
+
         return new Message("Service is unavailable");
     }
 }
