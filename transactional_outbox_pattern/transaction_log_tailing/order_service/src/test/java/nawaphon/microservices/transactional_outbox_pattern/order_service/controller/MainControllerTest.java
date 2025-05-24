@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -47,13 +46,11 @@ class MainControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(orderRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(HttpStatus.OK.value()))
-                .andExpect(jsonPath("$.message").value("OK"))
-                .andExpect(jsonPath("$.results.orderId").value(orderId.toString()));
+                .andExpect(jsonPath("$.orderId").value(orderId.toString()));
     }
 
     @Test
-    @DisplayName("Should return error response when order is not saved")
+    @DisplayName("Should throw exception when order is not saved")
     void testSaveOrderFailure() throws Exception {
         // Arrange
         OrderRequest orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
@@ -63,9 +60,6 @@ class MainControllerTest {
         mockMvc.perform(post("/save-order")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(orderRequest)))
-                .andExpect(status().isOk()) // Note: The controller returns 500 in the response body, but HTTP status is still 200
-                .andExpect(jsonPath("$.code").value(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                .andExpect(jsonPath("$.message").value("Internal Server Error"))
-                .andExpect(jsonPath("$.results.orderId").doesNotExist());
+                .andExpect(status().isInternalServerError());
     }
 }
