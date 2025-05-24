@@ -1,7 +1,6 @@
 package nawaphon.microservices.customer_service.controllers;
 
 import nawaphon.microservices.customer_service.pojo.Customer;
-import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Description;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -24,16 +22,13 @@ import java.util.UUID;
 @WebMvcTest(MainController.class)
 public class MainControllerTest {
 
-    private final MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
     @MockBean
-    private final MainService service;
+    private MainService service;
 
-
-    @Autowired
-    public MainControllerTest(final MockMvc mvc, final MainService service) {
-        this.mvc = mvc;
-        this.service = service;
+    public MainControllerTest() {
     }
 
     @Test
@@ -54,13 +49,12 @@ public class MainControllerTest {
         customer1.setId(uuidGenTest);
 
         final List<Customer> testData = List.of(customer1);
-        final ResponseMessage<List<Customer>> responseMessage = new ResponseMessage<>(
-                HttpStatus.OK.value(), HttpStatus.OK.name(), testData);
 
-        BDDMockito.given(service.firstService()).willReturn(responseMessage);
+        BDDMockito.given(service.firstService()).willReturn(testData);
 
         mvc.perform(MockMvcRequestBuilders.get("/hello-world").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.is(200)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is(HttpStatus.OK.name())));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].creditLimit", Matchers.is(1000)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(uuidGenTest.toString())));
     }
 }
