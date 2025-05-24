@@ -30,12 +30,12 @@ public class MainController {
 
 
     @PostMapping("/send-message")
-    public ResponseMessage<String> sendEvent(@RequestBody final Message message) throws JsonProcessingException {
+    public String sendEvent(@RequestBody final Message message) throws JsonProcessingException {
 
         logger.debug("message to be sent: {}", objectMapper.writeValueAsString(message));
         kafkaTemplate.send("Greeting", UUID.randomUUID(), message);
 
 
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Done");
+        return "Done";
     }
 }
