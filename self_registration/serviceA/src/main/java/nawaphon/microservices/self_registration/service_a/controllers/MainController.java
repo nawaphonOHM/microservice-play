@@ -16,7 +16,7 @@ public class MainController {
 
 
     @GetMapping("/hello-world")
-    public ResponseMessage<String> helloWorld() {
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), "Hello World");
+    public String helloWorld() {
+        return "Hello World";
     }
 }
