@@ -1,9 +1,8 @@
 package nawaphon.microservices.server_side_discovery.service_a.controllers;
 
-import nawaphon.microservices.server_side_discovery.service_a.pojo.ResponseMessage;
+import nawaphon.microservices.server_side_discovery.service_a.exception.UnknownHostRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,18 +17,15 @@ public class MainController {
 
 
     @GetMapping("/hello-world")
-    public ResponseMessage<String> home() {
+    public String home() {
         final String hostname;
 
         try {
             hostname = InetAddress.getLocalHost().getHostName();
         } catch (final UnknownHostException e) {
             logger.error(e.getMessage(), e);
-            return new ResponseMessage<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Unable to complete request");
+            throw new UnknownHostRuntimeException();
         }
-        return new ResponseMessage<>(HttpStatus.OK.value(),
-                HttpStatus.OK.toString(),
-                String.format("Hello world this request was processed by %s", hostname));
+        return String.format("Hello world this request was processed by %s", hostname);
     }
 }

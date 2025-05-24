@@ -33,21 +33,22 @@ public class MainController {
 
     @GetMapping("/call-service")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
-    public ResponseMessage<Message> getCustomer() {
+    public Message getCustomer() {
         final String url = String.format("%s/first-get", serviceIp);
-        final ResponseEntity<ResponseMessage<Message>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
+        final ResponseEntity<Message> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {});
+
+        logger.info("Call {}: response: {}", url, responseEntity.getBody());
+
+
         return responseEntity.getBody();
     }
     
     
-    private ResponseMessage<Message> unavailable(final Exception exception)  {
-        final Message message = new Message("Service is unavailable");
-        
-        
-        return new ResponseMessage<>(
-                HttpStatus.SERVICE_UNAVAILABLE.value(), 
-                HttpStatus.SERVICE_UNAVAILABLE.toString(), 
-                message);
+    private Message unavailable(final Exception exception)  {
+
+        logger.error("Call service is unavailable", exception);
+
+        return new Message("Service is unavailable");
     }
 }

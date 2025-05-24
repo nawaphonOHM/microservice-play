@@ -29,18 +29,14 @@ public class MainController {
     }
 
     @GetMapping("/get-customer/{uuid}")
-    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
-        final Customer result = fakeDatabaseComponent.getCustomers().stream().filter(
+    public Customer getCustomer(@PathVariable final UUID uuid) {
+        return fakeDatabaseComponent.getCustomers().stream().filter(
                 (predicate) -> predicate.id().compareTo(uuid) == 0).findFirst().orElse(null);
-
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
     }
 
     @GetMapping("/get-customer-details/{uuid}")
-    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
-        final CustomerDetail result = fakeDatabaseComponent.getCustomerDetails().stream().filter(
+    public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
+        return fakeDatabaseComponent.getCustomerDetails().stream().filter(
                 (predicate) -> predicate.customerId().compareTo(uuid) == 0).findFirst().orElse(null);
-
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result);
     }
 }

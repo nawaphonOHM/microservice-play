@@ -9,6 +9,7 @@ import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class MainService {
     }
 
 
-    public ResponseMessage<List<Customer>> getCustomerByCriteria(final Map<String, String> params) {
+    public List<Customer> getCustomerByCriteria(final Map<String, String> params) {
         final Customer probe = new Customer();
 
         params.forEach((key, value) -> {
@@ -43,32 +44,32 @@ public class MainService {
             }
         });
 
-        return customerRepository.findBy(Example.of(probe), (query) -> new ResponseMessage<>(200, "Done", query.all()));
+        return customerRepository.findBy(Example.of(probe), FluentQuery.FetchableFluentQuery::all);
 
     }
 
 
-    public ResponseMessage<Customer> addNewCustomer(final Customer newCustomer) {
+    public Customer addNewCustomer(final Customer newCustomer) {
         try {
             final Customer result = this.customerRepository.save(newCustomer);
             logger.info("Saving new customer is done.");
-            return new ResponseMessage<>(HttpStatus.OK.value(), "Data is success to save on database", result);
+            return result;
         } catch (final Exception exception) {
             logger.error("There is an error while saving new customer on the database {0}", exception);
             throw new FailToSaveCustomerException();
         }
     }
 
-    public ResponseMessage<UUID> removeCustomer(final UUID uuid) {
+    public UUID removeCustomer(final UUID uuid) {
         logger.info("Deleting Customer {}", uuid);
         this.customerRepository.deleteById(uuid);
         logger.info("Deleting Customer {} is done", uuid);
 
-        return new ResponseMessage<>(HttpStatus.OK.value(), "Delete Customer is Done", uuid);
+        return uuid;
     }
 
     @Transactional
-    public ResponseMessage<Customer> updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
+    public Customer updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
 
         final Customer customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 
@@ -79,7 +80,7 @@ public class MainService {
         try {
             this.customerRepository.save(customer);
             logger.info("Customer id {} has now credit as {}", customer.getId(), newCredit);
-            return new ResponseMessage<>(HttpStatus.OK.value(), "Done", customer);
+            return customer;
         } catch (final Exception exception) {
             logger.error("Failed to update new credit {} of {}", newCredit, customer.getId());
             throw new UpdateNewCreditFailedException(newCredit, customer.getId());

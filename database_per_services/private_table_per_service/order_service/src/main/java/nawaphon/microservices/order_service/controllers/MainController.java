@@ -24,7 +24,7 @@ public class MainController {
 
 
     @GetMapping("/hello-world")
-    public ResponseMessage<List<Order>> firstGetMethod() {
+    public List<Order> firstGetMethod() {
         return mainService.firstService();
     }
 }

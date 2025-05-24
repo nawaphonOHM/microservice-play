@@ -39,9 +39,9 @@ public class MainController {
     }
 
     @GetMapping("/get-customer/{uuid}")
-    public ResponseMessage<Customer> getCustomer(@PathVariable final UUID uuid) {
+    public Customer getCustomer(@PathVariable final UUID uuid) {
         final String url = friendIp + "/get-customer/" + uuid;
-        final ResponseMessage<Customer> result = this.restTemplate.exchange(url,
+        final Customer result = this.restTemplate.exchange(url,
                         HttpMethod.GET, null, new CustomerParameterizedTypeReference())
                 .getBody();
 
@@ -52,16 +52,13 @@ public class MainController {
         }
 
         assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.results());
+        return result;
     }
 
     @GetMapping("/get-customer-details/{uuid}")
-    public ResponseMessage<CustomerDetail> getCustomerDetail(@PathVariable final UUID uuid) {
-        final ResponseMessage<CustomerDetail> result = this.restTemplate.exchange(friendIp + "/get-customer-details/" + uuid,
+    public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
+        return this.restTemplate.exchange(friendIp + "/get-customer-details/" + uuid,
                 HttpMethod.GET, null,
                 new CustomerDetailsParameterizedTypeReference()).getBody();
-
-        assert result != null;
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), result.results());
     }
 }

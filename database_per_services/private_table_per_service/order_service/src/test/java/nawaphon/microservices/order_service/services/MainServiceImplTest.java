@@ -1,7 +1,6 @@
 package nawaphon.microservices.order_service.services;
 
 import nawaphon.microservices.order_service.pojo.Order;
-import nawaphon.microservices.order_service.pojo.ResponseMessage;
 import nawaphon.microservices.order_service.test_configuratiion.MainServiceMock;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +21,7 @@ class MainServiceImplTest {
     @Autowired
     private MainService mainService;
 
-    private ResponseMessage<List<Order>> testResult;
+    private List<Order> testResult;
 
     @BeforeEach
     void setUp() {
@@ -30,28 +29,23 @@ class MainServiceImplTest {
     }
 
     @Test
-    void responseMessageShouldNotNullTest() {
+    void resultShouldNotBeNullTest() {
         AssertionsForClassTypes.assertThat(testResult).isNotNull();
     }
 
     @Test
-    void listInsideResponseMessageShouldNotNullTest() {
-        AssertionsForClassTypes.assertThat(testResult).isNotNull();
+    void resultShouldNotBeEmptyTest() {
+        Assertions.assertFalse(testResult.isEmpty(), "Result list should not be empty");
     }
 
     @Test
-    void assertResponseMessageHasAllValidPropertyTest() {
-        AssertionsForClassTypes.assertThat(testResult).extracting(ResponseMessage::code, ResponseMessage::message)
-                .containsExactly(200, "Done");
+    void shouldHasOnlyOneOrderObjectTest() {
+        Assertions.assertEquals(1, testResult.size());
     }
 
     @Test
-    void shouldHasOnlyOneCustomerObjectTest() {
-        Assertions.assertEquals(1, testResult.results().size());
-    }
-
-    @Test
-    void assertCustomerHasAllExpectedPropertyTest() {
-        AssertionsForClassTypes.assertThat(testResult.results().get(0)).extracting(Order::getTotal, Order::isStatus).containsExactly(new BigDecimal(1000), true);
+    void assertOrderHasAllExpectedPropertyTest() {
+        AssertionsForClassTypes.assertThat(testResult.get(0)).extracting(Order::getTotal, Order::isStatus)
+                .containsExactly(new BigDecimal(1000), true);
     }
 }

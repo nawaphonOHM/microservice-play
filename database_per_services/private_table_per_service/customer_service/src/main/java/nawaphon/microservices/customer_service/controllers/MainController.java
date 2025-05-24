@@ -23,7 +23,7 @@ public class MainController {
 
 
     @GetMapping("/hello-world")
-    public ResponseMessage<List<Customer>> firstGetMethod() {
+    public List<Customer> firstGetMethod() {
         return mainService.firstService();
     }
 }
