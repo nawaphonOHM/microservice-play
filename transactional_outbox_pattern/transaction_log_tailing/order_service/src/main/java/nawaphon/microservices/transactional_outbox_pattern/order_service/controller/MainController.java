@@ -3,10 +3,8 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.contro
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderId;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.ResponseMessage;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.SavingOrderUnsuccessfulException;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
-import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +19,7 @@ public class MainController {
     }
 
     @PostMapping("/save-order")
-    public ResponseMessage<OrderId> saveOrder(@RequestBody @NonNull OrderRequest orderDetail) {
+    public OrderId saveOrder(@RequestBody @NonNull OrderRequest orderDetail) {
 
         final OrderSaveStatus saveInformation = mainService.saveOrder(orderDetail);
 
@@ -31,7 +29,7 @@ public class MainController {
             throw new SavingOrderUnsuccessfulException();
         }
 
-        return new ResponseMessage<>(HttpStatus.OK.value(), "OK", new OrderId(saveInformation.orderId()));
+        return new OrderId(saveInformation.orderId());
 
     }
 
