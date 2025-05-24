@@ -238,7 +238,7 @@ configure(subprojects.findAll { it.name == "self_registration@services_registry"
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.3"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2024.0.1"
         }
     }
 
@@ -253,7 +253,7 @@ configure(subprojects.findAll { it.name == "self_registration@services_A"}) {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.3"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2024.0.1"
         }
     }
 
