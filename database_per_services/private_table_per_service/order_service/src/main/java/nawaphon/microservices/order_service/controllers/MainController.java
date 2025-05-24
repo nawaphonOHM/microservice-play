@@ -25,6 +25,6 @@ public class MainController {
 
     @GetMapping("/hello-world")
     public List<Order> firstGetMethod() {
-        return mainService.firstService().results();
+        return mainService.firstService();
     }
 }
