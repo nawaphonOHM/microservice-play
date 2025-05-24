@@ -45,10 +45,7 @@ public class MainControllerTest {
         body.setId(UUID.randomUUID());
         body.setCreditLimit(BigDecimal.ONE);
 
-        BDDMockito.given(service.addNewCustomer(BDDMockito.refEq(body))).willReturn(
-                new ResponseMessage<>(200, "Done", BDDMockito.refEq(body))
-        );
-
+        BDDMockito.given(service.addNewCustomer(BDDMockito.refEq(body))).willReturn(body);
 
         mvc.perform(
                 MockMvcRequestBuilders.post("/post-customer")
@@ -68,11 +65,8 @@ public class MainControllerTest {
 
         final List<Customer> customers = List.of();
 
-
         BDDMockito.given(service.getCustomerByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
-                var1.get("id").equals("eeee")))).willReturn(
-                new ResponseMessage<>(200, "Done", BDDMockito.refEq(customers))
-        );
+                var1.get("id").equals("eeee")))).willReturn(customers);
 
         mvc.perform(
                 MockMvcRequestBuilders.get("/get-customer-by-criteria")
@@ -98,11 +92,8 @@ public class MainControllerTest {
         response.setId(id);
         response.setCreditLimit(BigDecimal.TEN);
 
-
         BDDMockito.given(service.updateUserCredit(BDDMockito.refEq(id), BDDMockito.refEq(body.credit())))
-                .willReturn(
-                        new ResponseMessage<>(200, "Done", response)
-                );
+                .willReturn(response);
 
         mvc.perform(
                 MockMvcRequestBuilders.patch("/update-customer-credit/{id}", id)
@@ -119,11 +110,8 @@ public class MainControllerTest {
 
         final UUID id = UUID.randomUUID();
 
-
         BDDMockito.given(service.removeCustomer(BDDMockito.refEq(id)))
-                .willReturn(
-                        new ResponseMessage<>(200, "Done", id)
-                );
+                .willReturn(id);
 
         mvc.perform(
                 MockMvcRequestBuilders.delete("/delete-customer-credit/{id}", id)
