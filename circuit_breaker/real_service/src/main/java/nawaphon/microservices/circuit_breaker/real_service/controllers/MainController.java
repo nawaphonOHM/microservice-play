@@ -15,9 +15,9 @@ public class MainController {
 
 
     @GetMapping("/first-get")
-    public ResponseMessage<Message> getCustomer() {
-        final Message message = new Message("Call from real service. OK!");
-        return new ResponseMessage<>(HttpStatus.OK.value(), HttpStatus.OK.toString(), message);
+    public Message getCustomer() {
+
+        return new Message("Call from real service. OK!");
     }
 
 }
