@@ -719,4 +719,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:transactional_outbox_pattern.order_service
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:transactional_outbox_pattern.transaction_log_tailing.order_service
