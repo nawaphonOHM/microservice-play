@@ -318,7 +318,7 @@ configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) 
 
 }
 
-configure(subprojects.findAll { it.name == "transactional_outbox_pattern@order_service"}) {
+configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transaction_log_tailling@order_service"}) {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'

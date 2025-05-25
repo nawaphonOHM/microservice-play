@@ -61,5 +61,5 @@ project(":client_side_discovery@client").projectDir = file("client_side_discover
 include("server_side_discovery@services_A")
 project(":server_side_discovery@services_A").projectDir = file("server_side_discovery/serviceA")
 
-include("transactional_outbox_pattern@order_service")
-project(":transactional_outbox_pattern@order_service").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service")
+include("transactional_outbox_pattern@transaction_log_tailling@order_service")
+project(":transactional_outbox_pattern@transaction_log_tailling@order_service").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service")
