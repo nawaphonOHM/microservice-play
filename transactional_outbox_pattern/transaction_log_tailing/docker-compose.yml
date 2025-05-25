@@ -12,7 +12,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
 
   order:
-    image: nawaphon2539/microservices-lab:transactional_outbox_pattern.order_service
+    image: nawaphon2539/microservices-lab:transactional_outbox_pattern.transaction_log_tailing.order_service
     env_file: ./order_service/order_service.env
     ports:
       - "1002:8080"
