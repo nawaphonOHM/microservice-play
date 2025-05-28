@@ -9,6 +9,8 @@ on:
       - synchronize
     branches:
       - 'main'
+permissions:
+  contents: read
 jobs:
   build-check-for-merge-request:
     runs-on: ubuntu-latest
