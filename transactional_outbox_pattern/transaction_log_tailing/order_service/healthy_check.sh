@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-RESULT=$(curl 'http://localhost:8080/transactional_outbox_pattern/order-service/actuator/health' -s -i -X GET -H \
-'Accept: application/json' | grep -Eo '\{\"status\":\"([A-Z]+)\"\}' | sed -E 's/\{\"status\":\"([A-Z]+)\"\}/\1/')
+RESULT=$(curl 'http://localhost:8080/transactional_outbox_pattern/order-service/actuator/health' -o /dev/null -w "%{http_code}" \
+-s -i -X GET )
 
-if [ "$RESULT" != "UP" ]; then
+if [ "$RESULT" != "200" ]; then
   exit 1
 fi
 
