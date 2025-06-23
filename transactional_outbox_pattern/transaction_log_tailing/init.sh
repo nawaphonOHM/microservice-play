@@ -20,7 +20,7 @@ LOCAL_HOST_IP=0.0.0.0
 ORDER_DATABASE_CONTAINER_NAME=transaction_log_tailing-orders_database
 
 ORDER_SERVICE_PORT=$(docker compose ps --format json | jq "select(.Name | \
-test(\"$ORDER_DATABASE_CONTAINER_NAME\")) | .Publishers | .[] | select(.URL==\"0.0.0.0\") | .PublishedPort" | \
+test(\"$ORDER_DATABASE_CONTAINER_NAME\")) | .Publishers | .[] | select(.URL==\"$LOCAL_HOST_IP\") | .PublishedPort" | \
 sed "s/\"//g")
 
 PGPASSWORD=$POSTGRES_PASSWORD psql -h $LOCAL_HOST_IP -p "$ORDER_SERVICE_PORT" -U "$POSTGRES_USER" -a \
@@ -38,7 +38,7 @@ ORDER_SERVICE_REGISTER_INFORMATION_FORDEBEZIUM=$(sed "s/{{ip}}/$ORDER_DATABASE_C
  DEBEZIUM_SERVICE_NAME=transaction_log_tailing-debezium
 
 DEBEZIUM_SERVICE_PORT=$(docker compose ps --format json | jq "select(.Name | \
-test(\"$DEBEZIUM_SERVICE_NAME\")) | .Publishers | .[] | select(.URL==\"0.0.0.0\") | .PublishedPort" | \
+test(\"$DEBEZIUM_SERVICE_NAME\")) | .Publishers | .[] | select(.URL==\"$LOCAL_HOST_IP\") | .PublishedPort" | \
 sed "s/\"//g")
 
 curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" \
