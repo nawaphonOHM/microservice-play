@@ -49,6 +49,11 @@ sed "s/\"//g")
 curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" \
  "$LOCAL_HOST_IP":"$DEBEZIUM_SERVICE_PORT"/connectors/ -d "$ORDER_SERVICE_REGISTER_INFORMATION_FORDEBEZIUM"
 
+if [[ $? != 0 ]]; then
+   echo "curl run failed"
+   exit 1
+fi
+
  # This part is order database initialization done
 
  echo initializing...DONE
