@@ -51,6 +51,7 @@ services:
     networks:
       default:
         ipv4_address: 192.168.1.4
+    depends_on: [ kafka ]
 
 
 networks:
