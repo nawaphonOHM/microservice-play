@@ -4,6 +4,11 @@ echo start initializing...
 
 docker compose up -d --wait
 
+if [[ $? != 0 ]]; then
+  echo "run docker failed"
+  exit 1
+fi
+
 # This part is order database initialization
 
 DOCKER_COMPOSE_NAME=transaction_log_tailing
