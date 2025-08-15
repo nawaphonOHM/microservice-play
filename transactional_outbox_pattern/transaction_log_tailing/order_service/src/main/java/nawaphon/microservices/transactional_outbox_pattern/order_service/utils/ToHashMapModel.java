@@ -18,19 +18,20 @@ public final class ToHashMapModel {
 
         for (final Field field : object.getClass().getDeclaredFields()) {
             final String key = field.getName();
+            final Object value;
 
             try {
-                final Object value = object.getClass()
+                value = object.getClass()
                         .getDeclaredMethod("get" + key.substring(0, 1).toUpperCase() + key.substring(1))
                         .invoke(object);
-
-                map.put(key, value);
 
 
             } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 log.error("Unable to convert object to map", e);
                 throw new ToHashMpModelException(e);
             }
+
+            map.put(key, value);
 
         }
 
