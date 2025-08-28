@@ -2,5 +2,6 @@ group = 'nawaphon.microservices.data_per_services'
 version = '0.0.1'
 
 
-
-archivesBaseName = 'customer_service'
+base {
+    archivesName = "customer_service"
+}
