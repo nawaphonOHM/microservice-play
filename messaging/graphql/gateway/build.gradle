@@ -1,5 +1,6 @@
 group = 'nawaphon.microservices.gateway'
 version = '0.0.1'
 
-
-archivesBaseName = 'gateway'
+base {
+    archivesName = "gateway"
+}

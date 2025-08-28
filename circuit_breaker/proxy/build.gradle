@@ -1,5 +1,6 @@
 group = 'nawaphon.microservices.circut_breaker'
 version = '0.0.1'
 
-
-archivesBaseName = 'proxy'
+base {
+    archivesName = "proxy"
+}

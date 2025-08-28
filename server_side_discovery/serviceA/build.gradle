@@ -3,5 +3,7 @@
 group = 'nawaphon.microservices.server_side_discovery'
 version = '0.0.1'
 
-archivesBaseName = 'services_a'
+base {
+    archivesName = "services_a"
+}
 

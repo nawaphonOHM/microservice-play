@@ -1,5 +1,6 @@
 group = 'nawaphon.self_registration'
 version = '0.0.1'
 
-
-archivesBaseName = 'services_registry'
+base {
+    archivesName = "services_registry"
+}

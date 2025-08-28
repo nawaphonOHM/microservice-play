@@ -1,5 +1,6 @@
 group = 'nawaphon.microservices.messaging.rest'
 version = '0.0.1'
 
-
-archivesBaseName = 'receiver'
+base {
+    archivesName = "receiver"
+}
