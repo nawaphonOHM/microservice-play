@@ -1,5 +1,6 @@
 group = 'nawaphon.microservices.messaging.event_sourcing.producer'
 version = '0.0.1'
 
-
-archivesBaseName = 'producer'
+base {
+    archivesName = "producer"
+}
