@@ -25,14 +25,14 @@ class OrderRepositoryTest {
     @DisplayName("Should save an order")
     void shouldSaveOrder() {
         // Arrange
-        Order order = new Order();
+        var order = new Order();
         order.setOrderName("Test Order");
         order.setPrice(BigDecimal.valueOf(100.0));
 
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 
         // Act
-        Order savedOrder = orderRepository.save(order);
+        var savedOrder = orderRepository.save(order);
 
         // Assert
         assertNotNull(savedOrder);
@@ -44,8 +44,8 @@ class OrderRepositoryTest {
     @DisplayName("Should find order by ID")
     void shouldFindOrderById() {
         // Arrange
-        UUID id = UUID.randomUUID();
-        Order order = new Order();
+        var id = UUID.randomUUID();
+        var order = new Order();
         order.setId(id);
         order.setOrderName("Test Order");
         order.setPrice(BigDecimal.valueOf(100.0));
@@ -53,7 +53,7 @@ class OrderRepositoryTest {
         when(orderRepository.findById(id)).thenReturn(Optional.of(order));
 
         // Act
-        Optional<Order> foundOrder = orderRepository.findById(id);
+        var foundOrder = orderRepository.findById(id);
 
         // Assert
         assertTrue(foundOrder.isPresent());
@@ -65,11 +65,11 @@ class OrderRepositoryTest {
     @DisplayName("Should return empty when order not found")
     void shouldReturnEmptyWhenOrderNotFound() {
         // Arrange
-        UUID id = UUID.randomUUID();
+        var id = UUID.randomUUID();
         when(orderRepository.findById(id)).thenReturn(Optional.empty());
 
         // Act
-        Optional<Order> foundOrder = orderRepository.findById(id);
+        var foundOrder = orderRepository.findById(id);
 
         // Assert
         assertFalse(foundOrder.isPresent());

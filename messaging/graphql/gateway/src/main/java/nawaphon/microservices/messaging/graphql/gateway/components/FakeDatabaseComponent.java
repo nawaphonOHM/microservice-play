@@ -36,12 +36,9 @@ public class FakeDatabaseComponent {
 
     @PostConstruct
     public void makeData() {
-        Customer customerFake;
-        CustomerDetail customerDetailFake;
-
         {
-            customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "John", "Doe");
+            final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
+            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "John", "Doe");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {
@@ -52,8 +49,8 @@ public class FakeDatabaseComponent {
         }
 
         {
-            customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Jane", "Smith");
+            final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
+            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Jane", "Smith");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {
@@ -64,8 +61,8 @@ public class FakeDatabaseComponent {
         }
 
         {
-            customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Bob", "Johnson");
+            final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
+            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Bob", "Johnson");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {

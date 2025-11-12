@@ -27,17 +27,17 @@ class CustomerRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        final Customer customer1 = new Customer();
+        final var customer1 = new Customer();
         customer1.setCreditLimit(new BigDecimal(20));
 
         entityManager.persist(customer1);
 
-        final Customer customer2 = new Customer();
+        final var customer2 = new Customer();
         customer2.setCreditLimit(new BigDecimal(50));
 
         entityManager.persist(customer2);
 
-        final Customer customer3 = new Customer();
+        final var customer3 = new Customer();
         customer3.setCreditLimit(new BigDecimal(100));
 
         entityManager.persist(customer3);
@@ -46,7 +46,7 @@ class CustomerRepositoryTest {
     @Test
     void notNullTest() {
 
-        final List<Customer> testResult = customerRepository.findAll();
+        final var testResult = customerRepository.findAll();
 
         Assertions.assertNotNull(testResult);
     }
@@ -54,13 +54,13 @@ class CustomerRepositoryTest {
     @Test
     void haveExpectedSizeTest() {
 
-        final List<Customer> testResult = customerRepository.findAll();
+        final var testResult = customerRepository.findAll();
         Assertions.assertEquals(3, testResult.size());
     }
 
     @Test
     void entityIdShouldHaveBeenGeneratedTest() {
-        final Customer customerTest = customerRepository.findAll().get(0);
+        final var customerTest = customerRepository.findAll().get(0);
 
         Assertions.assertNotNull(customerTest.getId());
     }

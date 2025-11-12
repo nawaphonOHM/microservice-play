@@ -32,7 +32,7 @@ public class MainService {
 
 
     public List<Customer> getCustomerByCriteria(final Map<String, String> params) {
-        final Customer probe = new Customer();
+        final var probe = new Customer();
 
         params.forEach((key, value) -> {
             if (key.equalsIgnoreCase("id")) {
@@ -51,7 +51,7 @@ public class MainService {
 
     public Customer addNewCustomer(final Customer newCustomer) {
         try {
-            final Customer result = this.customerRepository.save(newCustomer);
+            final var result = this.customerRepository.save(newCustomer);
             logger.info("Saving new customer is done.");
             return result;
         } catch (final Exception exception) {
@@ -71,7 +71,7 @@ public class MainService {
     @Transactional
     public Customer updateUserCredit(final UUID customerId, final BigDecimal newCredit) {
 
-        final Customer customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
+        final var customer = this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 
         logger.info("Found Customer ");
 

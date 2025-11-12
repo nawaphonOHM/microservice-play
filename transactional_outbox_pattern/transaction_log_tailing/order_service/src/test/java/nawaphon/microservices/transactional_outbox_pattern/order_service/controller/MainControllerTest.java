@@ -37,8 +37,8 @@ class MainControllerTest {
     @DisplayName("Should return success response when order is saved successfully")
     void testSaveOrderSuccess() throws Exception {
         // Arrange
-        OrderRequest orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
-        UUID orderId = UUID.randomUUID();
+        var orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
+        var orderId = UUID.randomUUID();
         when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(orderId, true));
 
         // Act & Assert
@@ -53,7 +53,7 @@ class MainControllerTest {
     @DisplayName("Should throw exception when order is not saved")
     void testSaveOrderFailure() throws Exception {
         // Arrange
-        OrderRequest orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
+        var orderRequest = new OrderRequest("Test Order", BigDecimal.valueOf(100.0), UUID.randomUUID());
         when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(null, false));
 
         // Act & Assert

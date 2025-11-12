@@ -17,13 +17,13 @@ public class MainServiceMock {
     @Bean
     public MainService mainService() {
 
-        final Customer customerTest = Mockito.mock(Customer.class);
+        final var customerTest = Mockito.mock(Customer.class);
 
         Mockito.when(customerTest.getCreditLimit()).thenReturn(new BigDecimal(1000));
 
-        final List<Customer> customers = List.of(customerTest);
+        final var customers = List.of(customerTest);
 
-        final CustomerRepository customerRepository = Mockito.mock(CustomerRepository.class);
+        final var customerRepository = Mockito.mock(CustomerRepository.class);
 
         Mockito.when(customerRepository.findAll()).thenReturn(customers);
 

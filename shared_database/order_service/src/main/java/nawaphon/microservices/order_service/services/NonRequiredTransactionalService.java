@@ -25,7 +25,7 @@ public class NonRequiredTransactionalService {
     }
 
     public ResponseMessage<List<Order>> getOrderByCriteria(final Map<String, String> params) {
-        final Order probe = new Order();
+        final var probe = new Order();
 
         probe.setCustomerId(new Customer());
 

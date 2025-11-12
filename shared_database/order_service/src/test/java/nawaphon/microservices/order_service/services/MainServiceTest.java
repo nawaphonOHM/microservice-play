@@ -30,7 +30,7 @@ public class MainServiceTest {
 
     @Test
     public void testGetOrderByCriteriaCallRightService() {
-        final Map<String, String> map = new HashMap<>();
+        final var map = new HashMap<String, String>();
         mainService.getOrderByCriteria(map);
 
         Mockito.verify(nonRequiredTransactionalService, Mockito.times(1)).getOrderByCriteria(Mockito.same(map));
@@ -39,17 +39,17 @@ public class MainServiceTest {
 
     @Test
     public void testAddOrdersCallRightService() {
-        final Order order1 = Mockito.mock(Order.class);
+        final var order1 = Mockito.mock(Order.class);
         Mockito.when(order1.getCustomerId()).thenReturn(Mockito.mock(Customer.class));
 
-        final Order order2 = Mockito.mock(Order.class);
+        final var order2 = Mockito.mock(Order.class);
         Mockito.when(order2.getCustomerId()).thenReturn(Mockito.mock(Customer.class));
 
-        final Order order3 = Mockito.mock(Order.class);
+        final var order3 = Mockito.mock(Order.class);
         Mockito.when(order3.getCustomerId()).thenReturn(Mockito.mock(Customer.class));
 
 
-        final List<Order> orders = List.of(order1);
+        final var orders = List.of(order1);
 
         mainService.addOrders(orders);
 

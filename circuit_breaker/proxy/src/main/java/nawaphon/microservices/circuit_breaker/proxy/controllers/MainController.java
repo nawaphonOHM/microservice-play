@@ -2,13 +2,11 @@ package nawaphon.microservices.circuit_breaker.proxy.controllers;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import nawaphon.microservices.circuit_breaker.proxy.pojo.Message;
-import nawaphon.microservices.circuit_breaker.proxy.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +32,9 @@ public class MainController {
     @GetMapping("/call-service")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
     public Message getCustomer() {
-        final String url = String.format("%s/first-get", serviceIp);
-        final ResponseEntity<Message> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
-                new ParameterizedTypeReference<>() {});
+        final var url = String.format("%s/first-get", serviceIp);
+        final var responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<Message>() {});
 
         logger.info("Call {}: response: {}", url, responseEntity.getBody());
 

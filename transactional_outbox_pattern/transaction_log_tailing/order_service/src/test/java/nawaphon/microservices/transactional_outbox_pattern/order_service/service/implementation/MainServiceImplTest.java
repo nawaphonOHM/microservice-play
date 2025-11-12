@@ -50,8 +50,8 @@ class MainServiceImplTest {
         // Arrange
         String orderName = "Test Order";
         BigDecimal price = BigDecimal.valueOf(100.0);
-        UUID customerId = UUID.randomUUID();
-        OrderRequest orderRequest = new OrderRequest(orderName, price, customerId);
+        var customerId = UUID.randomUUID();
+        var orderRequest = new OrderRequest(orderName, price, customerId);
 
         // Use Answer to simulate the behavior of the repository.save method
         when(orderRepository.save(any(Order.class))).thenAnswer(new Answer<Order>() {
@@ -101,7 +101,7 @@ class MainServiceImplTest {
         assertNotNull(capturedOutbox.getPayload());
 
         // Verify payload contains order data
-        Map<String, Object> payload = capturedOutbox.getPayload();
+        var payload = capturedOutbox.getPayload();
         assertNotNull(payload);
         assertEquals(orderName, payload.get("orderName"));
         assertEquals(price, payload.get("price"));
@@ -115,8 +115,8 @@ class MainServiceImplTest {
         // Arrange
         String orderName = "Test Order";
         BigDecimal price = BigDecimal.valueOf(100.0);
-        UUID customerId = UUID.randomUUID();
-        OrderRequest orderRequest = new OrderRequest(orderName, price, customerId);
+        var customerId = UUID.randomUUID();
+        var orderRequest = new OrderRequest(orderName, price, customerId);
 
         // Use Answer to simulate the behavior of the repository.save method
         when(orderRepository.save(any(Order.class))).thenAnswer(invocation -> {

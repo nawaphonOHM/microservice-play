@@ -34,29 +34,24 @@ public class MainService {
 
 
     public ResponseMessage<List<OrderStatusEnvelop>> addOrders(final List<Order> orders) {
-        final List<OrderStatusEnvelop> results = new ArrayList<>();
+        final var results = new ArrayList<OrderStatusEnvelop>();
 
 
-        for (final Order order : orders) {
+        for (final var order : orders) {
             logger.debug("Data Object {}; total {} will be saved", order.getId(), order.getTotal());
-            boolean saveSuccess;
+            var saveSuccess = false;
 
             try {
                 saveSuccess = requiredTransactionalService.addOrder(order);
 
                 logger.debug("Data Object {}; total {} save status {}", order.getId(), order.getTotal(), saveSuccess);
             } catch (final InsufficientException exception) {
-                saveSuccess = false;
                 logger.error("Data Object {} will be saved has insufficient credit", order.getId());
             }
 
-            final OrderStatusEnvelop orderStatus;
-
-            if (saveSuccess) {
-                orderStatus = new OrderStatusEnvelop(order.getId(), order.getCustomerId().getId(), OrderStatus.ACCEPT);
-            } else {
-                orderStatus = new OrderStatusEnvelop(order.getCustomerId().getId(), OrderStatus.REJECT);
-            }
+            final var orderStatus = saveSuccess
+                    ? new OrderStatusEnvelop(order.getId(), order.getCustomerId().getId(), OrderStatus.ACCEPT)
+                    : new OrderStatusEnvelop(order.getCustomerId().getId(), OrderStatus.REJECT);
 
             results.add(orderStatus);
         }

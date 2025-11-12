@@ -28,7 +28,7 @@ public class RequiredTransactionalService {
     }
 
     public boolean addOrder(Order order) {
-        final Customer customer = this.customerRepository.findById(order.getCustomerId().getId()).orElseThrow(CustomerNotFoundException::new);
+        final var customer = this.customerRepository.findById(order.getCustomerId().getId()).orElseThrow(CustomerNotFoundException::new);
 
         order.setCustomerId(customer);
 

@@ -26,11 +26,11 @@ class OrderOutboxRepositoryTest {
     @DisplayName("Should save an order outbox")
     void shouldSaveOrderOutbox() {
         // Arrange
-        OrderOutbox orderOutbox = new OrderOutbox();
+        var orderOutbox = new OrderOutbox();
         orderOutbox.setAggregatetype("ORDER_SERVICE");
         orderOutbox.setType("NEW_ORDER");
         
-        Map<String, Object> payload = new HashMap<>();
+        var payload = new HashMap<String, Object>();
         payload.put("orderName", "Test Order");
         payload.put("price", 100.0);
         orderOutbox.setPayload(payload);
@@ -38,7 +38,7 @@ class OrderOutboxRepositoryTest {
         when(orderOutboxRepository.save(any(OrderOutbox.class))).thenReturn(orderOutbox);
 
         // Act
-        OrderOutbox savedOrderOutbox = orderOutboxRepository.save(orderOutbox);
+        var savedOrderOutbox = orderOutboxRepository.save(orderOutbox);
 
         // Assert
         assertNotNull(savedOrderOutbox);
@@ -53,13 +53,13 @@ class OrderOutboxRepositoryTest {
     @DisplayName("Should find order outbox by ID")
     void shouldFindOrderOutboxById() {
         // Arrange
-        UUID id = UUID.randomUUID();
-        OrderOutbox orderOutbox = new OrderOutbox();
+        var id = UUID.randomUUID();
+        var orderOutbox = new OrderOutbox();
         orderOutbox.setId(id);
         orderOutbox.setAggregatetype("ORDER_SERVICE");
         orderOutbox.setType("NEW_ORDER");
         
-        Map<String, Object> payload = new HashMap<>();
+        var payload = new HashMap<String, Object>();
         payload.put("orderName", "Test Order");
         payload.put("price", 100.0);
         orderOutbox.setPayload(payload);
@@ -67,7 +67,7 @@ class OrderOutboxRepositoryTest {
         when(orderOutboxRepository.findById(id)).thenReturn(Optional.of(orderOutbox));
 
         // Act
-        Optional<OrderOutbox> foundOrderOutbox = orderOutboxRepository.findById(id);
+        var foundOrderOutbox = orderOutboxRepository.findById(id);
 
         // Assert
         assertTrue(foundOrderOutbox.isPresent());
@@ -83,11 +83,11 @@ class OrderOutboxRepositoryTest {
     @DisplayName("Should return empty when order outbox not found")
     void shouldReturnEmptyWhenOrderOutboxNotFound() {
         // Arrange
-        UUID id = UUID.randomUUID();
+        var id = UUID.randomUUID();
         when(orderOutboxRepository.findById(id)).thenReturn(Optional.empty());
 
         // Act
-        Optional<OrderOutbox> foundOrderOutbox = orderOutboxRepository.findById(id);
+        var foundOrderOutbox = orderOutboxRepository.findById(id);
 
         // Assert
         assertFalse(foundOrderOutbox.isPresent());
