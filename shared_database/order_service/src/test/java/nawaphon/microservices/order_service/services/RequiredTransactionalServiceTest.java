@@ -35,11 +35,11 @@ public class RequiredTransactionalServiceTest {
 
     @Test
     public void addOrderWithValidCustomerAndCredit_shouldReturnTrue() {
-        Customer customer = new Customer();
+        var customer = new Customer();
         customer.setId(UUID.randomUUID());
         customer.setCreditLimit(new BigDecimal(1000));
 
-        final Order order = new Order();
+        final var order = new Order();
         order.setId(UUID.randomUUID());
         order.setCustomerId(customer);
         order.setTotal(new BigDecimal(500));
@@ -56,8 +56,8 @@ public class RequiredTransactionalServiceTest {
 
     @Test
     public void addOrderWithInvalidCustomer_shouldThrowCustomerNotFoundException() {
-        final Order order = new Order();
-        final Customer customer = new Customer();
+        final var order = new Order();
+        final var customer = new Customer();
         order.setId(UUID.randomUUID());
         order.setCustomerId(customer);
         Mockito.when(customerRepositoryMock.findById(Mockito.any())).thenReturn(Optional.empty());
@@ -67,11 +67,11 @@ public class RequiredTransactionalServiceTest {
 
     @Test
     public void addOrderWithInsufficientCustomerCredit_shouldThrowInsufficientException() {
-        Customer customer = new Customer();
+        var customer = new Customer();
         customer.setId(UUID.randomUUID());
         customer.setCreditLimit(new BigDecimal(500));
 
-        final Order order = new Order();
+        final var order = new Order();
         order.setId(UUID.randomUUID());
         order.setCustomerId(customer);
         order.setTotal(new BigDecimal(1000));

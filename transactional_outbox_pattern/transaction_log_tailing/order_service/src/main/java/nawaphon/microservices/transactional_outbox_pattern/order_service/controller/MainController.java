@@ -21,9 +21,9 @@ public class MainController {
     @PostMapping("/save-order")
     public OrderId saveOrder(@RequestBody @NonNull OrderRequest orderDetail) {
 
-        final OrderSaveStatus saveInformation = mainService.saveOrder(orderDetail);
+        final var saveInformation = mainService.saveOrder(orderDetail);
 
-        final boolean done = saveInformation.saveStatus();
+        final var done = saveInformation.saveStatus();
 
         if (!done) {
             throw new SavingOrderUnsuccessfulException();

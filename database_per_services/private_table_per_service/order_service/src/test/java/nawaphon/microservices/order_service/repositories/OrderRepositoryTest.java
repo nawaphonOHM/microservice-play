@@ -27,19 +27,19 @@ class OrderRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        final Order order1 = new Order();
+        final var order1 = new Order();
         order1.setStatus(true);
         order1.setTotal(new BigDecimal(10));
 
         entityManager.persist(order1);
 
-        final Order order2 = new Order();
+        final var order2 = new Order();
         order2.setStatus(true);
         order2.setTotal(new BigDecimal(20));
 
         entityManager.persist(order2);
 
-        final Order order3 = new Order();
+        final var order3 = new Order();
         order3.setStatus(true);
         order3.setTotal(new BigDecimal(50));
 
@@ -49,7 +49,7 @@ class OrderRepositoryTest {
     @Test
     void notNullTest() {
 
-        final List<Order> testResult = orderRepository.findAll();
+        final var testResult = orderRepository.findAll();
 
         Assertions.assertNotNull(testResult);
     }
@@ -57,13 +57,13 @@ class OrderRepositoryTest {
     @Test
     void haveExpectedSizeTest() {
 
-        final List<Order> testResult = orderRepository.findAll();
+        final var testResult = orderRepository.findAll();
         Assertions.assertEquals(3, testResult.size());
     }
 
     @Test
     void entityIdShouldHaveBeenGeneratedTest() {
-        final Order customerTest = orderRepository.findAll().get(0);
+        final var customerTest = orderRepository.findAll().get(0);
 
         Assertions.assertNotNull(customerTest.getId());
     }

@@ -29,8 +29,8 @@ public class OrderRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        final Customer customer = new Customer();
-        final Order order = new Order();
+        final var customer = new Customer();
+        final var order = new Order();
 
         customer.setCreditLimit(BigDecimal.valueOf(1000));
         order.setTotal(BigDecimal.valueOf(1000));
@@ -46,7 +46,7 @@ public class OrderRepositoryTest {
     @Test
     public void testFindBy() {
 
-        final Order order = orderRepository.findByTotal(BigDecimal.valueOf(1000));
+        final var order = orderRepository.findByTotal(BigDecimal.valueOf(1000));
 
         Assertions.assertNotNull(order);
 
@@ -54,7 +54,7 @@ public class OrderRepositoryTest {
 
     @Test
     public void testFindAll() {
-        final List<Order> orders = orderRepository.findAll();
+        final var orders = orderRepository.findAll();
 
         Assertions.assertEquals(1, orders.size());
     }

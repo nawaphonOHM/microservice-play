@@ -29,9 +29,9 @@ public class NonRequiredTransactionalServiceTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodUUIDIsSetWhenThereIs() {
-        final Map<String, String> map = new HashMap<>();
+        final var map = new HashMap<String, String>();
 
-        final UUID uuidMock = UUID.randomUUID();
+        final var uuidMock = UUID.randomUUID();
 
         map.put("id", uuidMock.toString());
 
@@ -43,9 +43,9 @@ public class NonRequiredTransactionalServiceTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodCustomerIdIsSetWhenThereIs() {
-        final Map<String, String> map = new HashMap<>();
+        final var map = new HashMap<String, String>();
 
-        final UUID uuidMock = UUID.randomUUID();
+        final var uuidMock = UUID.randomUUID();
 
         map.put("customerId", uuidMock.toString());
 
@@ -57,9 +57,9 @@ public class NonRequiredTransactionalServiceTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodStatusIsSetWhenThereIs() {
-        final Map<String, String> map = new HashMap<>();
+        final var map = new HashMap<String, String>();
 
-        final boolean statusMock = true;
+        final var statusMock = true;
 
         map.put("status", String.valueOf(statusMock));
 
@@ -71,9 +71,9 @@ public class NonRequiredTransactionalServiceTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testGetOrderByCriteriaMethodTotalIsSetWhenThereIs() {
-        final Map<String, String> map = new HashMap<>();
+        final var map = new HashMap<String, String>();
 
-        final BigDecimal moneyMock = new BigDecimal("999.99");
+        final var moneyMock = new BigDecimal("999.99");
 
         map.put("total", String.valueOf(moneyMock));
 

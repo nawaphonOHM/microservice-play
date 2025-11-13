@@ -16,14 +16,14 @@ public class MainServiceMock {
 
     @Bean
     public MainService mainService() {
-        final OrderRepository orderRepositoryMock = Mockito.mock(OrderRepository.class);
+        final var orderRepositoryMock = Mockito.mock(OrderRepository.class);
 
-        final Order testOrder = Mockito.mock(Order.class);
+        final var testOrder = Mockito.mock(Order.class);
 
         Mockito.when(testOrder.getTotal()).thenReturn(new BigDecimal(1000));
         Mockito.when(testOrder.isStatus()).thenReturn(true);
 
-        final List<Order> mockOrders = List.of(testOrder);
+        final var mockOrders = List.of(testOrder);
 
         Mockito.when(orderRepositoryMock.findAll()).thenReturn(mockOrders);
 

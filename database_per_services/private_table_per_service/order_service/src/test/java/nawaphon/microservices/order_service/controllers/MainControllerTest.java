@@ -38,13 +38,13 @@ public class MainControllerTest {
 
     @Test
     public void ableToGetDataFromServiceTest() throws Exception {
-        final Order order1 = new Order();
+        final var order1 = new Order();
 
         order1.setStatus(true);
         order1.setCustomerId(BigInteger.ONE);
         order1.setTotal(new BigDecimal(1000));
 
-        final List<Order> testData = List.of(order1);
+        final var testData = List.of(order1);
 
         BDDMockito.given(service.firstService()).willReturn(testData);
 

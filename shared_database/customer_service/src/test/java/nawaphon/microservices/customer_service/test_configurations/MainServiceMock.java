@@ -20,12 +20,11 @@ public class MainServiceMock {
 
     @Bean
     public CustomerRepository customerRepository() {
-        final CustomerRepository customerRepository = Mockito.mock(CustomerRepository.class);
+        final var customerRepository = Mockito.mock(CustomerRepository.class);
 
-        final Customer testOrder = Mockito.mock(Customer.class);
+        final var testOrder = Mockito.mock(Customer.class);
 
-
-        final List<Customer> mockOrders = List.of(testOrder);
+        final var mockOrders = List.of(testOrder);
 
         Mockito.when(customerRepository.findAll()).thenReturn(mockOrders);
 

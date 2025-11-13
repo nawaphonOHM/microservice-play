@@ -14,24 +14,22 @@ public final class ToHashMapModel {
     private static final Logger log = LoggerFactory.getLogger(ToHashMapModel.class);
 
     public static Map<String, Object> convert(final Object object) {
-        final Map<String, Object> map = new HashMap<>();
+        final var map = new HashMap<String, Object>();
 
-        for (final Field field : object.getClass().getDeclaredFields()) {
-            final String key = field.getName();
-            final Object value;
+        for (final var field : object.getClass().getDeclaredFields()) {
+            final var key = field.getName();
 
             try {
-                value = object.getClass()
+                final var value = object.getClass()
                         .getDeclaredMethod("get" + key.substring(0, 1).toUpperCase() + key.substring(1))
                         .invoke(object);
 
+                map.put(key, value);
 
             } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 log.error("Unable to convert object to map", e);
                 throw new ToHashMpModelException(e);
             }
-
-            map.put(key, value);
 
         }
 

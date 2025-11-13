@@ -38,9 +38,9 @@ public class MainControllerTest {
 
     @Test
     void ableToRunAddCustomerPath() throws Exception {
-        final ObjectMapper objectMapper = new ObjectMapper();
+        final var objectMapper = new ObjectMapper();
 
-        final Customer body = new Customer();
+        final var body = new Customer();
 
         body.setId(UUID.randomUUID());
         body.setCreditLimit(BigDecimal.ONE);
@@ -59,11 +59,11 @@ public class MainControllerTest {
 
     @Test
     void ableToGetCustomerByCriteria() throws Exception {
-        final MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        final var body = new LinkedMultiValueMap<String, String>();
 
         body.add("id", "eeee");
 
-        final List<Customer> customers = List.of();
+        final var customers = List.<Customer>of();
 
         BDDMockito.given(service.getCustomerByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
                 var1.get("id").equals("eeee")))).willReturn(customers);
@@ -81,13 +81,13 @@ public class MainControllerTest {
 
     @Test
     void ableToUpdateCustomerCredit() throws Exception {
-        final ObjectMapper objectMapper = new ObjectMapper();
+        final var objectMapper = new ObjectMapper();
 
-        final UUID id = UUID.randomUUID();
+        final var id = UUID.randomUUID();
 
-        final CustomerId body = new CustomerId(BigDecimal.TEN);
+        final var body = new CustomerId(BigDecimal.TEN);
 
-        final Customer response = new Customer();
+        final var response = new Customer();
 
         response.setId(id);
         response.setCreditLimit(BigDecimal.TEN);
@@ -108,7 +108,7 @@ public class MainControllerTest {
     @Test
     void ableToDeleteCustomer() throws Exception {
 
-        final UUID id = UUID.randomUUID();
+        final var id = UUID.randomUUID();
 
         BDDMockito.given(service.removeCustomer(BDDMockito.refEq(id)))
                 .willReturn(id);

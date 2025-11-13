@@ -40,8 +40,8 @@ public class MainController {
 
     @GetMapping("/get-customer/{uuid}")
     public Customer getCustomer(@PathVariable final UUID uuid) {
-        final String url = friendIp + "/get-customer/" + uuid;
-        final Customer result = this.restTemplate.exchange(url,
+        final var url = friendIp + "/get-customer/" + uuid;
+        final var result = this.restTemplate.exchange(url,
                         HttpMethod.GET, null, new CustomerParameterizedTypeReference())
                 .getBody();
 

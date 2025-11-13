@@ -34,11 +34,11 @@ public class MainControllerTest {
 
     @Test
     void ableToGetOrderByCriteria() throws Exception {
-        final MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        final var body = new LinkedMultiValueMap<String, String>();
 
         body.add("id", "eeee");
 
-        final List<Order> orders = List.of();
+        final var orders = List.<Order>of();
 
         BDDMockito.given(service.getOrderByCriteria(BDDMockito.argThat((var1) -> var1.containsKey("id") &&
                 var1.get("id").equals("eeee")))).willReturn(

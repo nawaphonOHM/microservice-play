@@ -29,7 +29,7 @@ public class MainServiceTest {
 
     @Test
     void testAbleToGetCustomerByCriteria() {
-        final Map<String, String> params = new HashMap<>();
+        final var params = new HashMap<String, String>();
 
         mainService.getCustomerByCriteria(params);
 
@@ -41,9 +41,9 @@ public class MainServiceTest {
 
     @Test
     void testAbleToAddNewCustomer() {
-        final UUID id = UUID.randomUUID();
+        final var id = UUID.randomUUID();
 
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setId(id);
 
@@ -56,7 +56,7 @@ public class MainServiceTest {
 
     @Test
     void testAbleToRemoveCustomer() {
-        final UUID id = UUID.randomUUID();
+        final var id = UUID.randomUUID();
 
         mainService.removeCustomer(id);
 
@@ -65,12 +65,12 @@ public class MainServiceTest {
 
     @Test
     void testAbleToUpdateCredit() {
-        final UUID id = UUID.randomUUID();
-        final BigDecimal newCredit = BigDecimal.TEN;
+        final var id = UUID.randomUUID();
+        final var newCredit = BigDecimal.TEN;
 
-        final Customer mockCustomer = BDDMockito.mock(Customer.class);
+        final var mockCustomer = BDDMockito.mock(Customer.class);
 
-        final Optional<Customer> optionalCustomer = Optional.of(mockCustomer);
+        final var optionalCustomer = Optional.of(mockCustomer);
 
         BDDMockito.given(mockCustomer.getId()).willReturn(id);
 

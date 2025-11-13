@@ -42,13 +42,13 @@ public class MainControllerTest {
 
     @Test
     public void ableToGetDataFromServiceTest() throws Exception {
-        final UUID uuidGenTest = UUID.randomUUID();
-        final Customer customer1 = new Customer();
+        final var uuidGenTest = UUID.randomUUID();
+        final var customer1 = new Customer();
 
         customer1.setCreditLimit(new BigDecimal(1000));
         customer1.setId(uuidGenTest);
 
-        final List<Customer> testData = List.of(customer1);
+        final var testData = List.of(customer1);
 
         BDDMockito.given(service.firstService()).willReturn(testData);
 

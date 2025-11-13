@@ -33,7 +33,7 @@ public class CustomerRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setCreditLimit(BigDecimal.valueOf(1000));
 
@@ -44,11 +44,11 @@ public class CustomerRepositoryTest {
 
     @Test
     void ableFindByProperlyWhenSetOnlyId() {
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setId(uuid1);
 
-        final List<Customer> foundCustomer = customerRepository.findBy(Example.of(customer),
+        final var foundCustomer = customerRepository.findBy(Example.of(customer),
                 FluentQuery.FetchableFluentQuery::all);
 
         Assertions.assertEquals(1, foundCustomer.size());
@@ -59,11 +59,11 @@ public class CustomerRepositoryTest {
 
     @Test
     void ableFindByProperlyWhenSetOnlyCredit() {
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setCreditLimit(BigDecimal.valueOf(1000));
 
-        final List<Customer> foundCustomer = customerRepository.findBy(Example.of(customer),
+        final var foundCustomer = customerRepository.findBy(Example.of(customer),
                 FluentQuery.FetchableFluentQuery::all);
 
         Assertions.assertEquals(1, foundCustomer.size());
@@ -75,12 +75,12 @@ public class CustomerRepositoryTest {
 
     @Test
     void ableFindByProperlyWhenSetCreditAndUUID() {
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setCreditLimit(BigDecimal.valueOf(1000));
         customer.setId(uuid1);
 
-        final List<Customer> foundCustomer = customerRepository.findBy(Example.of(customer),
+        final var foundCustomer = customerRepository.findBy(Example.of(customer),
                 FluentQuery.FetchableFluentQuery::all);
 
         Assertions.assertEquals(1, foundCustomer.size());
@@ -92,11 +92,11 @@ public class CustomerRepositoryTest {
 
     @Test
     void ableToSaveNewEntity() {
-        final Customer customer = new Customer();
+        final var customer = new Customer();
 
         customer.setCreditLimit(BigDecimal.valueOf(2000));
 
-        final Customer savedCustomer = customerRepository.save(customer);
+        final var savedCustomer = customerRepository.save(customer);
 
         Assertions.assertNotNull(savedCustomer.getId());
         Assertions.assertEquals(BigDecimal.valueOf(2000), savedCustomer.getCreditLimit());
@@ -106,7 +106,7 @@ public class CustomerRepositoryTest {
     void ableToDelete() {
         customerRepository.deleteById(uuid1);
 
-        final List<Customer> customers = customerRepository.findAll();
+        final var customers = customerRepository.findAll();
 
         Assertions.assertTrue(customers.isEmpty());
     }

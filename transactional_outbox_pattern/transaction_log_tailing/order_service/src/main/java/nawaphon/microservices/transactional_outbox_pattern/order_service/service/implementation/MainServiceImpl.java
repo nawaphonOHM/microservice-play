@@ -25,7 +25,7 @@ public class MainServiceImpl implements MainService {
     @Override
     @Transactional
     public OrderSaveStatus saveOrder(@NonNull OrderRequest orderRequest) {
-        final Order order = new Order();
+        final var order = new Order();
 
 
         order.setOrderName(orderRequest.orderName());
@@ -33,7 +33,7 @@ public class MainServiceImpl implements MainService {
 
         orderRepository.save(order);
 
-        final OrderOutbox orderOutbox = new OrderOutbox();
+        final var orderOutbox = new OrderOutbox();
 
         orderOutbox.setType("NEW_ORDER");
         orderOutbox.setAggregatetype("ORDER_SERVICE");
