@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home consumer
+COPY ./build/libs/consumer-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-COPY ./build/libs/consumer-0.0.1.jar /home/consumer/
-COPY ./entrypoint.sh /home/consumer/
-
-RUN chown consumer /home/consumer/entrypoint.sh &&  \
-    chmod 500 /home/consumer/entrypoint.sh && \
-    chown consumer /home/consumer/consumer-0.0.1.jar && \
-    chmod 500 /home/consumer/consumer-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/consumer-0.0.1.jar && \
+    chmod 500 /home/nobody/consumer-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER consumer
+USER nobody
 
-WORKDIR /home/consumer/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

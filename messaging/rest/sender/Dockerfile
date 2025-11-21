@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home sender
+COPY ./build/libs/sender-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-COPY ./build/libs/sender-0.0.1.jar /home/sender/
-COPY ./entrypoint.sh /home/sender/
-
-RUN chown sender /home/sender/entrypoint.sh &&  \
-    chmod 500 /home/sender/entrypoint.sh && \
-    chown sender /home/sender/sender-0.0.1.jar && \
-    chmod 500 /home/sender/sender-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/sender-0.0.1.jar && \
+    chmod 500 /home/nobody/sender-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER sender
+USER nobody
 
-WORKDIR /home/sender/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home service_registry
+COPY build/libs/service_registry-0.0.1.jar /home/nobody/
+COPY entrypoint.sh /home/nobody/
 
-COPY build/libs/service_registry-0.0.1.jar /home/service_registry/
-COPY entrypoint.sh /home/service_registry/
-
-RUN chown service_registry /home/service_registry/entrypoint.sh &&  \
-    chmod 500 /home/service_registry/entrypoint.sh && \
-    chown service_registry /home/service_registry/service_registry-0.0.1.jar && \
-    chmod 500 /home/service_registry/service_registry-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/service_registry-0.0.1.jar && \
+    chmod 500 /home/nobody/service_registry-0.0.1.jar
 
 
 EXPOSE 8761
 
-USER service_registry
+USER nobody
 
-WORKDIR /home/service_registry/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

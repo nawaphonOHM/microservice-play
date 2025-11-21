@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home gateway
+COPY ./build/libs/gateway-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-COPY ./build/libs/gateway-0.0.1.jar /home/gateway/
-COPY ./entrypoint.sh /home/gateway/
-
-RUN chown gateway /home/gateway/entrypoint.sh &&  \
-    chmod 500 /home/gateway/entrypoint.sh && \
-    chown gateway /home/gateway/gateway-0.0.1.jar && \
-    chmod 500 /home/gateway/gateway-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/gateway-0.0.1.jar && \
+    chmod 500 /home/nobody/gateway-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER gateway
+USER nobody
 
-WORKDIR /home/gateway/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

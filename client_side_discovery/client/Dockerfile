@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home client
+COPY build/libs/client-0.0.1.jar /home/nobody/
+COPY entrypoint.sh /home/nobody/
 
-COPY build/libs/client-0.0.1.jar /home/client/
-COPY entrypoint.sh /home/client/
-
-RUN chown client /home/client/entrypoint.sh &&  \
-    chmod 500 /home/client/entrypoint.sh && \
-    chown client /home/client/client-0.0.1.jar && \
-    chmod 500 /home/client/client-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/client-0.0.1.jar && \
+    chmod 500 /home/nobody/client-0.0.1.jar
 
 
 EXPOSE 8761
 
-USER client
+USER nobody
 
-WORKDIR /home/client/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
