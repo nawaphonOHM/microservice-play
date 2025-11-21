@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home producer
+COPY ./build/libs/producer-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-COPY ./build/libs/producer-0.0.1.jar /home/producer/
-COPY ./entrypoint.sh /home/producer/
-
-RUN chown producer /home/producer/entrypoint.sh &&  \
-    chmod 500 /home/producer/entrypoint.sh && \
-    chown producer /home/producer/producer-0.0.1.jar && \
-    chmod 500 /home/producer/producer-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/producer-0.0.1.jar && \
+    chmod 500 /home/nobody/producer-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER producer
+USER nobody
 
-WORKDIR /home/producer/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

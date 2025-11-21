@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home real_service
+COPY ./build/libs/real_service-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-COPY ./build/libs/real_service-0.0.1.jar /home/real_service/
-COPY ./entrypoint.sh /home/real_service/
-
-RUN chown real_service /home/real_service/entrypoint.sh &&  \
-    chmod 500 /home/real_service/entrypoint.sh && \
-    chown real_service /home/real_service/real_service-0.0.1.jar && \
-    chmod 500 /home/real_service/real_service-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/real_service-0.0.1.jar && \
+    chmod 500 /home/nobody/real_service-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER real_service
+USER nobody
 
-WORKDIR /home/real_service/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

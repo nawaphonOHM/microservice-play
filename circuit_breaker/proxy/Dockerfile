@@ -1,22 +1,21 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home proxy_user
 
-COPY ./build/libs/proxy-0.0.1.jar /home/proxy_user/
-COPY ./entrypoint.sh /home/proxy_user/
+COPY ./build/libs/proxy-0.0.1.jar /home/nobody/
+COPY ./entrypoint.sh /home/nobody/
 
-RUN chown proxy_user /home/proxy_user/entrypoint.sh &&  \
-    chmod 500 /home/proxy_user/entrypoint.sh && \
-    chown proxy_user /home/proxy_user/proxy-0.0.1.jar && \
-    chmod 500 /home/proxy_user/proxy-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/proxy-0.0.1.jar && \
+    chmod 500 /home/nobody/proxy-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER proxy_user
+USER nobody
 
-WORKDIR /home/proxy_user/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 

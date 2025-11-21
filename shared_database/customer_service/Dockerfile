@@ -1,22 +1,20 @@
 FROM amazoncorretto:21.0.9-al2023-headless
 
 
-RUN useradd --create-home customer_service
+COPY build/libs/customer_service-0.0.1.jar /home/nobody/
+COPY entrypoint.sh /home/nobody/
 
-COPY build/libs/customer_service-0.0.1.jar /home/customer_service/
-COPY entrypoint.sh /home/customer_service/
-
-RUN chown customer_service /home/customer_service/entrypoint.sh &&  \
-    chmod 500 /home/customer_service/entrypoint.sh && \
-    chown customer_service /home/customer_service/customer_service-0.0.1.jar && \
-    chmod 500 /home/customer_service/customer_service-0.0.1.jar
+RUN chown nobody /home/nobody/entrypoint.sh &&  \
+    chmod 500 /home/nobody/entrypoint.sh && \
+    chown nobody /home/nobody/customer_service-0.0.1.jar && \
+    chmod 500 /home/nobody/customer_service-0.0.1.jar
 
 
 EXPOSE 8080
 
-USER customer_service
+USER nobody
 
-WORKDIR /home/customer_service/
+WORKDIR /home/nobody/
 
 ENTRYPOINT ["./entrypoint.sh"]
 
