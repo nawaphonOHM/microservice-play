@@ -15,5 +15,6 @@ public interface ReceiverExchange {
     @GetExchange("/get-customer/{uuid}")
     Customer getCustomer(@PathVariable UUID uuid);
 
-    CustomerDetail getCustomerDetail();
+    @GetExchange("/get-customer-details/{uuid}")
+    CustomerDetail getCustomerDetail(@PathVariable UUID uuid);
 }
