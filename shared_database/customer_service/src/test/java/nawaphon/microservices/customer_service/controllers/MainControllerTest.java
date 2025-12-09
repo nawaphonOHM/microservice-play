@@ -3,7 +3,6 @@ package nawaphon.microservices.customer_service.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.customer_service.pojo.Customer;
 import nawaphon.microservices.customer_service.pojo.CustomerId;
-import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -15,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -2,7 +2,6 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.contro
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderId;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.SavingOrderUnsuccessfulException;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import org.springframework.lang.NonNull;

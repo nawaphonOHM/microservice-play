@@ -3,10 +3,8 @@ package nawaphon.microservices.messaging.event_sourcing.producer.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.messaging.event_sourcing.producer.pojo.Message;
-import nawaphon.microservices.messaging.event_sourcing.producer.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
