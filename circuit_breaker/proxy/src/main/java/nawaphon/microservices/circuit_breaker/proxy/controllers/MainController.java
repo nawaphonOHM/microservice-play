@@ -1,6 +1,7 @@
 package nawaphon.microservices.circuit_breaker.proxy.controllers;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import nawaphon.microservices.circuit_breaker.proxy.http_exchanges.RealServiceExchange;
 import nawaphon.microservices.circuit_breaker.proxy.pojo.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,12 @@ public class MainController {
 
     private final String serviceIp;
 
-    public MainController(RestTemplate restTemplate, @Value("${service-ip}") String serviceIp) {
+    private final RealServiceExchange realServiceExchange;
+
+    public MainController(RestTemplate restTemplate, @Value("${service-ip}") String serviceIp, RealServiceExchange realServiceExchange) {
         this.restTemplate = restTemplate;
         this.serviceIp = serviceIp;
+        this.realServiceExchange = realServiceExchange;
     }
 
 
