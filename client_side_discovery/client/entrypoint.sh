@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/client/client-0.0.1.jar || exit 1
+  java -jar /home/nobody/client-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {

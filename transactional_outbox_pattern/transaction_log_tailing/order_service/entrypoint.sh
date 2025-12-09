@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/order_service/order_service-0.0.1.jar || exit 1
+  java -jar /home/nobody/order_service-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {

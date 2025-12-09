@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/gateway/gateway-0.0.1.jar || exit 1
+  java -jar /home/nobody/gateway-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {
