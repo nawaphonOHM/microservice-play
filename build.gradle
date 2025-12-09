@@ -139,6 +139,7 @@ configure(subprojects.findAll { it.name == "shared_database@customer_service"}) 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'com.h2database:h2'
 
+        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
     }
 
     tasks.named('test') {
