@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 class AspectObjectProgrammingConfiguration {
 
     public HttpChangeAspect httpChangeAspect() {
-        return null;
+        return new HttpChangeAspect();
     }
 
 }
