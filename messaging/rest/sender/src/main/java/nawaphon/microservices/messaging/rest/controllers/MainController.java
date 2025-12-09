@@ -1,5 +1,6 @@
 package nawaphon.microservices.messaging.rest.controllers;
 
+import nawaphon.microservices.messaging.rest.http_exchanges.ReceiverExchange;
 import nawaphon.microservices.messaging.rest.pojo.Customer;
 import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
 import nawaphon.microservices.messaging.rest.utils.CustomerDetailsParameterizedTypeReference;
@@ -22,26 +23,19 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private final RestTemplate restTemplate;
-    private final String friendIp;
-
     private final ObjectMapper objectMapper;
 
-    public MainController(final RestTemplate restTemplate,
-                          @Value("${connection.friend-service}") final String friendIp,
-                          final ObjectMapper objectMapper) {
-        this.restTemplate = restTemplate;
+    private final ReceiverExchange receiverExchange;
 
-        this.friendIp = friendIp;
+    public MainController(final ObjectMapper objectMapper, ReceiverExchange receiverExchange) {
         this.objectMapper = objectMapper;
+        this.receiverExchange = receiverExchange;
     }
 
     @GetMapping("/get-customer/{uuid}")
     public Customer getCustomer(@PathVariable final UUID uuid) {
         final var url = friendIp + "/get-customer/" + uuid;
-        final var result = this.restTemplate.exchange(url,
-                        HttpMethod.GET, null, new CustomerParameterizedTypeReference())
-                .getBody();
+        final var result = this.receiverExchange.getCustomer(uuid);
 
         try {
             logger.debug("Call {}: response: {}", url, objectMapper.writeValueAsString(result));
@@ -55,8 +49,6 @@ public class MainController {
 
     @GetMapping("/get-customer-details/{uuid}")
     public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
-        return this.restTemplate.exchange(friendIp + "/get-customer-details/" + uuid,
-                HttpMethod.GET, null,
-                new CustomerDetailsParameterizedTypeReference()).getBody();
+        return this.receiverExchange.getCustomerDetail(uuid);
     }
 }
