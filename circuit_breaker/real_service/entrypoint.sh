@@ -12,7 +12,7 @@ main() {
 
   unset ERROR
 
-  java -jar /home/real_service/real_service-0.0.1.jar || exit 1
+  java -jar /home/nobody/real_service-0.0.1.jar || exit 1
 }
 
 mandatoryEnvCheck() {
