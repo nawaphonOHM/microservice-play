@@ -22,10 +22,13 @@ import java.util.UUID;
 public class MainController {
 
 
+    private final ObjectMapper objectMapper;
+
 
     private final ReceiverExchange receiverExchange;
 
-    public MainController(ReceiverExchange receiverExchange) {
+    public MainController(ObjectMapper objectMapper, ReceiverExchange receiverExchange) {
+        this.objectMapper = objectMapper;
         this.receiverExchange = receiverExchange;
     }
 
