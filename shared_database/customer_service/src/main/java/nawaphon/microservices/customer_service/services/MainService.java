@@ -4,13 +4,11 @@ import nawaphon.microservices.customer_service.exceptions.CustomerNotFoundExcept
 import nawaphon.microservices.customer_service.exceptions.FailToSaveCustomerException;
 import nawaphon.microservices.customer_service.exceptions.UpdateNewCreditFailedException;
 import nawaphon.microservices.customer_service.pojo.Customer;
-import nawaphon.microservices.customer_service.pojo.ResponseMessage;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
 import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

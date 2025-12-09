@@ -2,7 +2,6 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.reposi
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
