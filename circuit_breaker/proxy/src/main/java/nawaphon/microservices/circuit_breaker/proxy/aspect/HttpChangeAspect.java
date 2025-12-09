@@ -1,14 +1,20 @@
 package nawaphon.microservices.circuit_breaker.proxy.aspect;
 
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.jspecify.annotations.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Aspect
 public class HttpChangeAspect {
 
-    @Before("execution(* nawaphon.microservices.circuit_breaker.proxy.http_exchanges.*.*(..))")
-    public void logHttpChange() {
+    private static final Logger log = LoggerFactory.getLogger(HttpChangeAspect.class);
 
+    @Before("execution(* nawaphon.microservices.circuit_breaker.proxy.http_exchanges.*.*(..))")
+    public void logHttpChange(@NonNull JoinPoint joinPoint) {
+        log.info("HTTP call: {}", joinPoint.getSignature().getName());
     }
 }
