@@ -219,7 +219,7 @@ configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
         implementation 'io.vavr:vavr:0.10.4'
         implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:3.2.1'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-aop:2.7.18'
+        implementation 'org.springframework.boot:spring-boot-starter-aop:3.5.8'
 
 
     }
