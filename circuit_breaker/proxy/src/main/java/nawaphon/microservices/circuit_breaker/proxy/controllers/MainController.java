@@ -11,7 +11,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RequestMapping("/")
 @RestController
@@ -19,15 +18,9 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private final RestTemplate restTemplate;
-
-    private final String serviceIp;
-
     private final RealServiceExchange realServiceExchange;
 
-    public MainController(RestTemplate restTemplate, @Value("${service-ip}") String serviceIp, RealServiceExchange realServiceExchange) {
-        this.restTemplate = restTemplate;
-        this.serviceIp = serviceIp;
+    public MainController(RealServiceExchange realServiceExchange) {
         this.realServiceExchange = realServiceExchange;
     }
 
@@ -35,14 +28,12 @@ public class MainController {
     @GetMapping("/call-service")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
     public Message getCustomer() {
-        final var url = String.format("%s/first-get", serviceIp);
-        final var responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
-                new ParameterizedTypeReference<Message>() {});
+        final var responseEntity = realServiceExchange.getCustomer();
 
-        logger.info("Call {}: response: {}", url, responseEntity.getBody());
+        logger.info("response: {}", responseEntity);
 
 
-        return responseEntity.getBody();
+        return responseEntity;
     }
     
     
