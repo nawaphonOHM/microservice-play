@@ -115,6 +115,8 @@ configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
 
         testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
 
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+
     }
 
     tasks.named('test') {
