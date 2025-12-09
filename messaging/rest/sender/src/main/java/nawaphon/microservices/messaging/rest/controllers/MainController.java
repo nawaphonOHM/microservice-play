@@ -22,7 +22,9 @@ import java.util.UUID;
 public class MainController {
 
 
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
     private final ObjectMapper objectMapper;
+
 
 
     private final ReceiverExchange receiverExchange;
