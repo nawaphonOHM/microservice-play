@@ -3,16 +3,11 @@ package nawaphon.microservices.messaging.rest.controllers;
 import nawaphon.microservices.messaging.rest.http_exchanges.ReceiverExchange;
 import nawaphon.microservices.messaging.rest.pojo.Customer;
 import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
-import nawaphon.microservices.messaging.rest.utils.CustomerDetailsParameterizedTypeReference;
-import nawaphon.microservices.messaging.rest.utils.CustomerParameterizedTypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
 
