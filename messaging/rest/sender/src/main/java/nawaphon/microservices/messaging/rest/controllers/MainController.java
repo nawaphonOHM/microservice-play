@@ -21,27 +21,17 @@ import java.util.UUID;
 @RestController
 public class MainController {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    private final ObjectMapper objectMapper;
 
     private final ReceiverExchange receiverExchange;
 
-    public MainController(final ObjectMapper objectMapper, ReceiverExchange receiverExchange) {
-        this.objectMapper = objectMapper;
+    public MainController(ReceiverExchange receiverExchange) {
         this.receiverExchange = receiverExchange;
     }
 
     @GetMapping("/get-customer/{uuid}")
     public Customer getCustomer(@PathVariable final UUID uuid) {
-        final var url = friendIp + "/get-customer/" + uuid;
         final var result = this.receiverExchange.getCustomer(uuid);
-
-        try {
-            logger.debug("Call {}: response: {}", url, objectMapper.writeValueAsString(result));
-        } catch (JacksonException e) {
-            logger.error("Unable write log");
-        }
 
         assert result != null;
         return result;
