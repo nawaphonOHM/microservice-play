@@ -350,6 +350,8 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transac
 
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
     }
 
     tasks.named('test') {
