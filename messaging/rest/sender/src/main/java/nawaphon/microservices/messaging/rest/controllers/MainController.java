@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class MainController {
 
         try {
             logger.debug("Call {}: response: {}", url, objectMapper.writeValueAsString(result));
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             logger.error("Unable write log");
         }
 
