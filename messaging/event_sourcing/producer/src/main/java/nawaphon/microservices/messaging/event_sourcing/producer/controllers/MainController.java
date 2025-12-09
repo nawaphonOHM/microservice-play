@@ -1,12 +1,12 @@
 package nawaphon.microservices.messaging.event_sourcing.producer.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.messaging.event_sourcing.producer.pojo.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public class MainController {
 
 
     @PostMapping("/send-message")
-    public String sendEvent(@RequestBody final Message message) throws JsonProcessingException {
+    public String sendEvent(@RequestBody final Message message) throws JacksonException {
 
         logger.debug("message to be sent: {}", objectMapper.writeValueAsString(message));
         kafkaTemplate.send("Greeting", UUID.randomUUID(), message);
