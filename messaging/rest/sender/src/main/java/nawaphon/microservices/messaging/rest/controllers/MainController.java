@@ -38,6 +38,12 @@ public class MainController {
     public Customer getCustomer(@PathVariable final UUID uuid) {
         final var result = this.receiverExchange.getCustomer(uuid);
 
+        try {
+            log.debug("response: {}",objectMapper.writeValueAsString(result));
+        } catch (JacksonException e) {
+            log.error("Unable write log");
+        }
+
         assert result != null;
         return result;
     }
