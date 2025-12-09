@@ -1,7 +1,5 @@
 package nawaphon.microservices.messaging.rest.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import nawaphon.microservices.messaging.rest.pojo.Customer;
 import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
 import nawaphon.microservices.messaging.rest.utils.CustomerDetailsParameterizedTypeReference;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
