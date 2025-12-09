@@ -2,6 +2,7 @@ package nawaphon.microservices.messaging.rest.http_exchanges;
 
 
 import nawaphon.microservices.messaging.rest.pojo.Customer;
+import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -13,4 +14,6 @@ public interface ReceiverExchange {
 
     @GetExchange("/get-customer/{uuid}")
     Customer getCustomer(@PathVariable UUID uuid);
+
+    CustomerDetail getCustomerDetail();
 }
