@@ -1,0 +1,6 @@
+group = 'nawaphon.microservices.messaging.grpc'
+version = '0.0.1'
+
+base {
+    archivesName = "client"
+}
