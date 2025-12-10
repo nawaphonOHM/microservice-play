@@ -11,7 +11,7 @@ class SpringAopConfiguration {
 
     @Bean
     public HttpChangeAspect httpChangeAspect() {
-        return null;
+        return new HttpChangeAspect();
     }
 
 }
