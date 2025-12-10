@@ -1,13 +1,13 @@
 package nawaphon.microservices.messaging.rest.components;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import nawaphon.microservices.messaging.rest.pojo.Customer;
 import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class FakeDatabaseComponent {
             customerDetails.add(customerDetailFake);
             try {
                 logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
-            } catch (JsonProcessingException e) {
+            } catch (JacksonException e) {
                 throw new RuntimeException("Unable to serialize value: ", e);
             }
         }
@@ -55,7 +55,7 @@ public class FakeDatabaseComponent {
             customerDetails.add(customerDetailFake);
             try {
                 logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
-            } catch (JsonProcessingException e) {
+            } catch (JacksonException e) {
                 throw new RuntimeException("Unable to serialize value: ", e);
             }
         }
@@ -67,7 +67,7 @@ public class FakeDatabaseComponent {
             customerDetails.add(customerDetailFake);
             try {
                 logger.info("Customer and CustomerDetail added: {}", objectMapper.writeValueAsString(customerFake));
-            } catch (JsonProcessingException e) {
+            } catch (JacksonException e) {
                 throw new RuntimeException("Unable to serialize value:", e);
             }
         }
