@@ -13,7 +13,7 @@ public class HttpChangeAspect {
 
     private static final Logger log = LoggerFactory.getLogger(HttpChangeAspect.class);
 
-    @Before("execution(* nawaphon.microservices.messaging.rest.aspect.*.*(..))")
+    @Before("execution(* nawaphon.microservices.messaging.rest.http_exchanges.*.*(..))")
     public void logHttpChange(@NonNull JoinPoint joinPoint) {
         log.info("HTTP call: {}", joinPoint.getSignature().getName());
     }
