@@ -2,10 +2,8 @@ package nawaphon.microservices.circuit_breaker.proxy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
-@EnableAspectJAutoProxy
 public class ProxyApplication {
 
     public static void main(String[] args) {
