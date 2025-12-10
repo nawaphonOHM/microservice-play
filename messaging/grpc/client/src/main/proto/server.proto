@@ -23,5 +23,5 @@ message CustomerDetailMessage {
 }
 
 service MainServer {
-
+  rpc Customer(UUID) returns (CustomerMessage) {}
 }
