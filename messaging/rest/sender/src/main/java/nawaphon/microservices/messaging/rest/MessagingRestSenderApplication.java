@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan(basePackages = "nawaphon.microservices.event_sourcing.consumer.configurations")
+@ConfigurationPropertiesScan(basePackages = "nawaphon.microservices.messaging.rest.configurations")
 public class MessagingRestSenderApplication {
 
     public static void main(String[] args) {
