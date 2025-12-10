@@ -15,3 +15,9 @@ message CustomerMessage {
   UUID id = 1;
   UUID detailsId = 2;
 }
+
+message CustomerDetailMessage {
+  UUID customerId = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
