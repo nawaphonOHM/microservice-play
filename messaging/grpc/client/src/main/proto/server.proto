@@ -10,3 +10,8 @@ option java_outer_classname = 'ServerProto';
 message UUID {
   string value = 1;
 }
+
+message CustomerMessage {
+  UUID id = 1;
+  UUID detailsId = 2;
+}
