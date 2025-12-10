@@ -5,3 +5,8 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = 'nawaphon.microservices.messaging.grpc.client';
 option java_outer_classname = 'ServerProto';
+
+
+message UUID {
+  string value = 1;
+}
