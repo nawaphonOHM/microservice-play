@@ -238,6 +238,16 @@ jobs:
             ./messaging/grpc/client/*.sh
             ./messaging/grpc/client/Dockerfile
             ./messaging/grpc/client/build/libs/*.jar
+
+      - name: Upload server@grpc
+        uses: actions/upload-artifact@v4
+        with:
+          name: server@grpc
+          path: |
+            ./messaging/grpc/server/*.env
+            ./messaging/grpc/server/*.sh
+            ./messaging/grpc/server/Dockerfile
+            ./messaging/grpc/server/build/libs/*.jar
             
       
       
