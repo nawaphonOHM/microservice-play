@@ -49,7 +49,25 @@ class GrpcService extends MainServerGrpc.MainServerImplBase {
     }
 
     @Override
-    public void customerDetail(UUID request, StreamObserver<CustomerDetailMessage> responseObserver) {
-        super.customerDetail(request, responseObserver);
+    public void customerDetail(UUID request, @NonNull StreamObserver<CustomerDetailMessage> responseObserver) {
+
+        try {
+            final var customerDetails = fakeDatabaseComponent.getCustomerDetails()
+                    .stream().filter(it -> it
+                            .customerId().equals(java.util.UUID.fromString(request.getValue())))
+                    .findFirst().orElseThrow();
+
+            responseObserver.onNext(CustomerDetailMessage.newBuilder()
+                    .setCustomerId(UUID.newBuilder().setValue(customerDetails.customerId().toString()).build())
+                    .setFirstName(customerDetails.firstName())
+                    .setLastName(customerDetails.lastName())
+                    .build());
+
+            responseObserver.onCompleted();
+        } catch (NoSuchElementException e) {
+            log.error("Cannot find customer detail with id: {}", request.getValue());
+            responseObserver.onError(e);
+        }
+
     }
 }
