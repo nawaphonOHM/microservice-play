@@ -1,0 +1,29 @@
+services:
+
+  client:
+    image: nawaphon2539/microservices-lab:messaging.grpc.client
+    env_file:
+      - client/client-vars.env
+    ports:
+      - "1001:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.2
+
+  server:
+    image: nawaphon2539/microservices-lab:messaging.grpc.server
+    env_file:
+      - server/server-vars.env
+    ports:
+      - "1002:8080"
+    networks:
+      default:
+        ipv4_address: 192.168.1.3
+
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/29
+          gateway: 192.168.1.1

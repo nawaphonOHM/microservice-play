@@ -227,6 +227,29 @@ jobs:
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.sh
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/Dockerfile
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/build/libs/*.jar
+            
+
+      - name: Upload client@grpc
+        uses: actions/upload-artifact@v4
+        with:
+          name: client@grpc
+          path: |
+            ./messaging/grpc/client/*.env
+            ./messaging/grpc/client/*.sh
+            ./messaging/grpc/client/Dockerfile
+            ./messaging/grpc/client/build/libs/*.jar
+
+      - name: Upload server@grpc
+        uses: actions/upload-artifact@v4
+        with:
+          name: server@grpc
+          path: |
+            ./messaging/grpc/server/*.env
+            ./messaging/grpc/server/*.sh
+            ./messaging/grpc/server/Dockerfile
+            ./messaging/grpc/server/build/libs/*.jar
+            
+      
       
             
 
@@ -723,3 +746,55 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:transactional_outbox_pattern.transaction_log_tailing.order_service
+
+  push-image-client-grpc:
+    needs: build-jar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download client@grpc
+        uses: actions/download-artifact@v4
+        with:
+          name: client@grpc
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.grpc.client
+
+  push-image-server-grpc:
+    needs: build-jar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download server@grpc
+        uses: actions/download-artifact@v4
+        with:
+          name: server@grpc
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:messaging.grpc.server
