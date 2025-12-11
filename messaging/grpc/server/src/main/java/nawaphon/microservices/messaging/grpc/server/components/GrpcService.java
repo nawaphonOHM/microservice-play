@@ -31,6 +31,8 @@ class GrpcService extends MainServerGrpc.MainServerImplBase {
                     .stream().filter(it -> it.id().equals(java.util.UUID.fromString(request.getValue())))
                     .findFirst().orElseThrow();
 
+            log.info("Found customer with id: {}", customer.id());
+
             responseObserver.onNext(
                     CustomerMessage.newBuilder()
                             .setId(UUID.newBuilder().setValue(customer.id().toString()).build())
@@ -56,6 +58,8 @@ class GrpcService extends MainServerGrpc.MainServerImplBase {
                     .stream().filter(it -> it
                             .customerId().equals(java.util.UUID.fromString(request.getValue())))
                     .findFirst().orElseThrow();
+
+            log.info("Found customer detail with id: {}", customerDetails.customerId());
 
             responseObserver.onNext(CustomerDetailMessage.newBuilder()
                     .setCustomerId(UUID.newBuilder().setValue(customerDetails.customerId().toString()).build())
