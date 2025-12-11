@@ -2,7 +2,6 @@ package nawaphon.microservices.messaging.grpc.client.controllers;
 
 
 import io.grpc.StatusException;
-import nawaphon.microservices.messaging.grpc.client.CustomerMessage;
 import nawaphon.microservices.messaging.grpc.client.MainServerGrpc;
 import nawaphon.microservices.messaging.grpc.client.pojo.Customer;
 import nawaphon.microservices.messaging.grpc.client.pojo.CustomerDetail;
@@ -36,7 +35,17 @@ public class MainController {
     }
 
     @GetMapping("/get-customer-details/{uuid}")
-    public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
-        return null;
+    public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) throws StatusException {
+
+        final var customerDetail = server.customerDetail(
+                nawaphon.microservices.messaging.grpc.client.UUID.newBuilder().setValue(uuid.toString()).build()
+        );
+
+
+        return new CustomerDetail(
+                UUID.fromString(customerDetail.getCustomerId().getValue()),
+                customerDetail.getFirstName(),
+                customerDetail.getLastName()
+        );
     }
 }
