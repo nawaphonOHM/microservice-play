@@ -227,6 +227,19 @@ jobs:
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.sh
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/Dockerfile
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/build/libs/*.jar
+            
+
+      - name: Upload client@grpc
+        uses: actions/upload-artifact@v4
+        with:
+          name: client@grpc
+          path: |
+            ./messaging/grpc/client/*.env
+            ./messaging/grpc/client/*.sh
+            ./messaging/grpc/client/Dockerfile
+            ./messaging/grpc/client/build/libs/*.jar
+            
+      
       
             
 
