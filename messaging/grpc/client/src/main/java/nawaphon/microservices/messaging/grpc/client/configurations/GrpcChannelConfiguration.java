@@ -12,7 +12,7 @@ class GrpcChannelConfiguration {
 
     @Bean
     public MainServerGrpc.MainServerBlockingV2Stub mainServerBlockingV2Stub(GrpcChannelFactory channels) {
-        return null;
+        return MainServerGrpc.newBlockingV2Stub(channels.createChannel("default-channel"));
     }
 
 }
