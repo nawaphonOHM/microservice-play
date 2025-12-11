@@ -10,6 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 class GrpcService extends MainServerGrpc.MainServerImplBase {
+
+    private final FakeDatabaseComponent fakeDatabaseComponent;
+
+    GrpcService(FakeDatabaseComponent fakeDatabaseComponent) {
+        this.fakeDatabaseComponent = fakeDatabaseComponent;
+    }
+
     @Override
     public void customer(UUID request, StreamObserver<CustomerMessage> responseObserver) {
         super.customer(request, responseObserver);
