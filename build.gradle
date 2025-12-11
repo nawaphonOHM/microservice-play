@@ -44,10 +44,12 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.grpc:spring-grpc-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     }
 
     dependencyManagement {
