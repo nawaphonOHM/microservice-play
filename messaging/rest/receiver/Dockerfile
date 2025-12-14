@@ -1,21 +1,14 @@
-FROM amazoncorretto:21.0.9-al2023-headless
+FROM ubuntu/jre:21-24.04
 
 
-COPY ./build/libs/receiver-0.0.1.jar /home/nobody/
-COPY ./entrypoint.sh /home/nobody/
+WORKDIR /
 
-RUN chown nobody /home/nobody/entrypoint.sh &&  \
-    chmod 500 /home/nobody/entrypoint.sh && \
-    chown nobody /home/nobody/receiver-0.0.1.jar && \
-    chmod 500 /home/nobody/receiver-0.0.1.jar
+COPY ./build/libs/receiver-0.0.1.jar .
 
 
 EXPOSE 8080
 
-USER nobody
 
-WORKDIR /home/nobody/
-
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["java", "-jar", "receiver-0.0.1.jar"]
 
 LABEL authors="nawaphon"
