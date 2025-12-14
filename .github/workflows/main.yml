@@ -37,7 +37,6 @@ jobs:
           path: |
             ./database_per_services/private_table_per_service/customer_service/build/libs/*.jar
             ./database_per_services/private_table_per_service/customer_service/*.env
-            ./database_per_services/private_table_per_service/customer_service/*.sh
             ./database_per_services/private_table_per_service/customer_service/Dockerfile
 
       - name: Upload private_table_per_service@order_service
@@ -47,7 +46,6 @@ jobs:
           path: |
             ./database_per_services/private_table_per_service/order_service/build/libs/*.jar
             ./database_per_services/private_table_per_service/order_service/*.env
-            ./database_per_services/private_table_per_service/order_service/*.sh
             ./database_per_services/private_table_per_service/order_service/Dockerfile
 
       - name: Upload private_table_per_service@db
@@ -56,7 +54,6 @@ jobs:
           name: private_table_per_service@db
           path: |
             ./database_per_services/private_table_per_service/db/*.env
-            ./database_per_services/private_table_per_service/db/*.sh
             ./database_per_services/private_table_per_service/db/Dockerfile
 
       - name: Upload shared_databases@customer_service
@@ -66,7 +63,6 @@ jobs:
           path: |
             ./shared_database/customer_service/build/libs/*.jar
             ./shared_database/customer_service/*.env
-            ./shared_database/customer_service/*.sh
             ./shared_database/customer_service/Dockerfile
 
       - name: Upload shared_databases@order_service
@@ -76,7 +72,6 @@ jobs:
           path: |
             ./shared_database/order_service/build/libs/*.jar
             ./shared_database/order_service/*.env
-            ./shared_database/order_service/*.sh
             ./shared_database/order_service/Dockerfile
 
       - name: Upload shared_databases@db
@@ -85,7 +80,6 @@ jobs:
           name: shared_databases@db
           path: |
             ./shared_database/db/*.env
-            ./shared_database/db/*.sh
             ./shared_database/db/Dockerfile
 
       - name: Upload rest@sender
@@ -95,7 +89,6 @@ jobs:
           path: |
             ./messaging/rest/sender/build/libs/*.jar
             ./messaging/rest/sender/*.env
-            ./messaging/rest/sender/*.sh
             ./messaging/rest/sender/Dockerfile
 
       - name: Upload rest@receiver
@@ -105,7 +98,6 @@ jobs:
           path: |
             ./messaging/rest/receiver/build/libs/*.jar
             ./messaging/rest/receiver/*.env
-            ./messaging/rest/receiver/*.sh
             ./messaging/rest/receiver/Dockerfile
 
       - name: Upload event_sourcing@consumer
@@ -115,7 +107,6 @@ jobs:
           path: |
             ./messaging/event_sourcing/consumer/build/libs/*.jar
             ./messaging/event_sourcing/consumer/*.env
-            ./messaging/event_sourcing/consumer/*.sh
             ./messaging/event_sourcing/consumer/Dockerfile
 
       - name: Upload event_sourcing@producer
@@ -125,7 +116,6 @@ jobs:
           path: |
             ./messaging/event_sourcing/producer/build/libs/*.jar
             ./messaging/event_sourcing/producer/*.env
-            ./messaging/event_sourcing/producer/*.sh
             ./messaging/event_sourcing/producer/Dockerfile
 
       - name: Upload graphql@gateway
@@ -135,7 +125,6 @@ jobs:
           path: |
             ./messaging/graphql/gateway/build/libs/*.jar
             ./messaging/graphql/gateway/*.env
-            ./messaging/graphql/gateway/*.sh
             ./messaging/graphql/gateway/Dockerfile
 
       - name: Upload circuit_breaker@proxy
@@ -145,7 +134,6 @@ jobs:
           path: |
             ./circuit_breaker/proxy/build/libs/*.jar
             ./circuit_breaker/proxy/*.env
-            ./circuit_breaker/proxy/*.sh
             ./circuit_breaker/proxy/Dockerfile
 
       - name: Upload circuit_breaker@real_service
@@ -155,7 +143,6 @@ jobs:
           path: |
             ./circuit_breaker/real_service/build/libs/*.jar
             ./circuit_breaker/real_service/*.env
-            ./circuit_breaker/real_service/*.sh
             ./circuit_breaker/real_service/Dockerfile
 
       - name: Upload service_registry@self_registration
@@ -164,7 +151,6 @@ jobs:
           name: service_registry@self_registration
           path: |
             ./self_registration/services_registry/*.env
-            ./self_registration/services_registry/*.sh
             ./self_registration/services_registry/Dockerfile
             ./self_registration/services_registry/build/libs/*.jar
 
@@ -174,7 +160,6 @@ jobs:
           name: serviceA@self_registration
           path: |
             ./self_registration/serviceA/*.env
-            ./self_registration/serviceA/*.sh
             ./self_registration/serviceA/Dockerfile
             ./self_registration/serviceA/build/libs/*.jar
 
@@ -184,7 +169,6 @@ jobs:
           name: serviceA@client_side_discovery
           path: |
             ./client_side_discovery/serviceA/*.env
-            ./client_side_discovery/serviceA/*.sh
             ./client_side_discovery/serviceA/Dockerfile
             ./client_side_discovery/serviceA/build/libs/*.jar
 
@@ -194,7 +178,6 @@ jobs:
           name: service_registry@client_side_discovery
           path: |
             ./client_side_discovery/services_registry/*.env
-            ./client_side_discovery/services_registry/*.sh
             ./client_side_discovery/services_registry/Dockerfile
             ./client_side_discovery/services_registry/build/libs/*.jar
 
@@ -204,7 +187,6 @@ jobs:
           name: client@client_side_discovery
           path: |
             ./client_side_discovery/client/*.env
-            ./client_side_discovery/client/*.sh
             ./client_side_discovery/client/Dockerfile
             ./client_side_discovery/client/build/libs/*.jar
 
@@ -214,7 +196,6 @@ jobs:
           name: serviceA@server_side_discovery
           path: |
             ./server_side_discovery/serviceA/*.env
-            ./server_side_discovery/serviceA/*.sh
             ./server_side_discovery/serviceA/Dockerfile
             ./server_side_discovery/serviceA/build/libs/*.jar
 
@@ -224,10 +205,9 @@ jobs:
           name: order_service@transactional_outbox_pattern_transaction_log_tailing
           path: |
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.env
-            ./transactional_outbox_pattern/transaction_log_tailing/order_service/*.sh
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/Dockerfile
             ./transactional_outbox_pattern/transaction_log_tailing/order_service/build/libs/*.jar
-            
+
 
       - name: Upload client@grpc
         uses: actions/upload-artifact@v4
@@ -235,7 +215,6 @@ jobs:
           name: client@grpc
           path: |
             ./messaging/grpc/client/*.env
-            ./messaging/grpc/client/*.sh
             ./messaging/grpc/client/Dockerfile
             ./messaging/grpc/client/build/libs/*.jar
 
@@ -245,13 +224,12 @@ jobs:
           name: server@grpc
           path: |
             ./messaging/grpc/server/*.env
-            ./messaging/grpc/server/*.sh
             ./messaging/grpc/server/Dockerfile
             ./messaging/grpc/server/build/libs/*.jar
-            
-      
-      
-            
+  
+  
+  
+  
 
   push-image-private_table_per_service-customer_service:
     needs: build-jar
