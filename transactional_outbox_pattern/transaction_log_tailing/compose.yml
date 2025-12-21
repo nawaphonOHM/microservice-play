@@ -23,7 +23,7 @@ services:
       orders_database:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "java", "-jar", "heart_beat-0.0.1.jar"]
+      test: ["CMD", "java", "-jar", "heart_beat-0.0.1.jar"]
 
   zookeeper:
     image: ubuntu/zookeeper:latest
