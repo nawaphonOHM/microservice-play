@@ -1,4 +1,4 @@
-package nawaphon.microservices.transactional_outbox_pattern.order_service;
+package nawaphon.microservices.transactional_outbox_pattern.order_service_heart_beat;
 
 
 import java.net.URI;
