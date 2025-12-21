@@ -540,7 +540,13 @@ configure(subprojects.findAll{ it.name == 'transactional_outbox_pattern@transact
     apply plugin: 'application'
 
     application {
-        mainClass = 'nawaphon.microservices.transactional_outbox_pattern.order_service.Heartbeat'
+        mainClass = 'nawaphon.microservices.transactional_outbox_pattern.order_service_heart_beat.Heartbeat'
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'nawaphon.microservices.transactional_outbox_pattern.order_service_heart_beat.Heartbeat'
+        }
     }
 
     tasks.named('build').configure {
