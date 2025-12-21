@@ -64,6 +64,9 @@ project(":server_side_discovery@services_A").projectDir = file("server_side_disc
 include("transactional_outbox_pattern@transaction_log_tailling@order_service")
 project(":transactional_outbox_pattern@transaction_log_tailling@order_service").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service")
 
+include("transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat")
+project(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service_heart_beat")
+
 
 include("messaging@grpc@server")
 project(":messaging@grpc@server").projectDir = file("messaging/grpc/server")

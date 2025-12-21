@@ -10,6 +10,7 @@ plugins {
     id 'org.springframework.boot' version '4.0.0'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'com.google.protobuf' version '0.9.5'
+    id 'application'
 }
 
 def springCloudVersion = '2025.1.0'
@@ -23,9 +24,6 @@ gradle.buildFinished {
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
 
     repositories {
         mavenCentral()
@@ -42,6 +40,9 @@ allprojects {
 configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
 
     apply plugin: 'com.google.protobuf'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
@@ -83,6 +84,9 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
 configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
 
     apply plugin: 'com.google.protobuf'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
@@ -122,6 +126,10 @@ configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
 }
 
 configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     dependencies {
@@ -133,6 +141,10 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
 }
 
 configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     dependencies {
@@ -143,6 +155,10 @@ configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
 }
 
 configure(subprojects.findAll { it.name == "messaging@consumer" }) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -156,6 +172,10 @@ configure(subprojects.findAll { it.name == "messaging@consumer" }) {
 }
 
 configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -169,6 +189,10 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }
 }
 
 configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -183,6 +207,10 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }
 }
 
 configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -213,6 +241,10 @@ configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
 }
 
 configure(subprojects.findAll { it.name == "shared_database@customer_service"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -242,6 +274,10 @@ configure(subprojects.findAll { it.name == "shared_database@customer_service"}) 
 }
 
 configure(subprojects.findAll { it.name == "private_table_per_service@order_service"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -273,6 +309,10 @@ configure(subprojects.findAll { it.name == "private_table_per_service@order_serv
 
 
 configure(subprojects.findAll { it.name == "private_table_per_service@customer_service"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -303,6 +343,10 @@ configure(subprojects.findAll { it.name == "private_table_per_service@customer_s
 }
 
 configure(subprojects.findAll { it.name == "messaging@graphql"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
     
 
     
@@ -317,6 +361,10 @@ configure(subprojects.findAll { it.name == "messaging@graphql"}) {
 }
 
 configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -341,12 +389,20 @@ configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
 
 configure(subprojects.findAll { it.name == "circuit_breaker@real_service"}) {
 
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 }
 
 configure(subprojects.findAll { it.name == "self_registration@services_registry"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
@@ -361,6 +417,10 @@ configure(subprojects.findAll { it.name == "self_registration@services_registry"
 }
 
 configure(subprojects.findAll { it.name == "self_registration@services_A"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
@@ -377,6 +437,10 @@ configure(subprojects.findAll { it.name == "self_registration@services_A"}) {
 
 configure(subprojects.findAll { it.name == "client_side_discovery@services_A"}) {
 
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -392,6 +456,10 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_A"}) 
 
 configure(subprojects.findAll { it.name == "client_side_discovery@services_registry"}) {
 
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     }
@@ -405,6 +473,10 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_regis
 }
 
 configure(subprojects.findAll { it.name == "client_side_discovery@client"}) {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
@@ -422,6 +494,10 @@ configure(subprojects.findAll { it.name == "client_side_discovery@client"}) {
 
 configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) {
 
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
@@ -436,11 +512,15 @@ configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) 
 
 configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transaction_log_tailling@order_service"}) {
 
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation("jakarta.validation:jakarta.validation-api:3.1.1")
-        implementation("org.springframework.boot:spring-boot-starter-actuator:3.4.5")
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
 
         runtimeOnly 'org.postgresql:postgresql'
 
@@ -453,4 +533,33 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transac
     tasks.named('test') {
         useJUnitPlatform()
     }
+}
+
+configure(subprojects.findAll{ it.name == 'transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat'}) {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    application {
+        mainClass = 'nawaphon.microservices.transactional_outbox_pattern.order_service_heart_beat.Heartbeat'
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'nawaphon.microservices.transactional_outbox_pattern.order_service_heart_beat.Heartbeat'
+        }
+    }
+
+    tasks.named('build').configure {
+        it.dependsOn(':transactional_outbox_pattern@transaction_log_tailling@order_service:build')
+        it.finalizedBy('copyJarFile')
+    }
+
+    tasks.register('copyJarFile', Copy) {
+        it.from(layout.buildDirectory.dir('libs'))
+        it.into(project(':transactional_outbox_pattern@transaction_log_tailling@order_service').layout.buildDirectory.dir('libs'))
+        it.include("*.jar")
+
+        it.dependsOn(':transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat:build')
+    }
+
 }

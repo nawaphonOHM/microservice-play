@@ -80,6 +80,7 @@ jobs:
           name: shared_databases@db
           path: |
             ./shared_database/db/*.env
+            ./shared_database/db/*.sh
             ./shared_database/db/Dockerfile
 
       - name: Upload rest@sender
