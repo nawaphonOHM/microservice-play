@@ -17,6 +17,7 @@ class ProducerApplicationTest {
 
     @Test
     void contextLoads() {
+        assertNotNull(context);
     }
 
 }
