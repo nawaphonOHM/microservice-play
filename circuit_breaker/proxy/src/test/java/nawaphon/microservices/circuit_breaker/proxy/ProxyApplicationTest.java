@@ -1,5 +1,6 @@
 package nawaphon.microservices.circuit_breaker.proxy;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
@@ -16,6 +17,7 @@ class ProxyApplicationTest {
         this.context = context;
     }
 
+    @Test
     void contextLoads() {
 
     }
