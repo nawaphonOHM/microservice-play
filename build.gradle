@@ -128,12 +128,6 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:" + springBootVersion)
-        }
-    }
     
 
     dependencies {
