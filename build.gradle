@@ -185,6 +185,10 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
     
 }
 
