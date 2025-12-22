@@ -1,5 +1,6 @@
 package nawaphon.microservices.event_sourcing.consumer;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
@@ -14,5 +15,6 @@ class ConsumerApplicationTest {
         this.context = context;
     }
 
+    @Test
     void contextLoads() {}
 }
