@@ -13,4 +13,6 @@ class ConsumerApplicationTest {
     ConsumerApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    void contextLoads() {}
 }
