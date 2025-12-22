@@ -1,6 +1,7 @@
 package nawaphon.microservices.messaging.grpc.client;
 
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
@@ -16,5 +17,6 @@ class GrpcClientApplicationTest {
         this.context = context;
     }
 
+    @Test
     void contextLoads() {}
 }
