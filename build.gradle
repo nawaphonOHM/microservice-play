@@ -489,6 +489,10 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_regis
         }
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
 configure(subprojects.findAll { it.name == "client_side_discovery@client"}) {
