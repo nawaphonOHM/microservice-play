@@ -121,6 +121,10 @@ configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
         }
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
 configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
