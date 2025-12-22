@@ -16,5 +16,7 @@ class ConsumerApplicationTest {
     }
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        assertNotNull(context);
+    }
 }
