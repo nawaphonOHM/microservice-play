@@ -207,6 +207,10 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }
         testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
     
 }
 
