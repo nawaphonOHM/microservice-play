@@ -403,6 +403,10 @@ configure(subprojects.findAll { it.name == "circuit_breaker@real_service"}) {
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }
 
 configure(subprojects.findAll { it.name == "self_registration@services_registry"}) {
