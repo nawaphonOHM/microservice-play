@@ -20,5 +20,6 @@ class ProxyApplicationTest {
     @Test
     void contextLoads() {
 
+        assertNotNull(context);
     }
 }
