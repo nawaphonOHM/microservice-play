@@ -19,6 +19,8 @@ class RealServiceApplicationTest {
 
     @Test
     void contextLoads() {
+
+        assertNotNull(context);
     }
 
 }
