@@ -17,6 +17,7 @@ class ServiceAApplicationTest {
 
     @Test
     void contextLoads() {
+        assertNotNull(context);
     }
 
 }
