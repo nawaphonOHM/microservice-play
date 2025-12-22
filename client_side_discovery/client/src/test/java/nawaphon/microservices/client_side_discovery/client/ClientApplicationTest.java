@@ -17,6 +17,8 @@ class ClientApplicationTest {
 
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        assertNotNull(context);
+    }
 
 }
