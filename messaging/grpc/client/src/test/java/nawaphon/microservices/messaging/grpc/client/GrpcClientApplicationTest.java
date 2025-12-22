@@ -15,4 +15,6 @@ class GrpcClientApplicationTest {
     GrpcClientApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    void contextLoads() {}
 }
