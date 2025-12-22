@@ -1,5 +1,6 @@
 package nawaphon.microservices.messaging.graphql.gateway;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
@@ -12,5 +13,7 @@ class GatewayApplicationTest {
     GatewayApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    @Test
     void contextLoads() {}
 }
