@@ -59,7 +59,7 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.grpc:spring-grpc-dependencies:1.0.0"
+            mavenBom "org.springframework.grpc:spring-grpc-dependencies:" + springGrpcVersion
         }
     }
 
@@ -103,7 +103,7 @@ configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.grpc:spring-grpc-dependencies:1.0.0"
+            mavenBom "org.springframework.grpc:spring-grpc-dependencies:" + springGrpcVersion
         }
     }
 
