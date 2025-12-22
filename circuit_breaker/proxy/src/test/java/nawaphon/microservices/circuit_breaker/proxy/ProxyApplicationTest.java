@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest
+@SpringBootTest(properties = {"spring.profiles.active=test"})
 class ProxyApplicationTest {
 
 
