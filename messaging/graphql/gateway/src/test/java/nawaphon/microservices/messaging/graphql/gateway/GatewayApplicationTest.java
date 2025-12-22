@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @SpringBootTest(properties = {"spring.profiles.active=test"})
 class GatewayApplicationTest {
@@ -15,5 +17,7 @@ class GatewayApplicationTest {
     }
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        assertNotNull(context);
+    }
 }
