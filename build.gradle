@@ -7,13 +7,11 @@
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.0'
+    id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version '1.1.7'
     id 'com.google.protobuf' version '0.9.5'
     id 'application'
 }
-
-def springCloudVersion = '2025.1.0'
 
 bootJar {
     enabled = false
@@ -57,7 +55,7 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.grpc:spring-grpc-dependencies:1.0.0"
+            mavenBom "org.springframework.grpc:spring-grpc-dependencies:" + springGrpcVersion
         }
     }
 
@@ -101,7 +99,7 @@ configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.grpc:spring-grpc-dependencies:1.0.0"
+            mavenBom "org.springframework.grpc:spring-grpc-dependencies:" + springGrpcVersion
         }
     }
 
@@ -134,9 +132,9 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-aop:3.5.8'
+        implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
 
-        implementation 'org.springframework.boot:spring-boot-restclient:4.0.0'
+        implementation 'org.springframework.boot:spring-boot-restclient'
     }
 }
 
@@ -229,9 +227,9 @@ configure(subprojects.findAll { it.name == "shared_database@order_service"}) {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'com.h2database:h2'
 
-        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 
     }
 
@@ -263,9 +261,9 @@ configure(subprojects.findAll { it.name == "shared_database@customer_service"}) 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'com.h2database:h2'
 
-        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     }
 
     tasks.named('test') {
@@ -296,9 +294,9 @@ configure(subprojects.findAll { it.name == "private_table_per_service@order_serv
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'com.h2database:h2'
 
-        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 
     }
 
@@ -331,9 +329,9 @@ configure(subprojects.findAll { it.name == "private_table_per_service@customer_s
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'com.h2database:h2'
 
-        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-data-jpa-test'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 
     }
 
@@ -371,9 +369,9 @@ configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
         implementation 'io.vavr:vavr:0.10.4'
         implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-aop:3.5.8'
+        implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
 
-        implementation 'org.springframework.boot:spring-boot-restclient:4.0.0'
+        implementation 'org.springframework.boot:spring-boot-restclient'
 
         compileOnly 'org.jetbrains:annotations:26.0.2-1'
 
@@ -527,7 +525,7 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transac
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test:4.0.0'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     }
 
     tasks.named('test') {
