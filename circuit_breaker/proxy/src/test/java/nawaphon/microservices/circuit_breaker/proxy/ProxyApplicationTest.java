@@ -15,4 +15,8 @@ class ProxyApplicationTest {
     ProxyApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    void contextLoads() {
+
+    }
 }
