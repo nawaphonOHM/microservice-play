@@ -15,6 +15,8 @@ plugins {
 
 def springCloudVersion = '2025.1.0'
 
+def springGrpcVersion = '1.0.0'
+
 bootJar {
     enabled = false
 }
