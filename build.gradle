@@ -132,7 +132,7 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
 
         implementation 'org.springframework.boot:spring-boot-restclient'
     }
