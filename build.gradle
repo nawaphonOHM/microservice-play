@@ -7,15 +7,11 @@
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.0'
+    id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version '1.1.7'
     id 'com.google.protobuf' version '0.9.5'
     id 'application'
 }
-
-def springCloudVersion = '2025.1.0'
-
-def springGrpcVersion = '1.0.0'
 
 bootJar {
     enabled = false
@@ -132,13 +128,19 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:" + springBootVersion)
+        }
+    }
     
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-aop:3.5.8'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
 
-        implementation 'org.springframework.boot:spring-boot-restclient:4.0.0'
+        implementation 'org.springframework.boot:spring-boot-restclient'
     }
 }
 
