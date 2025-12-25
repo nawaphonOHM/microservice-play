@@ -482,6 +482,10 @@ configure(subprojects.findAll { it.name == "self_registration@services_A"}) {
         }
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
 configure(subprojects.findAll { it.name == "client_side_discovery@services_A"}) {
