@@ -19,6 +19,7 @@ class GrpcServerApplicationTest {
 
     @Test
     void contextLoads() {
+        assertNotNull(context);
     }
 
 }
