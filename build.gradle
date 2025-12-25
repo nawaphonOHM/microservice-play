@@ -75,6 +75,10 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
                 }
             }
         }
+
+        tasks.named('test') {
+            useJUnitPlatform()
+        }
     }
 
 }
