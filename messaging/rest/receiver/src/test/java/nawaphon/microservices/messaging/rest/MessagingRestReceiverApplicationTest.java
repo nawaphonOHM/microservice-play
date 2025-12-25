@@ -17,5 +17,7 @@ class MessagingRestReceiverApplicationTest {
     }
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        assertNotNull(context);
+    }
 }
