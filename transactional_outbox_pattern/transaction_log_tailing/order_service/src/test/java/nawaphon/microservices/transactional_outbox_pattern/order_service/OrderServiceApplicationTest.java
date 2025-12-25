@@ -13,4 +13,6 @@ class OrderServiceApplicationTest {
     OrderServiceApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    void contextLoads() {}
 }
