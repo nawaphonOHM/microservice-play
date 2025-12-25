@@ -17,5 +17,6 @@ class ServiceRegistryApplicationTest {
 
     @Test
     void contextLoads() {
+        assertNotNull(context);
     }
 }
