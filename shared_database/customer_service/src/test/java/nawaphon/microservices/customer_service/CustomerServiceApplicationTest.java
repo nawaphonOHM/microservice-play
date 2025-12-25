@@ -13,4 +13,6 @@ class CustomerServiceApplicationTest {
     CustomerServiceApplicationTest(ApplicationContext context) {
         this.context = context;
     }
+
+    void contextLoads() {}
 }
