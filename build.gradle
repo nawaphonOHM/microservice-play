@@ -75,6 +75,10 @@ configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {
                 }
             }
         }
+
+        tasks.named('test') {
+            useJUnitPlatform()
+        }
     }
 
 }
@@ -121,6 +125,10 @@ configure(subprojects.findAll { it.name == "messaging@grpc@client" }) {
         }
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
 configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
@@ -135,6 +143,12 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
         implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
 
         implementation 'org.springframework.boot:spring-boot-restclient'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }
 
@@ -147,6 +161,12 @@ configure(subprojects.findAll { it.name == "messaging@rest@receiver" }) {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
     
@@ -181,6 +201,12 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@consumer" }
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.kafka:spring-kafka'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
     
@@ -198,7 +224,11 @@ configure(subprojects.findAll { it.name == "messaging@event_sourcing@producer" }
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-kafka'
-        testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
     
@@ -355,6 +385,12 @@ configure(subprojects.findAll { it.name == "messaging@graphql"}) {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }
 
@@ -373,6 +409,8 @@ configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
 
         implementation 'org.springframework.boot:spring-boot-restclient'
 
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
         compileOnly 'org.jetbrains:annotations:26.0.2-1'
 
         dependencyManagement {
@@ -380,6 +418,11 @@ configure(subprojects.findAll { it.name == "circuit_breaker@proxy"}) {
                 mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
             }
         }
+
+        tasks.named('test') {
+            useJUnitPlatform()
+        }
+
 
 
     }
@@ -393,6 +436,12 @@ configure(subprojects.findAll { it.name == "circuit_breaker@real_service"}) {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }
 
@@ -404,12 +453,18 @@ configure(subprojects.findAll { it.name == "self_registration@services_registry"
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
 }
@@ -423,12 +478,18 @@ configure(subprojects.findAll { it.name == "self_registration@services_A"}) {
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
 }
@@ -442,12 +503,18 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_A"}) 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
 }
@@ -460,12 +527,18 @@ configure(subprojects.findAll { it.name == "client_side_discovery@services_regis
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
 }
@@ -480,6 +553,12 @@ configure(subprojects.findAll { it.name == "client_side_discovery@client"}) {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        tasks.named('test') {
+            useJUnitPlatform()
+        }
     }
 
     dependencyManagement {
@@ -498,12 +577,18 @@ configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) 
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 
 }
@@ -526,10 +611,18 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transac
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+
+        testImplementation 'com.h2database:h2'
     }
 
     tasks.named('test') {
         useJUnitPlatform()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
+        }
     }
 }
 
