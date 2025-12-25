@@ -453,6 +453,8 @@ configure(subprojects.findAll { it.name == "self_registration@services_registry"
 
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
