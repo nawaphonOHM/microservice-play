@@ -587,6 +587,10 @@ configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) 
         }
     }
 
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
 }
 
 configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transaction_log_tailling@order_service"}) {
