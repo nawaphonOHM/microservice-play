@@ -143,6 +143,8 @@ configure(subprojects.findAll { it.name == "messaging@rest@sender" }) {
         implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
 
         implementation 'org.springframework.boot:spring-boot-restclient'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 }
 
