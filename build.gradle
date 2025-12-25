@@ -616,6 +616,12 @@ configure(subprojects.findAll { it.name == "transactional_outbox_pattern@transac
     tasks.named('test') {
         useJUnitPlatform()
     }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:" + springCloudVersion)
+        }
+    }
 }
 
 configure(subprojects.findAll{ it.name == 'transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat'}) {
