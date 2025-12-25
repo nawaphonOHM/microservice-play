@@ -7,4 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(properties = {"spring.profiles.active=test"})
 class ServiceRegistryApplicationTest {
 
+    void contextLoads() {
+    }
 }
