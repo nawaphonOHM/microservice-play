@@ -577,6 +577,8 @@ configure(subprojects.findAll { it.name == "server_side_discovery@services_A"}) 
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     dependencyManagement {
