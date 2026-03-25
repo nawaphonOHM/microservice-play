@@ -1,5 +1,4 @@
-name: Build Spring boot microservice project before request to merge to main branch
-run-name: running build for merge request
+name: Merge Request Build
 on:
   pull_request:
     types:
