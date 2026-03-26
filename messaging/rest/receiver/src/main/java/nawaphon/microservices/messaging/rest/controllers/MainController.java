@@ -26,13 +26,13 @@ public class MainController {
         this.fakeDatabaseComponent = fakeDatabaseComponent;
     }
 
-    @GetMapping("/get-customer/{uuid}")
+    @GetMapping(value = "/get-customer/{uuid}", version = "1.0")
     public Customer getCustomer(@PathVariable final UUID uuid) {
         return fakeDatabaseComponent.getCustomers().stream().filter(
                 (predicate) -> predicate.id().compareTo(uuid) == 0).findFirst().orElse(null);
     }
 
-    @GetMapping("/get-customer-details/{uuid}")
+    @GetMapping(value = "/get-customer-details/{uuid}", version = "1.0")
     public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
         return fakeDatabaseComponent.getCustomerDetails().stream().filter(
                 (predicate) -> predicate.customerId().compareTo(uuid) == 0).findFirst().orElse(null);
