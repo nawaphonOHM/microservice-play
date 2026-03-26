@@ -24,7 +24,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/call-service")
+    @GetMapping(value = "/call-service", version = "1.0")
     @CircuitBreaker(name = "call-service-breaker", fallbackMethod = "unavailable")
     public Message getCustomer() {
         final var responseEntity = realServiceExchange.getCustomer();
