@@ -27,7 +27,7 @@ public class MainController {
     }
 
 
-    @PostMapping("/send-message")
+    @PostMapping(value = "/send-message", version = "1.0")
     public String sendEvent(@RequestBody final Message message) throws JacksonException {
 
         logger.debug("message to be sent: {}", objectMapper.writeValueAsString(message));
