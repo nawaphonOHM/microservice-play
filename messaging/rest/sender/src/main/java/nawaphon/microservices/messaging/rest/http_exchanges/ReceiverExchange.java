@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public interface ReceiverExchange {
 
-    @GetExchange("/get-customer/{uuid}")
+    @GetExchange(value = "/get-customer/{uuid}", version = "1.0")
     Customer getCustomer(@PathVariable UUID uuid);
 
-    @GetExchange("/get-customer-details/{uuid}")
+    @GetExchange(value = "/get-customer-details/{uuid}", version = "1.0")
     CustomerDetail getCustomerDetail(@PathVariable UUID uuid);
 }

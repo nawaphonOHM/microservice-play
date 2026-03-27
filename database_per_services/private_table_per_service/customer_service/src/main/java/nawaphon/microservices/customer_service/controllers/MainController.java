@@ -21,7 +21,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/hello-world")
+    @GetMapping(value = "/hello-world", version = "1.0")
     public List<Customer> firstGetMethod() {
         return mainService.firstService();
     }

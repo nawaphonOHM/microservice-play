@@ -16,7 +16,7 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 
-    @GetMapping("/hello-world")
+    @GetMapping(value = "/hello-world", version = "1.0")
     public String home() {
         final String hostname;
 

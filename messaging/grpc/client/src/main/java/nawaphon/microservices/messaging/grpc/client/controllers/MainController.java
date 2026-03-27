@@ -23,7 +23,7 @@ public class MainController {
         this.server = server;
     }
 
-    @GetMapping("/get-customer/{uuid}")
+    @GetMapping(value = "/get-customer/{uuid}", version = "1.0")
     public Customer getCustomer(@PathVariable final UUID uuid) throws StatusException {
 
         log.info("Get customer by uuid: {}", uuid);
@@ -41,7 +41,7 @@ public class MainController {
         );
     }
 
-    @GetMapping("/get-customer-details/{uuid}")
+    @GetMapping(value = "/get-customer-details/{uuid}", version = "1.0")
     public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) throws StatusException {
 
         log.info("Get customer detail by uuid: {}", uuid);

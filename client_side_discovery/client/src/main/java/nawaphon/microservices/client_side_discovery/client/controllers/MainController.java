@@ -18,8 +18,8 @@ public class MainController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/hello-world")
+    @GetMapping(value = "/hello-world", version = "1.0")
     public String helloWorld() {
-        return this.restTemplate.getForObject("http://serviceA/client-side-discovery/service-a/hello-world", String.class);
+        return this.restTemplate.getForObject("http://serviceA/client-side-discovery/service-a/1.0/hello-world", String.class);
     }
 }
