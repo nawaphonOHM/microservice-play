@@ -15,12 +15,6 @@ import java.net.URI;
 public class ClientConfiguration {
 
     @Bean
-    @LoadBalanced
-    public RestClient.Builder restClientBuilder() {
-        return RestClient.builder();
-    }
-
-    @Bean
     public ServiceAExchange serviceAExchange(final RestClient.Builder builder) {
         final var restClient = builder.baseUrl(URI.create("http://serviceA/client-side-discovery/service-a/")).build();
 
