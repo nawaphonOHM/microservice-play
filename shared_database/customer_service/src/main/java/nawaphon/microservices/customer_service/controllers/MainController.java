@@ -21,22 +21,22 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @PostMapping("/post-customer")
+    @PostMapping("/customer")
     public Customer postNewCustomer(@RequestBody final Customer newCustomer) {
         return mainService.addNewCustomer(newCustomer);
     }
 
-    @GetMapping("/get-customer-by-criteria")
+    @GetMapping("/customer")
     public List<Customer> getCustomerByCriteria(@RequestParam final Map<String, String> params) {
         return mainService.getCustomerByCriteria(params);
     }
 
-    @PatchMapping("/update-customer-credit/{customer-uuid}")
+    @PatchMapping("/customer/{customer-uuid}/credit")
     public Customer patchCustomerCredit(@PathVariable("customer-uuid") final UUID customerUUID, @RequestBody final CustomerId credit) {
         return mainService.updateUserCredit(customerUUID, credit.credit());
     }
 
-    @DeleteMapping("delete-customer-credit/{customer-uuid}")
+    @DeleteMapping("customer/{customer-uuid}")
     public UUID removeCustomer(@PathVariable("customer-uuid") final UUID customerUUID) {
         return mainService.removeCustomer(customerUUID);
     }

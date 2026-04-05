@@ -42,7 +42,7 @@ class MainControllerTest {
         when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(orderId, true));
 
         // Act & Assert
-        mockMvc.perform(post("/save-order")
+        mockMvc.perform(post("/order")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(orderRequest)))
                 .andExpect(status().isOk())
@@ -57,7 +57,7 @@ class MainControllerTest {
         when(mainService.saveOrder(any(OrderRequest.class))).thenReturn(new OrderSaveStatus(null, false));
 
         // Act & Assert
-        mockMvc.perform(post("/save-order")
+        mockMvc.perform(post("/order")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(orderRequest)))
                 .andExpect(status().isInternalServerError());

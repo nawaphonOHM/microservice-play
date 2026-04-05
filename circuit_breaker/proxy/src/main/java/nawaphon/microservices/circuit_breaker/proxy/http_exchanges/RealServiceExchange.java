@@ -6,6 +6,6 @@ import org.springframework.web.service.annotation.GetExchange;
 
 public interface RealServiceExchange {
 
-    @GetExchange("/first-get")
+    @GetExchange("/basic-message")
     Message getCustomer();
 }

@@ -46,7 +46,7 @@ public class MainControllerTest {
         BDDMockito.given(service.addNewCustomer(BDDMockito.refEq(body))).willReturn(body);
 
         mvc.perform(
-                MockMvcRequestBuilders.post("/post-customer")
+                MockMvcRequestBuilders.post("/customer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().withDefaultPrettyPrinter().writeValueAsString(body))
         ).andExpect(MockMvcResultMatchers.status().isOk());
@@ -67,7 +67,7 @@ public class MainControllerTest {
                 var1.get("id").equals("eeee")))).willReturn(customers);
 
         mvc.perform(
-                MockMvcRequestBuilders.get("/get-customer-by-criteria")
+                MockMvcRequestBuilders.get("/customer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .params(body)
         ).andExpect(MockMvcResultMatchers.status().isOk());
@@ -94,7 +94,7 @@ public class MainControllerTest {
                 .willReturn(response);
 
         mvc.perform(
-                MockMvcRequestBuilders.patch("/update-customer-credit/{id}", id)
+                MockMvcRequestBuilders.patch("/customer/{id}/credit", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().withDefaultPrettyPrinter().writeValueAsString(body))
         ).andExpect(MockMvcResultMatchers.status().isOk());
@@ -112,7 +112,7 @@ public class MainControllerTest {
                 .willReturn(id);
 
         mvc.perform(
-                MockMvcRequestBuilders.delete("/delete-customer-credit/{id}", id)
+                MockMvcRequestBuilders.delete("/customer/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk());
 

@@ -22,12 +22,12 @@ public class MainController {
     }
 
 
-    @GetMapping("/get-order-by-criteria")
+    @GetMapping("/order")
     public ResponseMessage<List<Order>> getOrderByCriteria(@RequestParam final Map<String, String> params) {
         return mainService.getOrderByCriteria(params);
     }
 
-    @PostMapping("/add-orders")
+    @PostMapping("/order")
     public ResponseMessage<OrderStatusEnvelop> addOrders(@RequestBody final Order order) {
         final var results = mainService.addOrders(List.of(order));
         return new ResponseMessage<>(results.code(), results.message(), results.results().get(0));

@@ -17,7 +17,7 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @PostMapping("/save-order")
+    @PostMapping("/order")
     public OrderId saveOrder(@RequestBody @NonNull OrderRequest orderDetail) {
 
         final var saveInformation = mainService.saveOrder(orderDetail);
