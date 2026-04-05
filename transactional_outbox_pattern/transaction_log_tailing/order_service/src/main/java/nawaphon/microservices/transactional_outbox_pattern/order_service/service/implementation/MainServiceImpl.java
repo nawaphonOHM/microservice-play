@@ -9,7 +9,7 @@ import nawaphon.microservices.transactional_outbox_pattern.order_service.reposit
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderRepository;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.utils.ToHashMapModel;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
