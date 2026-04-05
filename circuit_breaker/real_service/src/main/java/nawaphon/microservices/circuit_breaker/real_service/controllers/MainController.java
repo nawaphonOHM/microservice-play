@@ -12,7 +12,7 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 
-    @GetMapping("/first-get")
+    @GetMapping("/basic-message")
     public Message getCustomer() {
 
         return new Message("Call from real service. OK!");

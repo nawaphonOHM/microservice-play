@@ -46,7 +46,7 @@ public class MainControllerTest {
 
 
         mvc.perform(
-                MockMvcRequestBuilders.get("/get-order-by-criteria")
+                MockMvcRequestBuilders.get("/order")
                         .contentType(MediaType.APPLICATION_JSON)
                         .params(body)
         ).andExpect(MockMvcResultMatchers.status().isOk());

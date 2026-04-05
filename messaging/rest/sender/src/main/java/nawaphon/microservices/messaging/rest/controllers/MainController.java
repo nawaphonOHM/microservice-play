@@ -29,7 +29,7 @@ public class MainController {
         this.receiverExchange = receiverExchange;
     }
 
-    @GetMapping("/get-customer/{uuid}")
+    @GetMapping("/customer/{uuid}/basic")
     public Customer getCustomer(@PathVariable final UUID uuid) {
         final var result = this.receiverExchange.getCustomer(uuid);
 
@@ -43,7 +43,7 @@ public class MainController {
         return result;
     }
 
-    @GetMapping("/get-customer-details/{uuid}")
+    @GetMapping("/customer/{uuid}/detail")
     public CustomerDetail getCustomerDetail(@PathVariable final UUID uuid) {
         return this.receiverExchange.getCustomerDetail(uuid);
     }
