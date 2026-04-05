@@ -1,25 +1,25 @@
 package nawaphon.microservices.client_side_discovery.client.controllers;
 
+import nawaphon.microservices.client_side_discovery.client.http_exchanges.ServiceAExchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 
 @RestController
 public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-    private final RestTemplate restTemplate;
+    private final ServiceAExchange serviceAExchange;
 
 
-    public MainController(final RestTemplate restTemplate) {
+    public MainController(final ServiceAExchange serviceAExchange) {
         logger.info("MainController created");
-        this.restTemplate = restTemplate;
+        this.serviceAExchange = serviceAExchange;
     }
 
     @GetMapping("/hello-world")
     public String helloWorld() {
-        return this.restTemplate.getForObject("http://serviceA/client-side-discovery/service-a/hello-world", String.class);
+        return this.serviceAExchange.helloWorld();
     }
 }
