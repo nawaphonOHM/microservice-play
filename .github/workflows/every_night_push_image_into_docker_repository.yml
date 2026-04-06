@@ -1,4 +1,4 @@
-name: push image for ${{ inputs.image_name }}
+name: push images into docker hub
 on:
   workflow_call:
     inputs:
@@ -8,9 +8,15 @@ on:
       image_name_for_docker_hub:
         required: true
         type: string
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_SECRET:
+        required: true
 
 jobs:
   push_image:
+    name: Download and Push <docker-repo-name>/microservices-lab:${{inputs.image_name_for_docker_hub}} image into docker hub
     runs-on: ubuntu-latest
     permissions:
       contents: read
