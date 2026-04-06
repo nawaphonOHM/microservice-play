@@ -14,8 +14,6 @@ on:
       DOCKER_SECRET:
         required: true
 
-run-name: pushing images into docker hub
-
 jobs:
   push_image:
     name: Download and Push <docker-repo-name>/microservices-lab:${{inputs.image_name_for_docker_hub}} image into docker hub
