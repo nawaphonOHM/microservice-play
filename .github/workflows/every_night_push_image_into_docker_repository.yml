@@ -8,6 +8,11 @@ on:
       image_name_for_docker_hub:
         required: true
         type: string
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_SECRET:
+        required: true
 
 jobs:
   push_image:
