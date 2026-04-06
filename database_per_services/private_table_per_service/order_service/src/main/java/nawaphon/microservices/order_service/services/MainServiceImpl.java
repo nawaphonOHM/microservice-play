@@ -1,6 +1,6 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.private_table.Order;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 

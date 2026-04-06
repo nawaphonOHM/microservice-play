@@ -1,6 +1,6 @@
 package nawaphon.microservices.customer_service.services;
 
-import nawaphon.microservices.customer_service.pojo.Customer;
+import nawaphon.microservices.reusable.entity.private_table.Customer;
 import nawaphon.microservices.customer_service.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 

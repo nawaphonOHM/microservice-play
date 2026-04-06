@@ -2,7 +2,7 @@ package nawaphon.microservices.circuit_breaker.proxy.controllers;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import nawaphon.microservices.circuit_breaker.proxy.http_exchanges.RealServiceExchange;
-import nawaphon.microservices.circuit_breaker.proxy.pojo.Message;
+import nawaphon.microservices.reusable.pojo.Message;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;

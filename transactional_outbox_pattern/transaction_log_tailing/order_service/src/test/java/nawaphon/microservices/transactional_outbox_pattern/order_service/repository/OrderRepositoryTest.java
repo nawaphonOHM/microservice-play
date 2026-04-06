@@ -1,6 +1,6 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.repository;
 
-import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
+import nawaphon.microservices.reusable.model.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

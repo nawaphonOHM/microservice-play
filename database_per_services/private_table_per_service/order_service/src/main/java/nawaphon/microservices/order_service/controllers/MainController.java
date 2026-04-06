@@ -1,6 +1,6 @@
 package nawaphon.microservices.order_service.controllers;
 
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.private_table.Order;
 import nawaphon.microservices.order_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

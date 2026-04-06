@@ -1,7 +1,7 @@
 package nawaphon.microservices.customer_service.exception_advices;
 
 import nawaphon.microservices.customer_service.exceptions.UpdateNewCreditFailedException;
-import nawaphon.microservices.customer_service.pojo.ResponseMessage;
+import nawaphon.microservices.reusable.pojo.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

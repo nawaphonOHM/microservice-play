@@ -1,8 +1,8 @@
 package nawaphon.microservices.order_service.controllers;
 
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.shared.Order;
 import nawaphon.microservices.order_service.services.MainService;
-import nawaphon.microservices.order_service.pojo.ResponseMessage;
+import nawaphon.microservices.reusable.pojo.ResponseMessage;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;

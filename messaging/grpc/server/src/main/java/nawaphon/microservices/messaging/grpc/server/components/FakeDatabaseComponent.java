@@ -1,8 +1,8 @@
 package nawaphon.microservices.messaging.grpc.server.components;
 
 import jakarta.annotation.PostConstruct;
-import nawaphon.microservices.messaging.grpc.server.pojo.Customer;
-import nawaphon.microservices.messaging.grpc.server.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;

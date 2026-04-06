@@ -1,6 +1,6 @@
 package nawaphon.microservices.messaging.event_sourcing.producer.controllers;
 
-import nawaphon.microservices.messaging.event_sourcing.producer.pojo.Message;
+import nawaphon.microservices.reusable.pojo.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;

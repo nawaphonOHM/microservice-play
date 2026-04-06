@@ -1,7 +1,7 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.controller;
 
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
+import nawaphon.microservices.reusable.dto.OrderRequest;
+import nawaphon.microservices.reusable.dto.OrderSaveStatus;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.controller;
 
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderId;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
+import nawaphon.microservices.reusable.dto.OrderId;
+import nawaphon.microservices.reusable.dto.OrderRequest;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.SavingOrderUnsuccessfulException;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;
 import org.jspecify.annotations.NonNull;

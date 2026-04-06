@@ -1,6 +1,6 @@
 package nawaphon.microservices.customer_service.services;
 
-import nawaphon.microservices.customer_service.pojo.Customer;
+import nawaphon.microservices.reusable.entity.private_table.Customer;
 import nawaphon.microservices.customer_service.test_configuration.MainServiceMock;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Assertions;

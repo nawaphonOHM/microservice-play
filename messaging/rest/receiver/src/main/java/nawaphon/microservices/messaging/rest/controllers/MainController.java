@@ -1,7 +1,7 @@
 package nawaphon.microservices.messaging.rest.controllers;
 
-import nawaphon.microservices.messaging.rest.pojo.Customer;
-import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import nawaphon.microservices.messaging.rest.components.FakeDatabaseComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

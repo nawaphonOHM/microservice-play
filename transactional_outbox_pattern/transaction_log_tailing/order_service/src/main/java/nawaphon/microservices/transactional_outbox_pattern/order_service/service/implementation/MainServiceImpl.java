@@ -1,10 +1,10 @@
 package nawaphon.microservices.transactional_outbox_pattern.order_service.service.implementation;
 
 import jakarta.transaction.Transactional;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderRequest;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.OrderSaveStatus;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.model.Order;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.model.OrderOutbox;
+import nawaphon.microservices.reusable.dto.OrderRequest;
+import nawaphon.microservices.reusable.dto.OrderSaveStatus;
+import nawaphon.microservices.reusable.model.Order;
+import nawaphon.microservices.reusable.model.OrderOutbox;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderOutboxRepository;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.repository.OrderRepository;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.service.MainService;

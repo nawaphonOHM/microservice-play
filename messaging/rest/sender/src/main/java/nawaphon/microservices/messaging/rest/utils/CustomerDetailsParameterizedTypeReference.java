@@ -1,7 +1,7 @@
 package nawaphon.microservices.messaging.rest.utils;
 
 
-import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import org.springframework.core.ParameterizedTypeReference;
 
 public class CustomerDetailsParameterizedTypeReference extends ParameterizedTypeReference<CustomerDetail> {

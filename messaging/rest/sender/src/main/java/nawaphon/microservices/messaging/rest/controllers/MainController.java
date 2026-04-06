@@ -1,8 +1,8 @@
 package nawaphon.microservices.messaging.rest.controllers;
 
 import nawaphon.microservices.messaging.rest.http_exchanges.ReceiverExchange;
-import nawaphon.microservices.messaging.rest.pojo.Customer;
-import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;

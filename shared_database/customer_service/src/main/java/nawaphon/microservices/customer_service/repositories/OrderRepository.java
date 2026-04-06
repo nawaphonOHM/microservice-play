@@ -1,6 +1,6 @@
 package nawaphon.microservices.customer_service.repositories;
 
-import nawaphon.microservices.customer_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.shared.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

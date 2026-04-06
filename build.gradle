@@ -32,7 +32,41 @@ allprojects {
             languageVersion = JavaLanguageVersion.of(21)
         }
     }
-    
+
+}
+
+subprojects {
+    afterEvaluate {
+        if (it.name != 'reusable' && it.name != 'transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat') {
+            dependencies {
+                implementation project(':reusable')
+            }
+        }
+    }
+}
+
+configure(subprojects.findAll { it.name == "reusable" }) {
+
+    apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
+        api 'org.springframework.boot:spring-boot-persistence'
+        api 'jakarta.persistence:jakarta.persistence-api'
+        api 'com.fasterxml.jackson.core:jackson-annotations'
+        api("jakarta.validation:jakarta.validation-api:3.1.1")
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }
 
 configure(subprojects.findAll { it.name == "messaging@grpc@server" }) {

@@ -1,8 +1,8 @@
 package nawaphon.microservices.messaging.graphql.gateway.components;
 
 import jakarta.annotation.PostConstruct;
-import nawaphon.microservices.messaging.graphql.gateway.pojo.Customer;
-import nawaphon.microservices.messaging.graphql.gateway.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,7 @@ public class FakeDatabaseComponent {
     public void makeData() {
         {
             final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "John", "Doe");
+            final var customerDetailFake = new CustomerDetail(customerFake.detailsId(), "John", "Doe");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {
@@ -50,7 +50,7 @@ public class FakeDatabaseComponent {
 
         {
             final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Jane", "Smith");
+            final var customerDetailFake = new CustomerDetail(customerFake.detailsId(), "Jane", "Smith");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {
@@ -62,7 +62,7 @@ public class FakeDatabaseComponent {
 
         {
             final var customerFake = new Customer(UUID.randomUUID(), UUID.randomUUID());
-            final var customerDetailFake = new CustomerDetail(customerFake.getDetailsId(), "Bob", "Johnson");
+            final var customerDetailFake = new CustomerDetail(customerFake.detailsId(), "Bob", "Johnson");
             customers.add(customerFake);
             customerDetails.add(customerDetailFake);
             try {

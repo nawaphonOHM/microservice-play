@@ -9,6 +9,9 @@
 
 rootProject.name = 'microservice-play'
 
+include("reusable")
+project(":reusable").projectDir = file("./reusable")
+
 include("private_table_per_service@customer_service")
 project(":private_table_per_service@customer_service").projectDir = file("./database_per_services/private_table_per_service/customer_service")
 

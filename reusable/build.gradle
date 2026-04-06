@@ -1,0 +1,6 @@
+group = 'nawaphon.microservices'
+version = '0.0.1'
+
+base {
+    archivesName = "reusable"
+}

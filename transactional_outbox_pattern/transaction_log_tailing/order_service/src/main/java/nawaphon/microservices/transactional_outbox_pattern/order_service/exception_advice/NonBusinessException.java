@@ -2,7 +2,7 @@ package nawaphon.microservices.transactional_outbox_pattern.order_service.except
 
 import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.SavingOrderUnsuccessfulException;
 import nawaphon.microservices.transactional_outbox_pattern.order_service.exception.ToHashMpModelException;
-import nawaphon.microservices.transactional_outbox_pattern.order_service.dto.ResponseMessage;
+import nawaphon.microservices.reusable.pojo.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

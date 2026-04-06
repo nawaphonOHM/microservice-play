@@ -1,7 +1,7 @@
 package nawaphon.microservices.circuit_breaker.proxy.http_exchanges;
 
 
-import nawaphon.microservices.circuit_breaker.proxy.pojo.Message;
+import nawaphon.microservices.reusable.pojo.Message;
 import org.springframework.web.service.annotation.GetExchange;
 
 public interface RealServiceExchange {

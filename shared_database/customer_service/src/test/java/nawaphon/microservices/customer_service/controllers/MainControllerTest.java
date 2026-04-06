@@ -1,8 +1,8 @@
 package nawaphon.microservices.customer_service.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nawaphon.microservices.customer_service.pojo.Customer;
-import nawaphon.microservices.customer_service.pojo.CustomerId;
+import nawaphon.microservices.reusable.entity.shared.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerId;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;

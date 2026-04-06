@@ -1,7 +1,7 @@
 package nawaphon.microservices.order_service.repositories;
 
-import nawaphon.microservices.order_service.pojo.Customer;
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.shared.Customer;
+import nawaphon.microservices.reusable.entity.shared.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,7 +2,7 @@ package nawaphon.microservices.order_service.services;
 
 import nawaphon.microservices.order_service.exceptions.CustomerNotFoundException;
 import nawaphon.microservices.order_service.exceptions.InsufficientException;
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.shared.Order;
 import nawaphon.microservices.order_service.repositories.CustomerRepository;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import org.slf4j.Logger;

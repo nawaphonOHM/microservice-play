@@ -1,8 +1,8 @@
 package nawaphon.microservices.messaging.rest.http_exchanges;
 
 
-import nawaphon.microservices.messaging.rest.pojo.Customer;
-import nawaphon.microservices.messaging.rest.pojo.CustomerDetail;
+import nawaphon.microservices.reusable.pojo.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerDetail;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
 

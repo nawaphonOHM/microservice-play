@@ -1,7 +1,7 @@
 package nawaphon.microservices.customer_service.controllers;
 
-import nawaphon.microservices.customer_service.pojo.Customer;
-import nawaphon.microservices.customer_service.pojo.CustomerId;
+import nawaphon.microservices.reusable.entity.shared.Customer;
+import nawaphon.microservices.reusable.pojo.CustomerId;
 import nawaphon.microservices.customer_service.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

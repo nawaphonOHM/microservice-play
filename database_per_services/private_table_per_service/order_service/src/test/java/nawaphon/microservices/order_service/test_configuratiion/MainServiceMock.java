@@ -1,6 +1,6 @@
 package nawaphon.microservices.order_service.test_configuratiion;
 
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.private_table.Order;
 import nawaphon.microservices.order_service.repositories.OrderRepository;
 import nawaphon.microservices.order_service.services.MainService;
 import nawaphon.microservices.order_service.services.MainServiceImpl;

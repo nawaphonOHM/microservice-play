@@ -1,6 +1,6 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservices.order_service.pojo.Order;
+import nawaphon.microservices.reusable.entity.private_table.Order;
 import nawaphon.microservices.order_service.test_configuratiion.MainServiceMock;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Assertions;

@@ -1,10 +1,10 @@
 package nawaphon.microservices.order_service.services;
 
-import nawaphon.microservices.order_service.enums.OrderStatus;
+import nawaphon.microservices.reusable.enums.OrderStatus;
 import nawaphon.microservices.order_service.exceptions.InsufficientException;
-import nawaphon.microservices.order_service.pojo.Order;
-import nawaphon.microservices.order_service.pojo.OrderStatusEnvelop;
-import nawaphon.microservices.order_service.pojo.ResponseMessage;
+import nawaphon.microservices.reusable.entity.shared.Order;
+import nawaphon.microservices.reusable.pojo.OrderStatusEnvelop;
+import nawaphon.microservices.reusable.pojo.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

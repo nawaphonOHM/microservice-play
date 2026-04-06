@@ -2,8 +2,10 @@ package nawaphon.microservices.order_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.persistence.autoconfigure.EntityScan;
 
 @SpringBootApplication
+@EntityScan(basePackages = {"nawaphon.microservices.order_service", "nawaphon.microservices.reusable.entity.private_table"})
 public class OrderServiceApplication {
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package nawaphon.microservices.order_service.exception_advices;
 
 import nawaphon.microservices.order_service.exceptions.InsufficientException;
-import nawaphon.microservices.order_service.pojo.ResponseMessage;
+import nawaphon.microservices.reusable.pojo.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
