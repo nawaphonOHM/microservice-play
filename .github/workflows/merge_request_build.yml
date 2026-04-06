@@ -19,6 +19,3 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup_java_and_gradle
-
-      - name: Run the Gradle package task
-        run: ./gradlew build

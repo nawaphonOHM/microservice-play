@@ -21,9 +21,6 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup_java_and_gradle
 
-      - name: Run the Gradle package task
-        run: ./gradlew build
-
       - name: Upload ${{ matrix.image_name }}
         uses: actions/upload-artifact@v4
         with:

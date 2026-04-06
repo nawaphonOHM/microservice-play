@@ -18,3 +18,7 @@ runs:
 
     - name: Setup gradle
       uses: gradle/actions/setup-gradle@v3
+
+    - name: Run the Gradle package task
+      run: ./gradlew build
+      shell: bash
