@@ -8,8 +8,9 @@ permissions:
   contents: read
 
 jobs:
-  build-jar:
+  build-jars:
     runs-on: ubuntu-latest
+    name: Build jar for ${{ matrix.image_name }}
     strategy:
       matrix: ${{ fromJSON(vars.MATRIX) }}
 
@@ -43,8 +44,8 @@ jobs:
   
   
 
-  push-image-to-docker-hub:
-    needs: build-jar
+  push-images-to-docker-hub:
+    needs: build-jars
     name: Push image ${{ matrix.image_name }}
     strategy:
       matrix: ${{ fromJSON(vars.MATRIX) }}
