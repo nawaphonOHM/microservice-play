@@ -16,7 +16,7 @@ on:
 
 jobs:
   push_image:
-    name: push ${{ secrets.DOCKER_USERNAME }}/microservices-lab:${{inputs.image_name_for_docker_hub}} image into docker hub
+    name: push <docker-repo-name>/microservices-lab:${{inputs.image_name_for_docker_hub}} image into docker hub
     runs-on: ubuntu-latest
     permissions:
       contents: read
