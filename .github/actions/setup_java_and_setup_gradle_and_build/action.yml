@@ -22,6 +22,10 @@ runs:
 
     - name: Setup gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        build-scan-publish: 'true'
+        build-scan-terms-of-use-url: 'https://gradle.com/help/legal-terms-of-use'
+        build-scan-terms-of-use-agree: 'yes'
 
     - name: Run the Gradle package task
       if: github.event_name != 'pull_request'
