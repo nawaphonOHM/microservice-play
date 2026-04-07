@@ -4,7 +4,7 @@ description: setup_java_and_gradle
 inputs:
   project_name:
     description: 'The name of the project to build'
-    required: true
+    required: false
 
 runs:
   using: "composite"
