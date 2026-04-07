@@ -10,5 +10,5 @@ runs:
   using: "composite"
   steps:
     - name: Run the Gradle package task for project named ${{ inputs.project_name }}
-      run: ./gradlew :${{ inputs.project_name }}:build --scan
+      run: ./gradlew ${{ format(':{0}:build', input.project_name) }} --scan
       shell: bash
