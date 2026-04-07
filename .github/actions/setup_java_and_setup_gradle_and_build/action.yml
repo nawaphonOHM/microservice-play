@@ -27,3 +27,8 @@ runs:
       if: github.event != 'pull_request'
       run: ./gradlew :${{ inputs.project_name }}:build --scan
       shell: bash
+
+    - name: Run the Gradle package task
+      if: github.event == 'pull_request'
+      run: ./gradlew build --scan
+      shell: bash
