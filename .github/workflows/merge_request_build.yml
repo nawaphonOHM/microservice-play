@@ -17,5 +17,8 @@ jobs:
       - name: checkout codebase
         uses: actions/checkout@v4
 
-      - name: Setup
-        uses: ./.github/actions/setup_java_and_setup_gradle_and_build
+      - name: Setup tool
+        uses: ./.github/actions/setup_tools
+
+      - name: Build project
+        uses: ./.github/actions/build_all

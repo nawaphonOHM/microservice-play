@@ -1,0 +1,11 @@
+name: build_all
+author: nawaphon
+description: build_all
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Run the Gradle package task
+      run: ./gradlew build --scan
+      shell: bash
