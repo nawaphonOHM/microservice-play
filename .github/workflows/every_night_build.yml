@@ -22,6 +22,7 @@ jobs:
         uses: ./.github/actions/setup_tools
 
       - name: Build project
+        if: ${{ matrix.project_name != '' }}
         uses: ./.github/actions/build_sub_project
         with:
           project_name: ${{ matrix.image_name }}
