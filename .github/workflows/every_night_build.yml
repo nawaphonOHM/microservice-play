@@ -25,7 +25,7 @@ jobs:
         if: ${{ matrix.project_name != '' }}
         uses: ./.github/actions/build_sub_project
         with:
-          project_name: ${{ matrix.image_name }}
+          project_name: ${{ matrix.project_name }}
 
       - name: Upload ${{ matrix.image_name }}
         uses: actions/upload-artifact@v4
