@@ -16,3 +16,7 @@ allprojects {
         }
     }
 }
+
+jar {
+    enabled = false
+}
