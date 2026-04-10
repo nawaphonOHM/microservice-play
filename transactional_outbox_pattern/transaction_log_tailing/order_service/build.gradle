@@ -33,3 +33,14 @@ dependencyManagement {
 test {
     useJUnitPlatform()
 }
+
+build {
+    dependsOn(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat:build")
+    finalizedBy('copyHeartBeatJar')
+}
+
+tasks.register('copyHeartBeatJar', Copy) {
+    it.from(project(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat").layout.buildDirectory.dir("libs"))
+    it.into(layout.buildDirectory.dir('libs'))
+    it.include("*.jar")
+}
