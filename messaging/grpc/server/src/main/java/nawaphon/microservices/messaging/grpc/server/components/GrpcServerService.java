@@ -8,18 +8,18 @@ import nawaphon.microservices.messaging.grpc.server.UUID;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.grpc.server.service.GrpcService;
 
 import java.util.NoSuchElementException;
 
 
-@Component
-class GrpcService extends MainServerGrpc.MainServerImplBase {
+@GrpcService
+class GrpcServerService extends MainServerGrpc.MainServerImplBase {
 
-    private static final Logger log = LoggerFactory.getLogger(GrpcService.class);
+    private static final Logger log = LoggerFactory.getLogger(GrpcServerService.class);
     private final FakeDatabaseComponent fakeDatabaseComponent;
 
-    GrpcService(FakeDatabaseComponent fakeDatabaseComponent) {
+    GrpcServerService(FakeDatabaseComponent fakeDatabaseComponent) {
         this.fakeDatabaseComponent = fakeDatabaseComponent;
     }
 
