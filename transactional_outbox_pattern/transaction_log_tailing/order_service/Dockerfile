@@ -1,8 +1,8 @@
-FROM ubuntu/jre:21-24.04
+FROM bellsoft/liberica-openjre-alpine:21-cds
 WORKDIR /
 COPY build/libs/order_service-0.0.1.jar .
 COPY build/libs/heart_beat-0.0.1.jar .
 
-ENTRYPOINT ["java", "-jar", "order_service-0.0.1.jar"]
+ENTRYPOINT ["java", "-XX:+AutoCreateSharedArchive", "-XX:SharedArchiveFile=app.jsa", "-jar", "order_service-0.0.1.jar"]
 
 LABEL authors="nawaphon"
