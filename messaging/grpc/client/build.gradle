@@ -13,17 +13,18 @@ base {
 }
 
 protobuf {
-    protoc {
-        def s = dependencyManagement.importedProperties['protobuf-java.version']
+    def protobufVersion = dependencyManagement.importedProperties['protobuf-java.version']
+    def grpcVersion = dependencyManagement.importedProperties['grpc-java.version']
 
-        artifact = "com.google.protobuf:protoc:${s}"
+    protoc {
+
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
     }
     plugins {
-        def object = dependencyManagement.importedProperties['grpc-java.version']
 
         grpc {
 
-            artifact = "io.grpc:protoc-gen-grpc-java:${object}"
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
     }
 }
