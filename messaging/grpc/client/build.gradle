@@ -12,39 +12,31 @@ base {
     archivesName = "client"
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.grpc:spring-grpc-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.grpc:spring-grpc-dependencies:" + springGrpcVersion
-    }
-}
-
 protobuf {
+    def protobufVersion = dependencyManagement.importedProperties['protobuf-java.version']
+    def grpcVersion = dependencyManagement.importedProperties['grpc-java.version']
+
     protoc {
-        artifact = 'com.google.protobuf:protoc'
+
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
     }
     plugins {
+
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java'
+
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
     }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {
-                option '@generated=omit'
-            }
-        }
-    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-grpc-client'
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-grpc-client-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
