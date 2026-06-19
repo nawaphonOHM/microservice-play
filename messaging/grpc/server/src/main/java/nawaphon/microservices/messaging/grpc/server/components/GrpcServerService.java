@@ -1,10 +1,7 @@
 package nawaphon.microservices.messaging.grpc.server.components;
 
 import io.grpc.stub.StreamObserver;
-import nawaphon.microservices.messaging.grpc.server.CustomerDetailMessage;
-import nawaphon.microservices.messaging.grpc.server.CustomerMessage;
-import nawaphon.microservices.messaging.grpc.server.MainServerGrpc;
-import nawaphon.microservices.messaging.grpc.server.UUID;
+import nawaphon.microservices.messaging.grpc.server.*;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +11,7 @@ import java.util.NoSuchElementException;
 
 
 @GrpcService
-class GrpcServerService extends MainServerGrpc.MainServerImplBase {
+class GrpcServerService extends MainServerServiceGrpc.MainServerServiceImplBase {
 
     private static final Logger log = LoggerFactory.getLogger(GrpcServerService.class);
     private final FakeDatabaseComponent fakeDatabaseComponent;
