@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "get_customer_by_customer_uuid_request.proto";
+import "get_customer_by_customer_uuid_response.proto";
+import "get_customer_detail_by_customer_uuid_request.proto";
+import "get_customer_detail_by_customer_uuid_response.proto";
+
+package nawaphon.microservices.messaging.grpc.server;
+
+
+option java_multiple_files = true;
+option java_package = 'nawaphon.microservices.messaging.grpc.server';
+
+
+service MainServerService {
+  rpc Customer(GetCustomerByCustomerUUIDRequest) returns (GetCustomerByCustomerUUIDResponse) {}
+  rpc CustomerDetail(GetCustomerDetailByCustomerUUIDRequest) returns (GetCustomerDetailByCustomerUUIDResponse) {}
+}

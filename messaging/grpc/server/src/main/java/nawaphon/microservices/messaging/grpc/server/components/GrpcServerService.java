@@ -1,10 +1,7 @@
 package nawaphon.microservices.messaging.grpc.server.components;
 
 import io.grpc.stub.StreamObserver;
-import nawaphon.microservices.messaging.grpc.server.CustomerDetailMessage;
-import nawaphon.microservices.messaging.grpc.server.CustomerMessage;
-import nawaphon.microservices.messaging.grpc.server.MainServerGrpc;
-import nawaphon.microservices.messaging.grpc.server.UUID;
+import nawaphon.microservices.messaging.grpc.server.*;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +11,7 @@ import java.util.NoSuchElementException;
 
 
 @GrpcService
-class GrpcServerService extends MainServerGrpc.MainServerImplBase {
+class GrpcServerService extends MainServerServiceGrpc.MainServerServiceImplBase {
 
     private static final Logger log = LoggerFactory.getLogger(GrpcServerService.class);
     private final FakeDatabaseComponent fakeDatabaseComponent;
@@ -24,19 +21,19 @@ class GrpcServerService extends MainServerGrpc.MainServerImplBase {
     }
 
     @Override
-    public void customer(UUID request, @NonNull StreamObserver<CustomerMessage> responseObserver) {
+    public void customer(GetCustomerByCustomerUUIDRequest request, @NonNull StreamObserver<GetCustomerByCustomerUUIDResponse> responseObserver) {
 
         try {
             final var customer = fakeDatabaseComponent.getCustomers()
-                    .stream().filter(it -> it.id().equals(java.util.UUID.fromString(request.getValue())))
+                    .stream().filter(it -> it.id().equals(java.util.UUID.fromString(request.getUuid())))
                     .findFirst().orElseThrow();
 
             log.info("Found customer with id: {}", customer.id());
 
             responseObserver.onNext(
-                    CustomerMessage.newBuilder()
-                            .setId(UUID.newBuilder().setValue(customer.id().toString()).build())
-                            .setDetailsId(UUID.newBuilder().setValue(customer.detailsId().toString()).build())
+                    GetCustomerByCustomerUUIDResponse.newBuilder()
+                            .setCustomerUUID(customer.id().toString())
+                            .setCustomerDetailUUID(customer.detailsId().toString())
                             .build()
             );
 
@@ -44,32 +41,31 @@ class GrpcServerService extends MainServerGrpc.MainServerImplBase {
 
 
         } catch (NoSuchElementException e) {
-            log.error("Cannot find customer with id: {}", request.getValue());
+            log.error("Cannot find customer with id: {}", request.getUuid());
             responseObserver.onError(e);
         }
 
     }
 
     @Override
-    public void customerDetail(UUID request, @NonNull StreamObserver<CustomerDetailMessage> responseObserver) {
+    public void customerDetail(GetCustomerDetailByCustomerUUIDRequest request, @NonNull StreamObserver<GetCustomerDetailByCustomerUUIDResponse> responseObserver) {
 
         try {
             final var customerDetails = fakeDatabaseComponent.getCustomerDetails()
                     .stream().filter(it -> it
-                            .customerId().equals(java.util.UUID.fromString(request.getValue())))
+                            .customerId().equals(java.util.UUID.fromString(request.getUuid())))
                     .findFirst().orElseThrow();
 
             log.info("Found customer detail with id: {}", customerDetails.customerId());
 
-            responseObserver.onNext(CustomerDetailMessage.newBuilder()
-                    .setCustomerId(UUID.newBuilder().setValue(customerDetails.customerId().toString()).build())
-                    .setFirstName(customerDetails.firstName())
-                    .setLastName(customerDetails.lastName())
-                    .build());
+            responseObserver.onNext(GetCustomerDetailByCustomerUUIDResponse.newBuilder()
+                    .setCustomerUUID(customerDetails.customerId().toString()).setFirstName(customerDetails.firstName())
+                    .setLastName(customerDetails.lastName()).build())
+            ;
 
             responseObserver.onCompleted();
         } catch (NoSuchElementException e) {
-            log.error("Cannot find customer detail with id: {}", request.getValue());
+            log.error("Cannot find customer detail with id: {}", request.getUuid());
             responseObserver.onError(e);
         }
 

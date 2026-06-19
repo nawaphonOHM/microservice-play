@@ -2,7 +2,9 @@ package nawaphon.microservices.messaging.grpc.client.controllers;
 
 
 import io.grpc.StatusException;
-import nawaphon.microservices.messaging.grpc.client.MainServerGrpc;
+import nawaphon.microservices.messaging.grpc.client.GetCustomerByCustomerUUIDRequest;
+import nawaphon.microservices.messaging.grpc.client.GetCustomerDetailByCustomerUUIDRequest;
+import nawaphon.microservices.messaging.grpc.client.MainServerServiceGrpc;
 import nawaphon.microservices.messaging.grpc.client.pojo.Customer;
 import nawaphon.microservices.messaging.grpc.client.pojo.CustomerDetail;
 import org.slf4j.Logger;
@@ -17,9 +19,9 @@ import java.util.UUID;
 public class MainController {
 
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
-    private final MainServerGrpc.MainServerBlockingV2Stub server;
+    private final MainServerServiceGrpc.MainServerServiceBlockingV2Stub server;
 
-    public MainController(MainServerGrpc.MainServerBlockingV2Stub server) {
+    public MainController(MainServerServiceGrpc.MainServerServiceBlockingV2Stub server) {
         this.server = server;
     }
 
@@ -29,15 +31,15 @@ public class MainController {
         log.info("Get customer by uuid: {}", uuid);
 
         final var customer = server.customer(
-                nawaphon.microservices.messaging.grpc.client.UUID.newBuilder().setValue(uuid.toString()
+                GetCustomerByCustomerUUIDRequest.newBuilder().setUuid(uuid.toString()
                 ).build()
         );
 
         log.info("Customer: {}", customer);
 
         return new Customer(
-                UUID.fromString(customer.getId().getValue()),
-                UUID.fromString(customer.getDetailsId().getValue())
+                UUID.fromString(customer.getCustomerUUID()),
+                UUID.fromString(customer.getCustomerDetailUUID())
         );
     }
 
@@ -47,14 +49,14 @@ public class MainController {
         log.info("Get customer detail by uuid: {}", uuid);
 
         final var customerDetail = server.customerDetail(
-                nawaphon.microservices.messaging.grpc.client.UUID.newBuilder().setValue(uuid.toString()).build()
+                GetCustomerDetailByCustomerUUIDRequest.newBuilder().setUuid(uuid.toString()).build()
         );
 
         log.info("Customer detail: {}", customerDetail);
 
 
         return new CustomerDetail(
-                UUID.fromString(customerDetail.getCustomerId().getValue()),
+                UUID.fromString(customerDetail.getCustomerUUID()),
                 customerDetail.getFirstName(),
                 customerDetail.getLastName()
         );
