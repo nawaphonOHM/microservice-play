@@ -21,19 +21,19 @@ class GrpcServerService extends MainServerServiceGrpc.MainServerServiceImplBase 
     }
 
     @Override
-    public void customer(UUID request, @NonNull StreamObserver<CustomerMessage> responseObserver) {
+    public void customer(GetCustomerByCustomerUUIDRequest request, @NonNull StreamObserver<GetCustomerByCustomerUUIDResponse> responseObserver) {
 
         try {
             final var customer = fakeDatabaseComponent.getCustomers()
-                    .stream().filter(it -> it.id().equals(java.util.UUID.fromString(request.getValue())))
+                    .stream().filter(it -> it.id().equals(java.util.UUID.fromString(request.getUuid())))
                     .findFirst().orElseThrow();
 
             log.info("Found customer with id: {}", customer.id());
 
             responseObserver.onNext(
-                    CustomerMessage.newBuilder()
-                            .setId(UUID.newBuilder().setValue(customer.id().toString()).build())
-                            .setDetailsId(UUID.newBuilder().setValue(customer.detailsId().toString()).build())
+                    GetCustomerByCustomerUUIDResponse.newBuilder()
+                            .setCustomerDetailUUID(customer.id().toString())
+                            .setCustomerDetailUUID(customer.id().toString())
                             .build()
             );
 
@@ -41,32 +41,31 @@ class GrpcServerService extends MainServerServiceGrpc.MainServerServiceImplBase 
 
 
         } catch (NoSuchElementException e) {
-            log.error("Cannot find customer with id: {}", request.getValue());
+            log.error("Cannot find customer with id: {}", request.getUuid());
             responseObserver.onError(e);
         }
 
     }
 
     @Override
-    public void customerDetail(UUID request, @NonNull StreamObserver<CustomerDetailMessage> responseObserver) {
+    public void customerDetail(GetCustomerDetailByCustomerUUIDRequest request, @NonNull StreamObserver<GetCustomerDetailByCustomerUUIDResponse> responseObserver) {
 
         try {
             final var customerDetails = fakeDatabaseComponent.getCustomerDetails()
                     .stream().filter(it -> it
-                            .customerId().equals(java.util.UUID.fromString(request.getValue())))
+                            .customerId().equals(java.util.UUID.fromString(request.getUuid())))
                     .findFirst().orElseThrow();
 
             log.info("Found customer detail with id: {}", customerDetails.customerId());
 
-            responseObserver.onNext(CustomerDetailMessage.newBuilder()
-                    .setCustomerId(UUID.newBuilder().setValue(customerDetails.customerId().toString()).build())
-                    .setFirstName(customerDetails.firstName())
-                    .setLastName(customerDetails.lastName())
-                    .build());
+            responseObserver.onNext(GetCustomerDetailByCustomerUUIDResponse.newBuilder()
+                    .setCustomerUUID(customerDetails.customerId().toString()).setFirstName(customerDetails.firstName())
+                    .setLastName(customerDetails.lastName()).build())
+            ;
 
             responseObserver.onCompleted();
         } catch (NoSuchElementException e) {
-            log.error("Cannot find customer detail with id: {}", request.getValue());
+            log.error("Cannot find customer detail with id: {}", request.getUuid());
             responseObserver.onError(e);
         }
 
