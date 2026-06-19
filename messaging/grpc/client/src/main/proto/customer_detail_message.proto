@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "uuid.proto";
+
+option java_multiple_files = true;
+option java_package = 'nawaphon.microservices.messaging.grpc.client';
+
+message CustomerDetailMessage {
+  UUID customerId = 1;
+  string firstName = 2;
+  string lastName = 3;
+}

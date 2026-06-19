@@ -2,7 +2,7 @@ package nawaphon.microservices.messaging.grpc.client.controllers;
 
 
 import io.grpc.StatusException;
-import nawaphon.microservices.messaging.grpc.client.MainServerGrpc;
+import nawaphon.microservices.messaging.grpc.client.MainServerServiceGrpc;
 import nawaphon.microservices.messaging.grpc.client.pojo.Customer;
 import nawaphon.microservices.messaging.grpc.client.pojo.CustomerDetail;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ import java.util.UUID;
 public class MainController {
 
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
-    private final MainServerGrpc.MainServerBlockingV2Stub server;
+    private final MainServerServiceGrpc.MainServerServiceBlockingV2Stub server;
 
-    public MainController(MainServerGrpc.MainServerBlockingV2Stub server) {
+    public MainController(MainServerServiceGrpc.MainServerServiceBlockingV2Stub server) {
         this.server = server;
     }
 
