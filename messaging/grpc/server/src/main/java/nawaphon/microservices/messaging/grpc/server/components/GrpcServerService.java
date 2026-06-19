@@ -32,8 +32,8 @@ class GrpcServerService extends MainServerServiceGrpc.MainServerServiceImplBase 
 
             responseObserver.onNext(
                     GetCustomerByCustomerUUIDResponse.newBuilder()
-                            .setCustomerDetailUUID(customer.id().toString())
-                            .setCustomerDetailUUID(customer.id().toString())
+                            .setCustomerUUID(customer.id().toString())
+                            .setCustomerDetailUUID(customer.detailsId().toString())
                             .build()
             );
 
