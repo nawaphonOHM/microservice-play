@@ -16,7 +16,7 @@ on:
 
 jobs:
   push_image:
-    name: Download and Push /microservice-using-docker-build:${{inputs.image_name_for_docker_hub}} image into docker hub
+    name: Download and Push microservice-using-docker-build:${{inputs.image_name_for_docker_hub}} image into docker hub
     runs-on: ubuntu-latest
     permissions:
       contents: read
