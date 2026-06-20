@@ -16,7 +16,7 @@ on:
 
 jobs:
   push_image:
-    name: Download and Push <docker-repo-name>/microservices-lab:${{inputs.image_name_for_docker_hub}} image into docker hub
+    name: Download and Push microservice-using-docker-build:${{inputs.image_name_for_docker_hub}} image into docker hub
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -41,4 +41,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/microservices-lab:${{inputs.image_name_for_docker_hub}}
+          tags: ${{ secrets.DOCKER_USERNAME }}/microservice-using-docker-build:${{inputs.image_name_for_docker_hub}}

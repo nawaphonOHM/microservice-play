@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: server-side-discovery-and-service-a
-          image: nawaphon2539/microservices-lab:server_side_discovery.serviceA
+          image: nawaphon2539/microservice-using-docker-build:server_side_discovery.serviceA
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

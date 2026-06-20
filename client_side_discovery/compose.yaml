@@ -1,7 +1,7 @@
 services:
 
   servicesRegistry:
-    image: nawaphon2539/microservices-lab:client-side-discovery.services-registry
+    image: nawaphon2539/microservice-using-docker-build:client-side-discovery.services-registry
     env_file:
       - services_registry/services-registry-vars.env
     ports:
@@ -10,7 +10,7 @@ services:
       default:
 
   service_a:
-    image: nawaphon2539/microservices-lab:client-side-discovery.serviceA
+    image: nawaphon2539/microservice-using-docker-build:client-side-discovery.serviceA
     env_file:
       - serviceA/service-a-vars.env
     ports:
@@ -22,7 +22,7 @@ services:
       replicas: 4
 
   client:
-    image: nawaphon2539/microservices-lab:client-side-discovery.client
+    image: nawaphon2539/microservice-using-docker-build:client-side-discovery.client
     env_file:
       - client/client-vars.env
     ports:

@@ -1,7 +1,7 @@
 services:
 
   client:
-    image: nawaphon2539/microservices-lab:messaging.grpc.client
+    image: nawaphon2539/microservice-using-docker-build:messaging.grpc.client
     env_file:
       - client/client-vars.env
     ports:
@@ -11,7 +11,7 @@ services:
         ipv4_address: 192.168.1.2
 
   server:
-    image: nawaphon2539/microservices-lab:messaging.grpc.server
+    image: nawaphon2539/microservice-using-docker-build:messaging.grpc.server
     env_file:
       - server/server-vars.env
     ports:
