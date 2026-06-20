@@ -1,7 +1,7 @@
 services:
 
   servicesRegistry:
-    image: nawaphon2539/microservices-lab:self-registration.services-registry
+    image: nawaphon2539/microservice-using-docker-build:self-registration.services-registry
     env_file:
       - services_registry/services-registry-vars.env
     ports:
@@ -10,7 +10,7 @@ services:
       default:
 
   service_a:
-    image: nawaphon2539/microservices-lab:self-registration.services-a
+    image: nawaphon2539/microservice-using-docker-build:self-registration.services-a
     env_file:
       - serviceA/service-a-vars.env
     ports:

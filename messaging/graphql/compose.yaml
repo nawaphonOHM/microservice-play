@@ -1,7 +1,7 @@
 services:
 
   gateway:
-    image: nawaphon2539/microservices-lab:messaging.graphql.gateway
+    image: nawaphon2539/microservice-using-docker-build:messaging.graphql.gateway
     env_file:
       - gateway/gateway-vars.env
     ports:
