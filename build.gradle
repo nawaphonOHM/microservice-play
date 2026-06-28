@@ -15,6 +15,26 @@ subprojects {
             languageVersion = JavaLanguageVersion.of(javaVersion as int)
         }
     }
+
+    plugins.withType(org.springframework.boot.gradle.plugin.SpringBootPlugin) {
+        bootBuildImage {
+
+            def isOnCICDProperty = project.findProperty("isOnCICD") as Boolean
+
+            if (!isOnCICDProperty) {
+                println("Oh! It's not on CICD. do nothing.")
+                return
+            }
+
+            println("Oh! It's on CICD. Let me do my job.")
+
+            def imageNameProperty = project.property("imageName")
+            def publishProperty = project.property("publish") as Boolean
+
+            imageName = imageNameProperty
+            publish = publishProperty
+        }
+    }
 }
 
 jar {

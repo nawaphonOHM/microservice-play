@@ -1,0 +1,86 @@
+name: Every Night Task Entry Point
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  decide-which-task-to-run:
+    runs-on: ubuntu-latest
+    outputs:
+      RANDOM_NUMBER: ${{ steps.random_number.outputs.RANDOM_NUMBER }}
+    steps:
+      - name: Generate Random Number
+        id: random_number
+        run: |
+          RANDOM_NUMBER=50
+          
+          until [ "$RANDOM_NUMBER" -ne 50 ]
+          do
+            RANDOM_NUMBER=$((RANDOM % 101))
+          done
+
+          echo "Random number: $RANDOM_NUMBER"
+          
+          echo RANDOM_NUMBER=$RANDOM_NUMBER >> $GITHUB_OUTPUT
+  
+
+  run-building-image-via-traditional-approach:
+    needs: decide-which-task-to-run
+    if: ${{ fromJSON(needs.decide-which-task-to-run.outputs.RANDOM_NUMBER) < 50 }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(vars.MATRIX) }}
+
+    steps:
+      - id: main
+        uses: ./.github/actions/clone_build_and_upload_artifact
+        with:
+          image: ${{ matrix.image_name }}
+          path: ${{ matrix.path }}
+          project_name: ${{ matrix.project_name }}
+
+  run-building-image-via-spring-boot-approach:
+    needs: decide-which-task-to-run
+    if: ${{ fromJSON(needs.decide-which-task-to-run.outputs.RANDOM_NUMBER) > 50 }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(vars.MATRIX) }}
+
+    steps:
+      - name: checkout codebase
+        uses: ./.github/actions/checkout_codebase
+
+      - name: Setting up tool for project ${{ matrix.project_name }}
+        uses: ./.github/actions/setup_tools
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: gradlew build ${{ matrix.project_name }} and push image
+        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true -PimageName={0} :{1}:bootBuildImage --scan', matrix.image_name_for_docker_hub, matrix.project_name) }}
+        shell: bash
+
+  trigger-dispatch-event:
+    runs-on: ubuntu-latest
+    needs: run-building-image-via-traditional-approach
+    if: ${{ success() }}
+
+    env:
+      GH_TOKEN: ${{ secrets.CICD_PERSONAL_ACCESS_TOKEN }}
+
+    steps:
+      - id: main
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/actions/workflows/push_image_into_repository_via_cicd.yml/dispatches \
+            -f "ref=${{ github.ref }}"
