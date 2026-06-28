@@ -42,22 +42,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-
-bootBuildImage {
-
-    def isOnCICDProperty = project.findProperty("isOnCICD") as Boolean
-
-    if (!isOnCICDProperty) {
-        println("Oh! It's not on CICD. do nothing.")
-        return
-    }
-
-    println("Oh! It's on CICD. Let's me do my job.")
-
-    def imageNameProperty = project.property("imageName")
-    def publishProperty = project.property("publish") as Boolean
-
-    imageName = imageNameProperty
-    publish = publishProperty
-}
