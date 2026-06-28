@@ -31,3 +31,4 @@ runs:
       with:
         path: ${{ inputs.path }}
         image_name: ${{ inputs.image }}
+        project_name: ${{ inputs.project_name }}

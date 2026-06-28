@@ -8,6 +8,9 @@ inputs:
   path:
     description: path to artifact
     required: true
+  project_name:
+    description: project name
+    required: true
 
 
 runs:
