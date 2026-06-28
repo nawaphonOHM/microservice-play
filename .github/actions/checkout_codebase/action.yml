@@ -1,0 +1,8 @@
+name: checkout_codebase
+author: nawaphon
+description: checkout_codebase
+runs:
+  using: "composite"
+  steps:
+    - id: checkout_codebase
+      uses: actions/checkout@v4
