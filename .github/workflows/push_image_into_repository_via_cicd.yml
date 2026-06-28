@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download  ${{ format('artiface={0};image={1}', matrix.project_name, matrix.image_name) }}
+      - name: Download ${{ format('artifact={0};image={1}', matrix.project_name, matrix.image_name) }}
         uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.image_name }}
