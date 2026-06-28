@@ -29,10 +29,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
-      - name: Push ${{ format('{0} image', inputs.image_name_for_docker_hub) }} into docker hub
+      - name: Push ${{ format('{0} image', matrix.image_name_for_docker_hub) }} into docker hub
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ format('{0}/microservice-using-docker-build:{1}', secrets.DOCKER_USERNAME, inputs.image_name_for_docker_hub) }}
+          tags: ${{ format('{0}/microservice-using-docker-build:{1}', secrets.DOCKER_USERNAME, matrix.image_name_for_docker_hub) }}
