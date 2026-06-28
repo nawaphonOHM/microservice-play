@@ -9,6 +9,8 @@ permissions:
 jobs:
   decide-which-task-to-run:
     runs-on: ubuntu-latest
+    outputs:
+      RANDOM_NUMBER: ${{ steps.random_number.outputs.RANDOM_NUMBER }}
     steps:
       - name: Generate Random Number
         id: random_number
@@ -26,7 +28,8 @@ jobs:
   
 
   run-building-image-via-traditional-approach:
-    if: ${{ steps.random_number.outputs.RANDOM_NUMBER < 50 }}
+    needs: decide-which-task-to-run
+    if: ${{ fromJSON(needs.decide-which-task-to-run.outputs.RANDOM_NUMBER) < 50 }}
 
     runs-on: ubuntu-latest
     strategy:
@@ -50,7 +53,8 @@ jobs:
             -f "ref=${{ github.ref }}"
 
   run-building-image-via-spring-boot-approach:
-    if: ${{ steps.random_number.outputs.RANDOM_NUMBER > 50 }}
+    needs: decide-which-task-to-run
+    if: ${{ fromJSON(needs.decide-which-task-to-run.outputs.RANDOM_NUMBER) > 50 }}
 
     runs-on: ubuntu-latest
     strategy:
@@ -60,7 +64,7 @@ jobs:
       - name: checkout codebase
         uses: ./.github/actions/checkout_codebase
 
-      - name: Setting up tool for project ${{ inputs.project_name }}
+      - name: Setting up tool for project ${{ matrix.project_name }}
         uses: ./.github/actions/setup_tools
 
       - name: Login to DockerHub
@@ -69,6 +73,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_SECRET }}
 
-      - name: gradlew build ${{ inputs.project_name }} and push image
-        run: ./gradlew ${{ format('./gradlew -Ppublish=true -PimageName={0} :{1}:bootBuildImage --scan', matrix.image_name_for_docker_hub, matrix.project_name) }}
+      - name: gradlew build ${{ matrix.project_name }} and push image
+        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true -PimageName={0} :{1}:bootBuildImage --scan', matrix.image_name_for_docker_hub, matrix.project_name) }}
         shell: bash
