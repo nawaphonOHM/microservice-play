@@ -73,6 +73,9 @@ jobs:
     needs: run-building-image-via-traditional-approach
     if: ${{ success() }}
 
+    env:
+      GH_TOKEN: ${{ secrets.CICD_PERSONAL_ACCESS_TOKEN }}
+
     steps:
       - id: main
         run: |
