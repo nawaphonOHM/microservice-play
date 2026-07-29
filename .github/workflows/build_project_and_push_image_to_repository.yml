@@ -19,7 +19,7 @@ jobs:
           
           until [ "$RANDOM_NUMBER" -ne 50 ]
           do
-            RANDOM_NUMBER=$((RANDOM % 101))
+            RANDOM_NUMBER=$((RANDOM % 100))
           done
 
           echo "Random number: $RANDOM_NUMBER"
