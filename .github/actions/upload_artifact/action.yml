@@ -1,0 +1,25 @@
+name: upload artifact
+author: nawaphon
+description: upload_artifact
+inputs:
+  image_name:
+    description: image name
+    required: true
+  path:
+    description: path to artifact
+    required: true
+  project_name:
+    description: project name
+    required: true
+
+
+runs:
+  using: "composite"
+
+
+  steps:
+    - id: ${{ format('upload_{0}''s_artifact', inputs.project_name) }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.image_name }}
+        path: ${{ inputs.path }}
