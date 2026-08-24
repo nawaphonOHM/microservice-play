@@ -16,7 +16,7 @@ dependencies {
     implementation 'io.vavr:vavr:0.10.4'
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootStarterAop
+    implementation 'org.springframework.boot:spring-boot-starter-aspectj'
     implementation 'org.springframework.boot:spring-boot-restclient'
 
     compileOnly 'org.jetbrains:annotations:26.0.2-1'
