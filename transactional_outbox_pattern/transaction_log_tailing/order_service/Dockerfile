@@ -1,5 +1,5 @@
 # --- Build stage: extract jar and create an AppCDS archive via a training run ---
-FROM bellsoft/liberica-openjre-alpine:21-cds AS optimizer
+FROM bellsoft/liberica-openjre-alpine:25-cds AS optimizer
 WORKDIR /app
 COPY ./build/libs/order_service-0.0.1.jar /tmp/app.jar
 # Extract into a regular classpath layout (app.jar launcher + lib/), which CDS can archive.
@@ -10,7 +10,7 @@ RUN java -XX:ArchiveClassesAtExit=/app/application.jsa \
     -Dspring.context.exit=onRefresh -Dspring.profiles.active=cds -jar /app/app.jar
 
 # --- Runtime stage: same /app path so the archived classpath matches ---
-FROM bellsoft/liberica-openjre-alpine:21-cds
+FROM bellsoft/liberica-openjre-alpine:25-cds
 WORKDIR /app
 COPY --from=optimizer /app/ /app/
 COPY ./build/libs/heart_beat-0.0.1.jar /app/heart_beat-0.0.1.jar
