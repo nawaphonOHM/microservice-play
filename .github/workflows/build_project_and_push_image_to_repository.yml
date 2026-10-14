@@ -26,5 +26,5 @@ jobs:
           password: ${{ secrets.DOCKER_SECRET }}
 
       - name: gradlew build ${{ matrix.project_name }} and push image
-        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true -PimageName={0}/microservices-lab:{1} bootBuildImage --scan', secrets.DOCKER_USERNAME, matrix.image_name_for_docker_hub) }}
+        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true -PimageName={0}/microservices-lab:{1} :{2}:bootBuildImage --scan', secrets.DOCKER_USERNAME, matrix.image_name_for_docker_hub, matrix.project_name) }}
         shell: bash
