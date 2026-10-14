@@ -1,4 +1,4 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     id 'org.springframework.boot' version "${springBootVersion}" apply false
@@ -18,25 +18,15 @@ subprojects {
         }
     }
 
-    plugins.withType(SpringBootPlugin).tap {
-        configureEach {
-            bootBuildImage {
+    tasks.withType(BootBuildImage).configureEach {
 
-                def isOnCICDProperty = project.findProperty("isOnCICD") as Boolean
+        def isOnCICDProperty = project.findProperty("isOnCICD") as Boolean
 
-                if (!isOnCICDProperty) {
-                    println("Oh! It's not on CICD. do nothing.")
-                    return
-                }
+        if (isOnCICDProperty) {
 
-                println("Oh! It's on CICD. Let me do my job.")
+            imageName = project.property("imageName")
+            publish = project.property("publish") as Boolean
 
-                def imageNameProperty = project.property("imageName")
-                def publishProperty = project.property("publish") as Boolean
-
-                imageName = imageNameProperty
-                publish = publishProperty
-            }
         }
     }
 }
