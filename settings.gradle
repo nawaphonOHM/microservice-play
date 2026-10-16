@@ -32,6 +32,7 @@ project(":messaging@rest@sender").name = "$rootProject.name-rest-sender"
 
 include("messaging@rest@receiver")
 project(":messaging@rest@receiver").projectDir = file("./messaging/rest/receiver")
+project(":messaging@rest@receiver").name = "$rootProject.name-rest-receiver"
 
 include("messaging@event_sourcing@producer")
 project(":messaging@event_sourcing@producer").projectDir = file("./messaging/event_sourcing/producer")
