@@ -24,6 +24,7 @@ project(":shared_database@customer_service").name = "$rootProject.name-shared_da
 
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
+project(":shared_database@order_service").name = "$rootProject.name-shared_database-order_service"
 
 include("messaging@rest@sender")
 project(":messaging@rest@sender").projectDir = file("./messaging/rest/sender")
