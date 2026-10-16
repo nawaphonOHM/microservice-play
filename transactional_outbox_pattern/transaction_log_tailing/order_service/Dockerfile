@@ -1,7 +1,7 @@
 # --- Build stage: extract jar and create an AppCDS archive via a training run ---
 FROM bellsoft/liberica-openjre-alpine:25-cds AS optimizer
 WORKDIR /app
-COPY ./build/libs/order_service-0.0.1.jar /tmp/app.jar
+COPY ./build/libs/microservice_play-transaction_log_tailling-order_service-1.0.0.jar /tmp/app.jar
 # Extract into a regular classpath layout (app.jar launcher + lib/), which CDS can archive.
 RUN java -Djarmode=tools -jar /tmp/app.jar extract --destination /app
 # Training run: refresh the context and exit, dumping the archive. The 'cds' profile
@@ -13,7 +13,7 @@ RUN java -XX:ArchiveClassesAtExit=/app/application.jsa \
 FROM bellsoft/liberica-openjre-alpine:25-cds
 WORKDIR /app
 COPY --from=optimizer /app/ /app/
-COPY ./build/libs/heart_beat-0.0.1.jar /app/heart_beat-0.0.1.jar
+COPY ./build/libs/microservice_play-transaction_log_tailling-order_service_heart_beat-1.0.0.jar /app/microservice_play-transaction_log_tailling-order_service_heart_beat-1.0.0.jar
 ENTRYPOINT ["java", "-XX:SharedArchiveFile=/app/application.jsa", "-jar", "/app/app.jar"]
 
 LABEL authors="nawaphon"

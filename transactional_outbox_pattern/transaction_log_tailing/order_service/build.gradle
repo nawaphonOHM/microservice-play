@@ -4,12 +4,7 @@ plugins {
     id 'io.spring.dependency-management'
 }
 
-group = 'nawaphon.microservices.transactional_outbox_pattern'
-version = '0.0.1'
-
-base {
-    archivesName = "order_service"
-}
+version = '1.0.0'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -35,12 +30,12 @@ test {
 }
 
 build {
-    dependsOn(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat:build")
+    dependsOn(":microservice_play-transaction_log_tailling-order_service_heart_beat:build")
     finalizedBy('copyHeartBeatJar')
 }
 
 tasks.register('copyHeartBeatJar', Copy) {
-    it.from(project(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat").layout.buildDirectory.dir("libs"))
+    it.from(project(":microservice_play-transaction_log_tailling-order_service_heart_beat").layout.buildDirectory.dir("libs"))
     it.into(layout.buildDirectory.dir('libs'))
     it.include("*.jar")
 }
