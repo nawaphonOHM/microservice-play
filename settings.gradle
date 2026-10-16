@@ -28,6 +28,7 @@ project(":shared_database@order_service").name = "$rootProject.name-shared_datab
 
 include("messaging@rest@sender")
 project(":messaging@rest@sender").projectDir = file("./messaging/rest/sender")
+project(":messaging@rest@sender").name = "$rootProject.name-rest-sender"
 
 include("messaging@rest@receiver")
 project(":messaging@rest@receiver").projectDir = file("./messaging/rest/receiver")
