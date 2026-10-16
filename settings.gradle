@@ -44,6 +44,7 @@ project(":messaging@event_sourcing@consumer").name = "$rootProject.name-event_so
 
 include("messaging@graphql")
 project(":messaging@graphql").projectDir = file("messaging/graphql/gateway")
+project(":messaging@graphql").name = "$rootProject.name-graphql"
 
 include("circuit_breaker@proxy")
 project(":circuit_breaker@proxy").projectDir = file("circuit_breaker/proxy")
