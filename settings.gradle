@@ -7,69 +7,90 @@
  * in the user manual at https://docs.gradle.org/7.2/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'microservice-play'
+rootProject.name = 'microservice_play'
 
 include("private_table_per_service@customer_service")
 project(":private_table_per_service@customer_service").projectDir = file("./database_per_services/private_table_per_service/customer_service")
+project(":private_table_per_service@customer_service").name = "$rootProject.name-private_table_per_service-customer_service"
 
 include("private_table_per_service@order_service")
 project(":private_table_per_service@order_service").projectDir = file("./database_per_services/private_table_per_service/order_service")
+project(":private_table_per_service@order_service").name = "$rootProject.name-private_table_per_service-order_service"
 
 
 include("shared_database@customer_service")
 project(":shared_database@customer_service").projectDir = file("./shared_database/customer_service")
+project(":shared_database@customer_service").name = "$rootProject.name-shared_database-customer_service"
 
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
+project(":shared_database@order_service").name = "$rootProject.name-shared_database-order_service"
 
 include("messaging@rest@sender")
 project(":messaging@rest@sender").projectDir = file("./messaging/rest/sender")
+project(":messaging@rest@sender").name = "$rootProject.name-rest-sender"
 
 include("messaging@rest@receiver")
 project(":messaging@rest@receiver").projectDir = file("./messaging/rest/receiver")
+project(":messaging@rest@receiver").name = "$rootProject.name-rest-receiver"
 
 include("messaging@event_sourcing@producer")
 project(":messaging@event_sourcing@producer").projectDir = file("./messaging/event_sourcing/producer")
+project(":messaging@event_sourcing@producer").name = "$rootProject.name-event_sourcing-producer"
 
 include("messaging@event_sourcing@consumer")
 project(":messaging@event_sourcing@consumer").projectDir = file("./messaging/event_sourcing/consumer")
+project(":messaging@event_sourcing@consumer").name = "$rootProject.name-event_sourcing-consumer"
 
 include("messaging@graphql")
 project(":messaging@graphql").projectDir = file("messaging/graphql/gateway")
+project(":messaging@graphql").name = "$rootProject.name-graphql"
 
 include("circuit_breaker@proxy")
 project(":circuit_breaker@proxy").projectDir = file("circuit_breaker/proxy")
+project(":circuit_breaker@proxy").name = "$rootProject.name-circuit_breaker-proxy"
 
 include("circuit_breaker@real_service")
 project(":circuit_breaker@real_service").projectDir = file("circuit_breaker/real_service")
+project(":circuit_breaker@real_service").name = "$rootProject.name-circuit_breaker-real_service"
 
 include("self_registration@services_registry")
 project(":self_registration@services_registry").projectDir = file("self_registration/services_registry")
+project(":self_registration@services_registry").name = "$rootProject.name-self_registration-services_registry"
 
 include("self_registration@services_A")
 project(":self_registration@services_A").projectDir = file("self_registration/serviceA")
+project(":self_registration@services_A").name = "$rootProject.name-self_registration-services_a"
 
 include("client_side_discovery@services_A")
 project(":client_side_discovery@services_A").projectDir = file("client_side_discovery/serviceA")
+project(":client_side_discovery@services_A").name = "$rootProject.name-client_side_discovery-services_a"
 
 include("client_side_discovery@services_registry")
 project(":client_side_discovery@services_registry").projectDir = file("client_side_discovery/services_registry")
+project(":client_side_discovery@services_registry").name = "$rootProject.name-client_side_discovery-services_registry"
 
 include("client_side_discovery@client")
 project(":client_side_discovery@client").projectDir = file("client_side_discovery/client")
+project(":client_side_discovery@client").name = "$rootProject.name-client_side_discovery-client"
 
 include("server_side_discovery@services_A")
 project(":server_side_discovery@services_A").projectDir = file("server_side_discovery/serviceA")
+project(":server_side_discovery@services_A").name = "$rootProject.name-server_side_discovery-client"
 
 include("transactional_outbox_pattern@transaction_log_tailling@order_service")
 project(":transactional_outbox_pattern@transaction_log_tailling@order_service").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service")
+project(":transactional_outbox_pattern@transaction_log_tailling@order_service").name = "$rootProject.name-transaction_log_tailling-order_service"
 
 include("transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat")
 project(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat").projectDir = file("transactional_outbox_pattern/transaction_log_tailing/order_service_heart_beat")
+project(":transactional_outbox_pattern@transaction_log_tailling@order_service_heart_beat").name = "$rootProject.name-transaction_log_tailling-order_service_heart_beat"
 
 
 include("messaging@grpc@server")
 project(":messaging@grpc@server").projectDir = file("messaging/grpc/server")
+project(":messaging@grpc@server").name = "$rootProject.name-grpc-server"
 
 include("messaging@grpc@client")
 project(":messaging@grpc@client").projectDir = file("messaging/grpc/client")
+project(":messaging@grpc@client").name = "$rootProject.name-grpc-client"

@@ -4,12 +4,7 @@ plugins {
     id 'io.spring.dependency-management'
 }
 
-group = 'nawaphon.microservices.client_side_discovery'
-version = '0.0.1'
-
-base {
-    archivesName = "services_a"
-}
+version = '1.0.0'
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
