@@ -56,6 +56,7 @@ project(":circuit_breaker@real_service").name = "$rootProject.name-circuit_break
 
 include("self_registration@services_registry")
 project(":self_registration@services_registry").projectDir = file("self_registration/services_registry")
+project(":self_registration@services_registry").name = "$rootProject.name-self_registration-services_registry"
 
 include("self_registration@services_A")
 project(":self_registration@services_A").projectDir = file("self_registration/serviceA")
