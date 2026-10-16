@@ -15,6 +15,7 @@ project(":private_table_per_service@customer_service").name = "$rootProject.name
 
 include("private_table_per_service@order_service")
 project(":private_table_per_service@order_service").projectDir = file("./database_per_services/private_table_per_service/order_service")
+project(":private_table_per_service@order_service").name = "$rootProject.name-private_table_per_service-order_service"
 
 
 include("shared_database@customer_service")
