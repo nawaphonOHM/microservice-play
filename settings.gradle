@@ -48,6 +48,7 @@ project(":messaging@graphql").name = "$rootProject.name-graphql"
 
 include("circuit_breaker@proxy")
 project(":circuit_breaker@proxy").projectDir = file("circuit_breaker/proxy")
+project(":circuit_breaker@proxy").name = "$rootProject.name-circuit_breaker-proxy"
 
 include("circuit_breaker@real_service")
 project(":circuit_breaker@real_service").projectDir = file("circuit_breaker/real_service")
