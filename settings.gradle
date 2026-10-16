@@ -89,6 +89,7 @@ project(":transactional_outbox_pattern@transaction_log_tailling@order_service_he
 
 include("messaging@grpc@server")
 project(":messaging@grpc@server").projectDir = file("messaging/grpc/server")
+project(":messaging@grpc@server").name = "$rootProject.name-grpc-server"
 
 include("messaging@grpc@client")
 project(":messaging@grpc@client").projectDir = file("messaging/grpc/client")
