@@ -64,6 +64,7 @@ project(":self_registration@services_A").name = "$rootProject.name-self_registra
 
 include("client_side_discovery@services_A")
 project(":client_side_discovery@services_A").projectDir = file("client_side_discovery/serviceA")
+project(":client_side_discovery@services_A").name = "$rootProject.name-client_side_discovery-services_a"
 
 include("client_side_discovery@services_registry")
 project(":client_side_discovery@services_registry").projectDir = file("client_side_discovery/services_registry")
