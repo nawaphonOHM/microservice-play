@@ -93,3 +93,4 @@ project(":messaging@grpc@server").name = "$rootProject.name-grpc-server"
 
 include("messaging@grpc@client")
 project(":messaging@grpc@client").projectDir = file("messaging/grpc/client")
+project(":messaging@grpc@client").name = "$rootProject.name-grpc-client"
