@@ -52,6 +52,7 @@ project(":circuit_breaker@proxy").name = "$rootProject.name-circuit_breaker-prox
 
 include("circuit_breaker@real_service")
 project(":circuit_breaker@real_service").projectDir = file("circuit_breaker/real_service")
+project(":circuit_breaker@real_service").name = "$rootProject.name-circuit_breaker-real_service"
 
 include("self_registration@services_registry")
 project(":self_registration@services_registry").projectDir = file("self_registration/services_registry")
