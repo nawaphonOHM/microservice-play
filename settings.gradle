@@ -20,6 +20,7 @@ project(":private_table_per_service@order_service").name = "$rootProject.name-pr
 
 include("shared_database@customer_service")
 project(":shared_database@customer_service").projectDir = file("./shared_database/customer_service")
+project(":shared_database@customer_service").name = "$rootProject.name-shared_database-customer_service"
 
 include("shared_database@order_service")
 project(":shared_database@order_service").projectDir = file("./shared_database/order_service")
