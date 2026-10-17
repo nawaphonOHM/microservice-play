@@ -1,7 +1,7 @@
 services:
 
   servicesRegistry:
-    image: nawaphon2539/microservice_play-client_side_discovery-services_registry:1.0.0
+    image: nawaphon2539/microservice_play-client_side_discovery-services_registry:2.0.0
     env_file:
       - services_registry/services-registry-vars.env
     ports:
@@ -10,7 +10,7 @@ services:
       default:
 
   service_a:
-    image: nawaphon2539/microservice_play-client_side_discovery-services_a:1.0.0
+    image: nawaphon2539/microservice_play-client_side_discovery-services_a:2.0.0
     env_file:
       - serviceA/service-a-vars.env
     ports:
@@ -22,7 +22,7 @@ services:
       replicas: 4
 
   client:
-    image: nawaphon2539/microservice_play-client_side_discovery-client:1.0.0
+    image: nawaphon2539/microservice_play-client_side_discovery-client:2.0.0
     env_file:
       - client/client-vars.env
     ports:

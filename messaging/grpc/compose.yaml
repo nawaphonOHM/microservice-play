@@ -1,7 +1,7 @@
 services:
 
   client:
-    image: nawaphon2539/microservice_play-grpc-client:1.0.0
+    image: nawaphon2539/microservice_play-grpc-client:2.0.0
     env_file:
       - client/client-vars.env
     ports:
@@ -11,7 +11,7 @@ services:
         ipv4_address: 192.168.1.2
 
   server:
-    image: nawaphon2539/microservice_play-grpc-server:1.0.0
+    image: nawaphon2539/microservice_play-grpc-server:2.0.0
     env_file:
       - server/server-vars.env
     ports:
