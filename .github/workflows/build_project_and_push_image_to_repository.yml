@@ -1,0 +1,30 @@
+name: Every Night Task Entry Point
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  run-building-image-via-spring-boot-approach:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(vars.MATRIX) }}
+
+    steps:
+      - name: checkout codebase
+        uses: actions/checkout@v4
+
+      - name: Setting up tool for project ${{ matrix.project_name }}
+        uses: ./.github/actions/setup_tools
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: gradlew build ${{ matrix.project_name }} and push image
+        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true :{0}:bootBuildImage --scan', matrix.project_name) }}
+        shell: bash

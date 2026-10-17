@@ -1,7 +1,7 @@
 # --- Build stage: extract jar and create an AppCDS archive via a training run ---
 FROM bellsoft/liberica-openjre-alpine:25-cds AS optimizer
 WORKDIR /app
-COPY ./build/libs/microservice_play-client_side_discovery-services_a-1.0.0.jar /tmp/app.jar
+COPY ./build/libs/microservice_play-client_side_discovery-services_a-2.0.0.jar /tmp/app.jar
 # Extract into a regular classpath layout (app.jar launcher + lib/), which CDS can archive.
 RUN java -Djarmode=tools -jar /tmp/app.jar extract --destination /app
 # Training run: refresh the context and exit, dumping the archive. The 'cds' profile

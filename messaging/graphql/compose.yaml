@@ -1,7 +1,7 @@
 services:
 
   gateway:
-    image: nawaphon2539/microservice_play-graphql:1.0.0
+    image: nawaphon2539/microservice_play-graphql:2.0.0
     env_file:
       - gateway/gateway-vars.env
     ports:
