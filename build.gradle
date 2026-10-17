@@ -24,7 +24,6 @@ subprojects {
 
         if (isOnCICDProperty) {
 
-            imageName = project.property("imageName")
             publish = project.property("publish") as Boolean
 
         }
