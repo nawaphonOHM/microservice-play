@@ -5,7 +5,7 @@ plugins {
     id 'io.spring.dependency-management'
 }
 
-version = '1.0.0'
+version = '2.0.0'
 
 protobuf {
     def protobufVersion = dependencyManagement.importedProperties['protobuf-java.version']
