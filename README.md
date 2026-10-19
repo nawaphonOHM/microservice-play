@@ -4,4 +4,4 @@ My practice of writing codes following microservice patterns
 
 **Main branch:**
 
-[![Everynight build](https://github.com/nawaphonOHM/microservice-play/actions/workflows/every_night_build.yml/badge.svg)](https://github.com/nawaphonOHM/microservice-play/actions/workflows/every_night_build.yml)
+[![Every Night Task](https://github.com/nawaphonOHM/microservice-play/actions/workflows/build_project_and_push_image_to_repository.yml/badge.svg)](https://github.com/nawaphonOHM/microservice-play/actions/workflows/build_project_and_push_image_to_repository.yml)
