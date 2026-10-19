@@ -1,4 +1,4 @@
-name: Every Night Task Entry Point
+name: Every Night Task
 on:
   schedule:
     - cron: '0 0 * * *'
