@@ -7,10 +7,8 @@ permissions:
   contents: read
 
 jobs:
-  run-building-image-via-spring-boot-approach:
+  spring-boot-build-image:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON(vars.MATRIX) }}
 
     steps:
       - name: checkout codebase
@@ -26,5 +24,5 @@ jobs:
           password: ${{ secrets.DOCKER_SECRET }}
 
       - name: gradlew build ${{ matrix.project_name }} and push image
-        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true :{0}:bootBuildImage --scan', matrix.project_name) }}
+        run: ./gradlew -PisOnCICD=true -Ppublish=true bootBuildImage --scan
         shell: bash
