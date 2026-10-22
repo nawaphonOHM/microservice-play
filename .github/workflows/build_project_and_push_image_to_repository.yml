@@ -7,16 +7,14 @@ permissions:
   contents: read
 
 jobs:
-  run-building-image-via-spring-boot-approach:
+  spring-boot-build-image:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON(vars.MATRIX) }}
 
     steps:
       - name: checkout codebase
         uses: actions/checkout@v4
 
-      - name: Setting up tool for project ${{ matrix.project_name }}
+      - name: Setting up tool for project
         uses: ./.github/actions/setup_tools
 
       - name: Login to DockerHub
@@ -25,6 +23,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_SECRET }}
 
-      - name: gradlew build ${{ matrix.project_name }} and push image
-        run: ${{ format('./gradlew -PisOnCICD=true -Ppublish=true :{0}:bootBuildImage --scan', matrix.project_name) }}
+      - name: gradlew build and push image
+        run: ./gradlew -PisOnCICD=true -Ppublish=true bootBuildImage --scan
         shell: bash
