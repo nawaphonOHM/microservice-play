@@ -23,6 +23,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_SECRET }}
 
-      - name: gradlew build and push image
-        run: ./gradlew -PisOnCICD=true -Ppublish=true bootBuildImage --scan
+      - name: gradlew bootBuildImage and push images
+        run: |
+          ./gradlew -PdockerHub=${{ secrets.DOCKER_USERNAME }} --publishImage bootBuildImage --scan
         shell: bash

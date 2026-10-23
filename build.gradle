@@ -20,13 +20,9 @@ subprojects {
 
     tasks.withType(BootBuildImage).configureEach {
 
-        def isOnCICDProperty = project.findProperty("isOnCICD") as Boolean
+        def dockerHub = project.findProperty("dockerHub") as String
 
-        if (isOnCICDProperty) {
-
-            publish = project.property("publish") as Boolean
-
-        }
+        imageName = "docker.io/$dockerHub/${project.name}:${project.version}"
     }
 }
 
