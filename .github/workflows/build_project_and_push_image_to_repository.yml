@@ -25,6 +25,5 @@ jobs:
 
       - name: gradlew bootBuildImage and push images
         run: |
-          ./gradlew -PdockerHub=${{ secrets.DOCKER_USERNAME }} -Pspring-boot.build-image.publish=true bootBuildImage \
-          --scan
+          ./gradlew -PdockerHub=${{ secrets.DOCKER_USERNAME }} bootBuildImage --publishImage --scan
         shell: bash
