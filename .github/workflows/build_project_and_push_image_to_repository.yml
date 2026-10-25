@@ -41,3 +41,10 @@ jobs:
         run: |
           ./gradlew -PdockerHub=${{ secrets.DOCKER_USERNAME }} bootBuildImage --publishImage --scan
         shell: bash
+
+      - name: Upload build reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-reports
+          path: '**/build/reports/'
