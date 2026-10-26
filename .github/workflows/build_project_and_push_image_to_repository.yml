@@ -47,4 +47,7 @@ jobs:
         if: always()
         with:
           name: build-reports
-          path: '**/build/reports/'
+          include-hidden-files: 'true'
+          path: |
+            **/build/reports/
+            **/.gradle-actions/build-results/
