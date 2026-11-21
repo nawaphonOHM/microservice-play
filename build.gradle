@@ -24,6 +24,8 @@ subprojects {
 
         imageName = "docker.io/$dockerHub/${project.name}:${project.version}"
     }
+
+    version = (version != 'unspecified') ? version : '2.0.0'
 }
 
 jar {
