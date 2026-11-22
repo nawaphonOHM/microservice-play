@@ -39,6 +39,8 @@ jobs:
           password: ${{ secrets.DOCKER_SECRET }}
 
       - name: gradlew build and push images
+        env:
+          DOCKER_HUB_REPOSITORY_NAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
           containerize() {
             local PATH_="$1"
@@ -70,8 +72,6 @@ jobs:
           DOCKER_FILE_DIRS=$(find . -name "$DOCKER_FILE")
           
           mapfile -t PATHS <<< "$DOCKER_FILE_DIRS"
-          
-          DOCKER_HUB_REPOSITORY_NAME='nawaphon2539'
           
           for PATH_ in "${PATHS[@]}" ; do
             containerize "$PATH_" "$DOCKER_FILE" "$DOCKER_HUB_REPOSITORY_NAME" &
